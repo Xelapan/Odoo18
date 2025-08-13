@@ -1,0 +1,9 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_job_user,hr.job,model_hr_job,base.group_user,1,1,1,1
+access_hr_job_factor_user,hr.job.factor,model_hr_job_factor,base.group_user,1,1,1,1
+access_hr_job_factor_description_user,hr.job.factor.description,model_hr_job_factor_description,base.group_user,1,1,1,1
+access_hr_job_factor_puesto_user,hr.job.factor.puesto,model_hr_job_factor_puesto,base.group_user,1,1,1,1
+access_hr_job_competencia_puesto_user,hr.job.competencia.puesto,model_hr_job_competencia_puesto,base.group_user,1,1,1,1
+access_hr_job_competencia_user,hr.job.competencia,model_hr_job_competencia,base.group_user,1,1,1,1
+access_hr_job_competencia_description_user,hr.job.competencia.description,model_hr_job_competencia_description,base.group_user,1,1,1,1
+

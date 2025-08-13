@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Heredando la vista de formulario de hr.job -->
+        <record id="view_hr_job_form_inherit" model="ir.ui.view">
+            <field name="name">view.hr.job.form.inherit</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_title']" position="after">
+                    <div>
+                        <group>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="department_id"/>
+                            <field name="address_id"/>
+                        </group>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='recruitment_page']" position="attributes">
+<!--                    <attribute name="attrs">{'invisible': [('id', '!=', False)]}</attribute>-->
+                        <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='job_description_page']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+<!--                    <attribute name="attrs">{'invisible': [('id', '!=', False)]}</attribute>-->
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Valuación de Puesto">
+                        <group>
+                            <group string="Descripción">
+<!--                                <field name="codigo" widget="char"/>-->
+<!--                                <field name="version"/>-->
+                                <field name="fecha_emision"/>
+                            </group>
+                            <group string="Rango">
+                                <field name="rango_actual"/>
+<!--                                <field name="rango_maximo"/>-->
+<!--                                <field name="rango_minimo"/>-->
+                            </group>
+                        </group>
+                        <group string="Factor">
+                            <field name="factor_puesto" string="">
+                                <list editable="bottom">
+                                    <field name="publicar_en_web"/>
+                                    <field name="factor_id"/>
+                                    <field name="factor_descripcion"/>
+                                    <field name="punteo"/>
+                                    <field name="grado"/>
+                                </list>
+                            </field>
+                        </group>
+                        <group string="Competencias">
+                            <field name="competencia_puesto" string="">
+                                <list editable="bottom">
+                                    <field name="publicar_web"/>
+                                    <field name="competencia_id"/>
+                                    <field name="competencia_descripcion"/>
+                                    <field name="punteo"/>
+                                    <field name="grado"/>
+                                </list>
+                            </field>
+                        </group>
+                    </page>
+                    <page string="Descriptor de Puesto">
+                        <group string="Funciones">
+                            <field name="funcion_principal"/>
+                            <label for="funciones_especificas" />
+                            <field name="funciones_especificas" options="{'collaborative': true}" nolabel="1"/>
+                            <label for="responsabilidades" />
+                            <field name="responsabilidades" options="{'collaborative': true}" nolabel="1"/>
+                        </group>
+<!--                        <group string="Funciones Especificas">-->
+<!--                            <label for="funciones_especificas" string=""/>-->
+<!--                            <field name="funciones_especificas" nolabel="1">-->
+<!--                                <list editable="bottom">-->
+<!--                                    <field name="funcion_especifica"/>-->
+<!--                                </list>-->
+<!--                            </field>-->
+<!--                        </group>-->
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="factor_puesto_tree_view" model="ir.ui.view">
+            <field name="name">factor.puesto.view.tree</field>
+            <field name="model">hr.job.factor.puesto</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="job_id"/>
+                    <field name="factor_id"/>
+                    <field name="factor_descripcion"/>
+                    <field name="punteo"/>
+                    <field name="grado"/>
+                </list>
+            </field>
+        </record>
+        <record id="factores_tree_view" model="ir.ui.view">
+            <field name="name">factores.view.tree</field>
+            <field name="model">hr.job.factor.description</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="factor_id"/>
+                    <field name="grado"/>
+                    <field name="punteo"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="factor_tree_view" model="ir.ui.view">
+            <field name="name">factor.view.tree</field>
+            <field name="model">hr.job.factor</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="competencia_puesto_tree_view" model="ir.ui.view">
+            <field name="name">competencia.puesto.view.tree</field>
+            <field name="model">hr.job.competencia.puesto</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="puesto_id"/>
+                    <field name="competencia_id"/>
+                    <field name="competencia_descripcion"/>
+                    <field name="punteo"/>
+                    <field name="grado"/>
+                </list>
+            </field>
+        </record>
+        <record id="competencias_tree_view" model="ir.ui.view">
+            <field name="name">competencias.view.tree</field>
+            <field name="model">hr.job.competencia.description</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="competencia_id"/>
+                    <field name="grado"/>
+                    <field name="punteo"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+        <record id="competencia_tree_view" model="ir.ui.view">
+            <field name="name">competencia.view.tree</field>
+            <field name="model">hr.job.competencia</field>
+            <field name="arch" type="xml">
+                <list create="true">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_factor_puesto">
+            <field name="name">Factores en puestos</field>
+            <field name="res_model">hr.job.factor.puesto</field>
+            <field name="view_mode">list</field>
+        </record>
+        <record model="ir.actions.act_window" id="action_puestos">
+            <field name="name">Factores</field>
+            <field name="res_model">hr.job.factor.description</field>
+            <field name="view_mode">list</field>
+        </record>
+        <record model="ir.actions.act_window" id="action_puesto">
+            <field name="name">Factor</field>
+            <field name="res_model">hr.job.factor</field>
+            <field name="view_mode">list,form</field>
+<!--            <field name="import" eval="True"/>-->
+        </record>
+        <record model="ir.actions.act_window" id="action_competencia_puesto">
+            <field name="name">Competencia en puestos</field>
+            <field name="res_model">hr.job.competencia.puesto</field>
+            <field name="view_mode">list</field>
+        </record>
+        <record model="ir.actions.act_window" id="action_competencias">
+            <field name="name">Competencias</field>
+            <field name="res_model">hr.job.competencia.description</field>
+            <field name="view_mode">list</field>
+        </record>
+        <record model="ir.actions.act_window" id="action_competencia">
+            <field name="name">Competencia</field>
+            <field name="res_model">hr.job.competencia</field>
+            <field name="view_mode">list</field>
+        </record>
+
+        <menuitem id="menu_action_factor_puesto" name="Factores en Puestos" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_factor_puesto"/>
+        <menuitem id="menu_action_puestos" name="Puestos" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_puestos"/>
+        <menuitem id="menu_action_puesto" name="Puesto" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_puesto"/>
+        <menuitem id="menu_action_competencia_puesto" name="Competencias en Puestos" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_competencia_puesto"/>
+        <menuitem id="menu_action_competencias" name="Competencias" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_competencias"/>
+        <menuitem id="menu_action_competencia" name="Competencia" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_competencia"/>
+
+
+    </data>
+</odoo>

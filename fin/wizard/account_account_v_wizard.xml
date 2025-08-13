@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista del Wizard -->
+        <record id="view_account_account_v_wizard_form" model="ir.ui.view">
+            <field name="name">account.account.v.wizard.form</field>
+            <field name="model">account.account.v.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Datos">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="account_ids" widget="many2many_tags"/>
+                        <field name="journal_ids" widget="many2many_tags"/>
+                        <field name="journal_type" widget="selection"/>
+<!--                        <field name="analytic_account_ids" widget="many2many_tags"/>-->
+                        <field name="company_id" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="open_prestaciones_at_date" type="object" string="Datos por Cuenta" class="btn-primary"/>
+                        <button name="get_move_lines" type="object" string="Reporte de Compras" class="btn-primary"/>
+<!--                        <button name="get_move_lines_inventario" type="object" string="Reporte de Inventario" class="btn-primary"/>-->
+                        <button name="get_invoices_payments_at_date" type="object" string="Pendientes de Pago" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción del Wizard -->
+        <record id="action_account_account_v_wizard" model="ir.actions.act_window">
+            <field name="name">Consultar por Cuenta Contable</field>
+            <field name="res_model">account.account.v.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_account_account_v_wizard_form"/>
+        </record>
+    </data>
+</odoo>

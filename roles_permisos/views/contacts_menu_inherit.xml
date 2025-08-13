@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <!-- Contactos    -->
+        <record id="contacts.menu_contacts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_medio_nominas'),
+                                                  ref('roles_permisos.group_alto_nominas'),
+                                                   ref('roles_permisos.group_alto_gth'),
+                                                   ref('roles_permisos.group_gerencia_gth')
+                                                  ])]"/>
+        </record>
+
+    </data>
+
+
+    <!-- Contactos/Configuración/Cuentas bancarias/Bancos -->
+        <record id="contacts.menu_action_res_bank_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!-- Contactos/Configuración/Cuentas bancarias/Cuentas bancarias -->
+        <record id="contacts.menu_action_res_partner_bank_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!-- Contactos/Configuración/Etiquetas de contacto -->
+        <record id="contacts.menu_partner_category_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!-- Contactos/Configuración/Títulos de contacto -->
+        <record id="contacts.menu_partner_title_contact" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!-- CContactos/Configuración/Industrias -->
+        <record id="contacts.res_partner_industry_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+     <!-- Contactos/Configuración/Localización -->
+        <record id="contacts.menu_localisation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+     <!--Contactos/Configuración/Cuentas bancarias -->
+        <record id="contacts.menu_config_bank_accounts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_medio_nominas'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_nominas'),
+                                                  ref('roles_permisos.group_medio_nominas')
+                                                  ])]"/>
+        </record>
+
+     <!--Contactos/Configuración/Cuentas bancarias -->
+        <record id="contacts.menu_country_partner" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!--Contactos/Configuración/Localización/Provincias -->
+        <record id="contacts.menu_country_state_partner" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!--Contactos/Configuración/Localización/Grupo de países -->
+        <record id="contacts.menu_country_group" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+     <!--Contactos/Contactos-->
+        <record id="contacts.res_partner_menu_contacts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                  ])]"/>
+        </record>
+
+    <!--Contactos/Contactos-->
+        <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+
+
+
+</odoo>

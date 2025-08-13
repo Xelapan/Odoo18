@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Inventarios -->
+        <record id="stock.menu_stock_root" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_prov'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_gerencia_mto'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_medio_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Configuración/Unidades de medida/Categorías UdM -->
+        <record id="stock.menu_stock_uom_categ_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Configuración/Unidades de medida/Categorías UdM -->
+        <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Configuración/Unidades de medida/Categorías UdM -->
+        <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Operaciones/Reposición -->
+        <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                  ref('roles_permisos.group_gerencia_mto'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--inventario/Operaciones/Ajustes de Inventario -->
+        <record id="stock.menu_action_inventory_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_gerencia_mto'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Operaciones/Transferencias -->
+        <record id="stock.all_picking" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_prov'),
+                                                    ref('roles_permisos.group_gerencia_mto'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+         <!--Inventario/Operaciones/Desechar -->
+        <record id="stock.menu_stock_scrap" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_gerencia_mto'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Operaciones/Ejecutar Planificador -->
+        <record id="stock.menu_procurement_compute" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Información general -->
+        <record id="stock.stock_picking_type_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_gerencia_mto'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Operaciones -->
+        <record id="stock.menu_stock_warehouse_mgmt" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [  ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_finanzas'),
+                                                     ref('roles_permisos.group_alto_prov'),
+                                                     ref('roles_permisos.group_gerencia_prov'),
+                                                     ref('roles_permisos.group_gerencia_mto'),
+                                                     ref('roles_permisos.group_alto_mto'),
+                                                     ref('roles_permisos.group_medio_mto'),
+                                                     ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+         <!--Inventario/Productos -->
+        <record id="stock.menu_stock_inventory_control" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_prov'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!--Inventario/Informes -->
+        <record id="stock.menu_warehouse_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+        <!--Inventario/Configuración -->
+        <record id="stock.menu_stock_config_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes/Almacenes  -->
+        <record id="stock.menu_action_warehouse_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes/Ubicaciones  -->
+        <record id="stock.menu_action_location_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes/Rutas  -->
+        <record id="stock.menu_routes_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes/Reglas  -->
+        <record id="stock.menu_action_rules_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+
+        <!--Inventario/Configuración/Gestión de almacenes/Tipos de operaciones  -->
+        <record id="stock.menu_pickingtype" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+        <!--Inventario/Configuración/Gestión de almacenes/Categorías de almacenamiento -->
+        <record id="stock.menu_storage_categoty_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes/Reglas de Estrategía de Traslado-->
+        <record id="stock.menu_putaway" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+
+        </record>
+
+ <!--Inventario/Informes/Stock -->
+        <record id="stock.menu_product_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                   ref('roles_permisos.group_gerencia_finanzas'),
+                                                   ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+         <!--Inventario/Informes/Kardex -->
+        <record id="stock_kardex_report.menu_kardex_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Informes/Reporte de Inventario a la Fecha -->
+        <record id="stock_kardex_report.menu_inventory_at_date_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Informes/Ubicaciones -->
+        <record id="stock.menu_valuation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Informes/Historial de movimientos -->
+        <record id="stock.stock_move_line_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+        <!--Inventario/Informes/Movimientos de stock -->
+        <record id="stock.stock_move_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+         <!--Inventario/Informes/Valoración -->
+        <record id="stock_account.menu_valuation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Informes/Rendimiento -->
+        <record id="stock_enterprise.stock_dashboard_menuitem" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_prov'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+         <!--Inventario/Configuración/Productos/Categorías de productos -->
+        <record id="stock.menu_product_category_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Productos/Atributos-->
+        <record id="stock.menu_attribute_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Productos/Envases del producto-->
+        <record id="stock.menu_product_packagings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_finanzas'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Productos/Reglas de abastecimiento -->
+        <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Productos/Unidades de medida -->
+        <record id="stock.menu_stock_unit_measure_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                   ref('roles_permisos.group_gerencia_prov'),
+                                                   ref('roles_permisos.group_alto_finanzas'),
+                                                   ref('roles_permisos.group_alto_mto'),
+                                                   ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+        <!--Inventario/Configuración/Productos/Nomenclaturas de código de barras -->
+        <record id="stock.menu_wms_barcode_nomenclature_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+          <!--Inventario/Productos/Productos/-->
+        <record id="stock.menu_product_variant_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_prov'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Productos/Variantes de producto -->
+        <record id="stock.product_product_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Productos/Lotes/Números de serie -->
+        <record id="stock.menu_action_production_lot_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Productos/Paquetes -->
+        <record id="stock.menu_package" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_prov'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+          <!--Inventario/Configuración/Ajustes -->
+        <record id="stock.menu_stock_general_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+         <!--Inventario/Configuración/Gestión de almacenes -->
+        <record id="stock.menu_warehouse_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+         <!--Inventario/Configuración/Productos -->
+        <record id="stock.menu_product_in_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Unidades de medida -->
+        <record id="stock.product_uom_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+        <!--Inventario/Configuración/Entrega -->
+        <record id="stock.menu_delivery" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+
+   <!--Inventario/Configuración/Entrega/Tipos de paquete -->
+        <record id="stock.menu_packaging_types" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_prov'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+          </record>
+
+    </data>
+</odoo>

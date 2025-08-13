@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="l10n_gt_view_purchase_order_form" model="ir.ui.view">
+            <field name="name">l10n_gt_extra.purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+<!--                boton impuesto global despues de button_draft-->
+                <xpath expr="//button[@name='button_draft']" position="after">
+                    <button name="impuesto_global" id="impuesto_global" string="Generar Impuesto" class="btn-primary" type="object"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--vista heredada mrp.production.form-->
+        <record id="mrp_production_form_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_confirm']" position="after">
+                    <button name="set_to_draft" string="Pasar a Borrador"
+                            type="object" class="oe_highlight" states="confirmed,progress,to_close"/>
+                    <button name="set_return_confirmed" string="Retorno Confirmado"
+                            type="object" class="oe_highlight" states="done" groups="mto.admin_informatica"/>
+                </xpath>
+                <xpath expr="//group[@name='group_extra_info']" position="inside">
+                    <field name="asignado"  readonly="1"/>
+                    <field name="team_id"  readonly="1"/>
+                    <field name="analytic_account_id" string="Ubicación" readonly="1"/>
+                    <field name="proyecto"  readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="before">
+                    <field name="ticket" readonly="1"/>
+                    <field name="mesa_servicio"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Requisiciones" name="requisiciones_tab">
+                            <field name="requisiciones" widget="one2many_list" nolabel="1"/>
+                    </page>
+                    <page string="Ventas" name="ventas_tab">
+                            <field name="ventas" widget="one2many_list" nolabel="1"/>
+                    </page>
+                </xpath>
+<!--                campo components_availability que se oculte-->
+                <xpath expr="//field[@name='components_availability']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='move_raw_ids']" position="after">
+                    <group name="montos">
+                        <group name="informacion">
+                        </group>
+                        <group>
+                            <field name="costo_materiales" readonly="1" widget="monetary"/>
+                            <field name="servicio_fabricacion" readonly="1" widget="monetary"/>
+                            <field name="costo_total" readonly="1" widget="monetary"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='move_raw_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

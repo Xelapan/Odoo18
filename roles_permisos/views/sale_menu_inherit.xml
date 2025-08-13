@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Venta -->
+        <record id="sale.sale_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_medio_gth')
+                                            ])]"/>
+        </record>
+
+        <!-- Ventas/Pedidos -->
+        <record id="sale.sale_order_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_basico_finanzas'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_medio_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/A facturar -->
+        <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_basico_finanzas'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Productos -->
+        <record id="sale.product_menu_catalog" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                      ref('roles_permisos.group_medio_finanzas'),
+                                                        ref('roles_permisos.group_alto_finanzas'),
+                                                        ref('roles_permisos.group_alto_mto'),
+                                                        ref('roles_permisos.group_gerencia_gth'),
+                                                        ref('roles_permisos.group_alto_gth')
+                                                ])]"/>
+        </record>
+
+        <!-- Ventas/Informes -->
+        <record id="sale.menu_sale_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración -->
+        <record id="sale.menu_sale_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                     ])]"/>
+        </record>
+
+        <!-- Ventas/Productos/Productos -->
+        <record id="sale.menu_product_template_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Productos/Variantes de producto -->
+        <record id="sale.menu_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                      ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Productos/Tarifas -->
+        <record id="sale.menu_product_pricelist_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                      ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Productos/Atributos -->
+        <record id="sale.menu_product_attribute_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Ajustes -->
+        <record id="sale.menu_sale_general_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Equipos de ventas -->
+        <record id="sale.sales_team_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas')])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Pedidos de ventas -->
+        <record id="sale.menu_sales_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Productos -->
+        <record id="sale.prod_config_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Unidades de medida -->
+        <record id="sale.next_id_16" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Tipos de actividad -->
+        <record id="sale.sale_menu_config_activity_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Pedidos de ventas/Etiquetas -->
+        <record id="sale.menu_tag_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [  ref('roles_permisos.group_gerencia_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_gth'),
+                                                     ref('roles_permisos.group_alto_gth')
+            ])]"/>
+        </record>
+
+        <!-- Ventas/Pedidos/Presupuestos -->
+        <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                   ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_mto'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Pedidos/Pedidos -->
+        <record id="sale.menu_sale_order" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Pedidos/Clientes -->
+        <record id="sale.res_partner_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/A facturar/Pedidos a Facturar -->
+        <record id="sale.menu_sale_order_invoice" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_mto'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                     ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Unidades de medida/Unidades de medida -->
+        <record id="sale.menu_product_uom_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+
+                                                  ])]"/>
+        </record>
+
+        <!-- Ventas/Configuración/Unidades de medida/Categorías de las unidades de medida -->
+        <record id="sale.menu_product_uom_categ_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_gth'),
+                                                  ref('roles_permisos.group_alto_gth')
+                                                  ])]"/>
+        </record>
+
+    </data>
+</odoo>

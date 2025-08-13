@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="account_inventory_v_view_tree" model="ir.ui.view">
+            <field name="name">account.inventory.v.tree</field>
+            <field name="model">account.inventory.v</field>
+            <field name="arch" type="xml">
+                <list string="Visor Inventario Contable" create="0" edit="1" js_class="AccountInventoryVTreeView">
+                    <field name="product_id" widget="many2one"/>
+                    <field name="account_id"/>
+                    <field name="default_code"/>
+                    <field name="description"/>
+                    <field name="product_uom_id"/>
+                    <field name="quantity"/>
+<!--                    <field name="avg_unit_cost"/>-->
+                    <field name="standard_price"/>
+                    <field name="total_cost" sum="Total"/>
+                </list>
+            </field>
+        </record>
+        <!-- Vista de árbol personalizada -->
+<!--        <record id="account_inventory_v_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">account.inventory.v.view.tree</field>-->
+<!--            <field name="model">account.inventory.v</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <list string="Informe Inventario" create="0" edit="1" js_class="AccountInventoryVTreeView">-->
+<!--                    <field name="date"                                 optional="hide"/>-->
+<!--                    <field name="move_id"           widget="many2one"   optional="hide"/>-->
+<!--                    <field name="account_id"        widget="many2one"   optional="hide"/>-->
+<!--                    <field name="journal_id"        widget="many2one"   optional="hide"/>-->
+<!--                    <field name="session_identifier"                    optional="hide"/>-->
+<!--                    <field name="product_id" widget="many2one"          optional="hide"/>-->
+<!--                    <field name="tipo_gasto"                            optional="hide"/>-->
+<!--                    <field name="default_code"/>-->
+<!--                    <field name="description"/>-->
+<!--                    <field name="product_uom_id" widget="many2one"/>-->
+<!--                    <field name="move_type"                             optional="hide"/>-->
+<!--                    <field name="quantity"/>-->
+<!--                    <field name="standard_price"/>-->
+<!--                    <field name="total_cost" sum="Total"/>-->
+<!--                </list>-->
+<!--            </field>-->
+<!--        </record>-->
+        <record id="view_account_inventory_v_search" model="ir.ui.view">
+            <field name="name">account.inventory.v.search</field>
+            <field name="model">account.inventory.v</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="product_id"/>
+<!--                    <field name="date"/>-->
+<!--                    <field name="account_id"/>-->
+<!--                    <field name="move_id"/>-->
+<!--                    <field name="journal_id"/>-->
+                    <group expand="1" string="Agrupar por">
+<!--                        <filter string="Fecha" name="fecha" context="{'group_by': 'date'}"/>-->
+<!--                        <filter string="Cuenta Contable" name="thaccount_id" context="{'group_by': 'account_id'}"/>-->
+<!--                        <filter string="Diario" name="thjournal_id" context="{'group_by': 'journal_id'}"/>-->
+                        <filter string="Producto" name="thproduct_id" context="{'group_by': 'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_account_inventory_v_tree" model="ir.actions.server">
+            <field name="name">Open Account Inventory V</field>
+            <field name="model_id" ref="model_account_inventory_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.inventory.v'].action_open_account_inventory_v()
+            </field>
+        </record>
+
+        <menuitem id="menu_account_inventory_v_tree"
+          name="Visor de Inventario Contable"
+          action="action_account_inventory_v_tree"
+          parent="account.menu_finance_reports"/>
+        <!-- Menú para acceder a la vista -->
+<!--        <menuitem -->
+<!--                id="menu_account_account_v_tree" -->
+<!--                name="Datos por Cuenta Contable" -->
+<!--                action="action_account_account_v_tree" -->
+<!--                parent="account.menu_finance_reports"/>-->
+
+    </data>
+</odoo>

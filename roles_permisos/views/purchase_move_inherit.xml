@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_purchase_move_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.move.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Botón crear factura -->
+            <xpath expr="//button[@name='action_create_invoice']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_basico_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_basico_prov,
+                    roles_permisos.group_medio_prov,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+            <!-- Botón confirmar pedido -->
+            <xpath expr="//button[@name='button_confirm']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+             <!-- Botón Cancelar-->
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+             <!-- Botón confirmar la fecha de recepcion  -->
+            <xpath expr="//button[@name='confirm_reminder_mail']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+     <!-- Botón imprimir SDP -->
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+
+            <!-- Botón crear factura -->
+            <xpath expr="//button[@name='action_create_invoice']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+<!--            &lt;!&ndash; Botón generar impuesto &ndash;&gt;-->
+<!--            <xpath expr="//button[@name='impuesto_global']" position="attributes">-->
+<!--                <attribute name="groups">-->
+<!--                    roles_permisos.group_alto_finanzas,-->
+<!--                    roles_permisos.group_gerencia_finanzas,-->
+<!--                    roles_permisos.group_medio_finanzas -->
+<!--                /attribute>-->
+<!--            </xpath>-->
+
+            <!-- Botón Bloquear -->
+            <xpath expr="//button[@name='button_done']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+            <!-- Botón establecer borrador -->
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+
+<!--            &lt;!&ndash; Botón ver &ndash;&gt;-->
+<!--            <xpath expr="//button[@name='action_view_picking']" position="attributes">-->
+<!--                <attribute name="groups">-->
+<!--                    roles_permisos.group_alto_finanzas,-->
+<!--                    roles_permisos.group_gerencia_finanzas,-->
+<!--                    roles_permisos.group_medio_finanzas-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+
+             <!-- Botón enviar pc por correo electronico -->
+            <xpath expr="//button[@name='action_rfq_send']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+</odoo>
+

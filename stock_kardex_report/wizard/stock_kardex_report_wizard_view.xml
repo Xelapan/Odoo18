@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_stock_kardex_report" model="ir.ui.view">
+        <field name="name">Reporte Kardex</field>
+        <field name="model">stock.kardex.report.wiz</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="product" options="{'no_create': True}"/>
+                        <field name="location" options="{'no_create': True}"/>
+<!--                        <field name="date_from"/>-->
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="open_table" string="Kardex" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_kardex_report" model="ir.actions.act_window">
+        <field name="name">Kardex</field>
+        <field name="res_model">stock.kardex.report.wiz</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_kardex_report"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_kardex_report" name="Kardex" parent="stock.menu_warehouse_report" action="action_stock_kardex_report"/>
+
+</odoo>

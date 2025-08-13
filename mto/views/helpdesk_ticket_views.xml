@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="helpdesk_ticket_form_inherit" model="ir.ui.view">
+        <!-- agregar campos por herencia a helpdesk.helpdesk_ticket_view_form -->
+        <field name="name">helpdesk.helpdesk_ticket_view_form_inherit</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="x_asignado" context="{'allow_all_employees': True, 'create': False}"/>
+            </xpath>
+            <!-- ocultar campo user_id -->
+            <field name="user_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+<!--    colocar campo one2many employee_ids despues de <div class="row mt32 o_settings_container" id="after-sales">-->
+    <record id="helpdesk_team_form_inherit" model="ir.ui.view">
+        <!-- agregar campos por herencia a helpdesk.helpdesk_team_view_form -->
+        <field name="name">helpdesk.helpdesk_team_view_form_inherit</field>
+        <field name="model">helpdesk.team</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_team_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='after-sales']" position="after">
+                <field name="employee_ids" widget="many2many" options="{'no_create': True}">
+                    <list>
+                        <field name="name"/>
+                        <field name="department_name"/>
+                        <field name="job_title"/>
+                    </list>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

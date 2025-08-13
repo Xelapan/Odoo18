@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_inventory_adjustment_wizard_form" model="ir.ui.view">
+            <field name="name">stock.inventory.adjustment.wizard.form</field>
+            <field name="model">stock.inventory.adjustment.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Ajustes de Inventario Wizard">
+                    <sheet>
+                        <group>
+<!--                            <field name="date_start"/>-->
+                            <field name="date_end" required="True"/>
+<!--                            <field name="ref"/>-->
+                            <field name="location_id" required="True"/>
+<!--                            <field name="product_id"/>-->
+                        </group>
+                        <footer>
+                            <button name="open_inventory_adjustment" type="object" string="Historial Ajustes Inventario" class="btn-primary"/>
+                            <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_stock_inventory_adjustment_wizard" model="ir.actions.act_window">
+            <field name="name">Historial Ajustes de Inventario</field>
+            <field name="res_model">stock.inventory.adjustment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_stock_inventory_adjustment_wizard_form"/>
+        </record>
+        <menuitem id="menu_stock_inventory_adjustment_wizard" name="Historial Ajustes de Inventario" parent="stock.menu_warehouse_report" action="action_stock_inventory_adjustment_wizard"/>
+    </data>
+</odoo>

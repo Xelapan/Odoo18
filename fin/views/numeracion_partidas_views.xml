@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista de árbol personalizada -->
+        <record id="numeracion_partidas_view_tree" model="ir.ui.view">
+            <field name="name">numeracion.partidas.view.tree</field>
+            <field name="model">numeracion.partidas</field>
+            <field name="arch" type="xml">
+                <list string="Partidas" create="0" default_order="date asc, correlativo asc">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="company_id" widget="many2one"/>
+
+                </list>
+            </field>
+        </record>
+        <record id="numeracion_partidas_view_form" model="ir.ui.view">
+            <field name="name">numeracion.partidas.view.form</field>
+            <field name="model">numeracion.partidas</field>
+            <field name="arch" type="xml">
+                <form string="Partidas" create="0">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="correlativo"/>
+                            <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="move_ids" widget="one2many_list">
+                                <list string="Aientos Contables">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="partida_id"/>
+                                    <field name="journal_id"/>
+                                    <field name="amount_total_signed"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción para abrir la vista de árbol -->
+        <record id="action_numeracion_partidas_tree" model="ir.actions.act_window">
+            <field name="name">Correlativo Partidas</field>
+            <field name="res_model">numeracion.partidas</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="numeracion_partidas_view_tree"/>
+            <field name="context">{'group_by': ['company_id', 'date']}</field>
+        </record>
+        <!-- Menú para acceder a la vista -->
+        <menuitem id="menu_numeracion_partidas_tree" name="Correlativo Partidas" action="action_numeracion_partidas_tree" parent="account.menu_finance_reports"/>
+    </data>
+</odoo>

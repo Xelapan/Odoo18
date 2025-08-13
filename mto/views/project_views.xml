@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="project_view_form_inherit" model="ir.ui.view">
+        <field name="name">project.view.form.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="replace">
+                <field name="x_autorizador"/>
+            </xpath>
+<!--            <xpath expr="//field[@name='label_tasks']" position="after">-->
+<!--                <field name="presupuestado" string="Proyecto presupuestado"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//page[@name='description']" position="before">-->
+<!--                <page string="Bodegas" name="bodega">-->
+<!--                    <group>-->
+<!--                    <field name="custom_picking_type_id" string="Tipo de transferencia"/>-->
+<!--                    <field name="location_id" string="Ubicación Origen"/>-->
+<!--                    <field name="location_dest_id" string="Ubicación Destino"/>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+        <record id="project_view_tree_inherit" model="ir.ui.view">
+            <field name="name">project.view.tree.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="x_autorizador"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

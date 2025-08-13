@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+ <record id="view_helpdesk_move_form_inherit" model="ir.ui.view">
+    <field name="name">helpdesk.move.form.inherit</field>
+    <field name="model">helpdesk.team</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_team_view_kanban"/>
+    <field name="arch" type="xml">
+
+       <!-- Botón Tiquets -->
+            <xpath expr="//button[@name='action_view_ticket']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_medio_mto
+                </attribute>
+            </xpath>
+    </field>
+
+ </record>
+
+   <record id="view_helpdesk_move_form_inherit2" model="ir.ui.view">
+    <field name="name">helpdesk.move.form.inherit</field>
+    <field name="model">helpdesk.ticket</field>
+    <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+    <field name="arch" type="xml">
+
+       <!-- Botón Asignarme -->
+            <xpath expr="//button[@name='assign_ticket_to_self']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_medio_mto
+                </attribute>
+            </xpath>
+    </field>
+
+ </record>
+
+
+</odoo>

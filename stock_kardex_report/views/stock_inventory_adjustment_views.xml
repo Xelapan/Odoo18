@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Crear una nueva vista para stock.inventory.adjustment para los campos fecha, ref, location_id -->
+<odoo>
+    <data>
+        <record id="view_stock_inventory_adjustment_form" model="ir.ui.view">
+            <field name="name">stock.inventory.adjustment.form</field>
+            <field name="model">stock.inventory.adjustment</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Adjustment">
+                    <sheet>
+                        <group>
+                            <field name="date"/>
+                            <field name="ref"/>
+                            <field name="location_id"/>
+                            <field name="cost"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+<!--        Vista arbol-->
+        <record id="view_stock_inventory_adjustment_tree" model="ir.ui.view">
+            <field name="name">stock.inventory.adjustment.tree</field>
+            <field name="model">stock.inventory.adjustment</field>
+            <field name="arch" type="xml">
+                <list string="Ajustes de Inventario">
+                    <field name="date"/>
+                    <field name="ref"/>
+                    <field name="location_id"/>
+                    <field name="created_by"/>
+                    <field name="cost"/>
+                    <field name="company_id" optional="hide"/>
+                    <button name="action_open_stock_inventory_adjustment_line_report" type="object" string="Detalle Ajuste" class="oe_highlight" context="{
+                                'default_reference': ref,
+                                'default_location_id': location_id}"/>
+                </list>
+            </field>
+        </record>
+        <record id="stock_inventory_adjustment_line_tree_view" model="ir.ui.view">
+            <field name="name">stock.inventory.adjustment.line.tree</field>
+            <field name="model">stock.inventory.adjustment.line</field>
+            <field name="arch" type="xml">
+                <list string="Detalle de Ajuste">
+                    <field name="stock_move_line_id" widget="many2one" optional="show"/>
+                    <field name="reference" optional="show"/>
+                    <field name="date" widget="date" optional="show"/>
+                    <field name="product_id" widget="many2one" optional="show"/>
+                    <field name="product_uom_id"/>
+                    <field name="qty_done"/>
+                    <field name="cost"/>
+                    <field name="total_cost" sum="Total"/>
+                    <field name="user_id" widget="many2one" optional="hide"/>
+                    <field name="location_id" widget="many2one" optional="hide"/>
+                    <field name="account_move_id" widget="many2one" optional="hide"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_stock_inventory_adjustment" model="ir.actions.act_window">
+            <field name="name">Inventory Adjustment</field>
+            <field name="res_model">stock.inventory.adjustment</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

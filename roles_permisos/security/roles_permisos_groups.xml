@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <!-- Grupos de Finanzas -->
+        <record id="group_basico_finanzas" model="res.groups">
+            <field name="name">Básico Finanzas</field>
+        </record>
+        <record id="group_medio_finanzas" model="res.groups">
+            <field name="name">Medio Finanzas</field>
+        </record>
+        <record id="group_alto_finanzas" model="res.groups">
+            <field name="name">Alto Finanzas</field>
+        </record>
+        <record id="group_gerencia_finanzas" model="res.groups">
+            <field name="name">Gerencia Finanzas</field>
+        </record>
+
+        <!-- Grupos de nominas -->
+        <record id="group_basico_nominas" model="res.groups">
+            <field name="name">Básico Nominas</field>
+        </record>
+        <record id="group_medio_nominas" model="res.groups">
+            <field name="name">Medio Nominas</field>
+        </record>
+        <record id="group_alto_nominas" model="res.groups">
+            <field name="name">Alto Nominas</field>
+        </record>
+
+         <!-- Grupos de GTH -->
+        <record id="group_basico_gth" model="res.groups">
+            <field name="name">Básico GTH</field>
+        </record>
+        <record id="group_medio_gth" model="res.groups">
+            <field name="name">Medio GTH</field>
+        </record>
+        <record id="group_alto_gth" model="res.groups">
+            <field name="name">Alto GTH</field>
+        </record>
+        <record id="group_gerencia_gth" model="res.groups">
+            <field name="name">Gerencia GTH</field>
+        </record>
+
+         <!-- Grupos de prov -->
+        <record id="group_basico_prov" model="res.groups">
+            <field name="name">Básico PROV</field>
+        </record>
+        <record id="group_medio_prov" model="res.groups">
+            <field name="name">Medio PROV</field>
+        </record>
+        <record id="group_alto_prov" model="res.groups">
+            <field name="name">Alto PROV</field>
+        </record>
+        <record id="group_gerencia_prov" model="res.groups">
+            <field name="name">Gerencia PROV</field>
+        </record>
+
+
+        <!-- Grupos de MTO -->
+        <record id="group_basico_mto" model="res.groups">
+            <field name="name">Básico MTO</field>
+        </record>
+        <record id="group_medio_mto" model="res.groups">
+            <field name="name">Medio MTO</field>
+        </record>
+        <record id="group_alto_mto" model="res.groups">
+            <field name="name">Alto MTO</field>
+        </record>
+        <record id="group_gerencia_mto" model="res.groups">
+                <field name="name">Gerencia MTO</field>
+        </record>
+
+          <!-- Grupos de INF -->
+        <record id="group_gerencia_inf" model="res.groups">
+                <field name="name">Gerencia INF</field>
+        </record>
+    </data>
+</odoo>

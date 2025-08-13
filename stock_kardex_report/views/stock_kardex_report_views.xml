@@ -1,0 +1,30 @@
+<odoo>
+    <record id="stock_kardex_report_tree_view" model="ir.ui.view">
+        <field name="name">stock.kardex.report.tree</field>
+        <field name="model">stock.kardex.report</field>
+        <field name="arch" type="xml">
+            <list string="Kardex" default_order='date desc' action="action_open_reference" type="object">
+                <field name="date"/>
+<!--                <field name="origin"/>-->
+                <field name="account_move_id" widget="many2one"/>
+                <field name="origin"/>
+                <field name="reference"/>
+                <field name="move_id" widget="many2one"/>
+                <field name="tipo_mov"/>
+                <field name="product_id" />
+                <field name="product_uom_id" optional="hide"/>
+                <field name="location_id" />
+                <field name="location_dest_id" />
+<!--                <field name="lot_id"/>-->
+                <field name="owner_id" optional="hide"/>
+                <field name="package_id" optional="hide"/>
+                <field name="qty_done"/>
+                <field name="cost"/>
+                <field name="balance"/>
+                <field name="total_cost"/>
+                <field name="write_uid" />
+                <field name="write_date"/>
+            </list>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="stock_inventory_at_date_tree_view" model="ir.ui.view">
+            <field name="name">stock.inventory.at.date.tree.view</field>
+            <field name="model">stock.inventory.at.date</field>
+            <field name="arch" type="xml">
+                <list string="Inventory at Date" default_order='product_id asc'>
+                    <field name="product_id"/>
+                    <field name="quantity" string="Existencia"/>
+                    <field name="unit_cost" string="Costo"/>
+                    <field name="total_cost" string="Monto"/>
+                    <field name="categ_id"/>
+                    <field name="uom_id"/>
+                    <field name="precio"/>
+                    <field name="total_precio"/>
+                    <field name="location_id"/>
+                    <field name="date" optional="hide"/>
+                    <button name="action_open_kardex_report" type="object" string="Open Kardex Report" class="oe_highlight" context="{
+                                'default_product_id': product_id,
+                                'default_location_id': location_id,
+                                'default_date_to': date
+                            }"/>
+                </list>
+            </field>
+        </record>
+        <!--Visor para busqueda de el mismo modelo-->
+        <record id="stock_inventory_at_date_search_view" model="ir.ui.view">
+            <field name="name">stock.inventory.at.date.search.view</field>
+            <field name="model">stock.inventory.at.date</field>
+            <field name="arch" type="xml">
+                <search string="Search Inventory at Date">
+                    <field name="product_id"/>
+                    <field name="categ_id"/>
+                    <field name="location_id"/>
+                    <field name="location_dest_id"/>
+                    <field name="date"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

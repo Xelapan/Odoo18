@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_sale_day_book_wizard_result_tree" model="ir.ui.view">
+            <field name="name">sale.day.book.wizard.result.tree</field>
+            <field name="model">sale.day.book.result</field>
+            <field name="arch" type="xml">
+                <list string="Sale Day Book Results">
+<!--                    <field name="sku"/>-->
+<!--                    <field name="name"/>-->
+                    <field name="product_id"/>
+                    <field name="net_on_hand"/>
+                    <field name="uom_id"/>
+
+                    <field name="cost_price"/>
+                    <field name="total_value"/>
+                    <field name="sale_value"/>
+                    <field name="category" optional="hide"/>
+
+
+                    <field name="available" optional="hide"/>
+                    <field name="virtual" optional="hide"/>
+                    <field name="incoming" optional="hide"/>
+                    <field name="outgoing" optional="hide"/>
+                    <field name="purchase_value" optional="hide"/>
+                    <field name="beginning" optional="hide"/>
+                    <field name="internal" optional="hide"/>
+                    <field name="costing_method" optional="hide"/>
+                    <field name="currency_id" optional="hide"/>
+                </list>
+            </field>
+        </record>
+        <record id="action_sale_day_book_result" model="ir.actions.act_window">
+            <field name="name">Sale Day Book Results</field>
+            <field name="res_model">sale.day.book.result</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_sale_day_book_wizard_result_tree"/>
+            <field name="target">current</field>
+        </record>
+    </data>
+</odoo>

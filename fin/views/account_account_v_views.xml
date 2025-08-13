@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista de árbol personalizada -->
+        <record id="account_account_v_view_tree" model="ir.ui.view">
+            <field name="name">account.account.v.view.tree</field>
+            <field name="model">account.account.v</field>
+            <field name="arch" type="xml">
+<!--                <list string="Movimientos" create="0" edit="1" js_class="AccountAccountVTreeView">-->
+                <list string="Movimientos" create="0" edit="1">
+                    <header>
+                        <button name="open_wizard" string="Datos a la Fecha"
+                                type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
+<!--                <list string="Movimientos" create="0" edit="1">-->
+                    <field name="fecha"/>
+                    <field name="move_id" widget="many2one"/>
+                    <field name="account_id" widget="many2one"/>
+                    <field name="journal_id" widget="many2one"/>
+                    <field name="description" optional="hide"/>
+<!--                    tipo_documento = fields.Char(string="Tipo Documento", readonly=True, related='move_line_id.move_id.tipo_documento')-->
+<!--                    tipo_transaccion = fields.Char(string="Tipo Documento", readonly=True, related='move_line_id.move_id.tipo_transaccion')-->
+<!--                    tipo = fields.Char(string="Tipo", readonly=True, related='move_line_id.move_id.move_type')-->
+<!--                    ref = fields.Char(string="Referencia", readonly=True, related='move_line_id.move_id.ref')-->
+                    <field name="move_type" optional="hide"/>
+                    <field name="tipo_documento" optional="hide"/>
+                    <field name="tipo_transaccion" optional="hide"/>
+                    <field name="ref" optional="hide"/>
+                    <field name="partner_id" widget="many2one"/>
+<!--                    <field name="analytic_distribution"/>-->
+                    <field name="analytic_tags" string="Etiquetas Analíticas" optional="hide"/>
+                    <field name="analytic_account_id"  optional="show"/>
+                    <field name="balance"/>
+                    <field name="amount_residual" optional="show"/>
+                    <field name="price_unit" optional="hide"/>
+                    <field name="price_subtotal" optional="hide"/>
+<!--                    <field name="company_id"/>-->
+<!--                    <field name="tax_base_amount"/>-->
+<!--                    session_token = fields.Char(string='Session Token', required=True)  # Campo para el token de sesión-->
+<!--                    product_id = fields.Many2one('product.product', string="Producto", store=True, related='move_line_id.product_id')-->
+<!--                    tipo_gasto = fields.Selection(string="Tipo Gasto", store=True, related='product_id.tipo_gasto')-->
+<!--                    quantity = fields.Float(string="Cantidad", store=True, related='move_line_id.quantity')-->
+<!--                    tax_ids = fields.Many2many('account.tax', string="Impuesto", store=False, related='move_line_id.tax_ids')-->
+<!--                    numero_fel = fields.Char(string="Número FEL", store=True, related='move_id.numero_fel')-->
+<!--                    serie_fel = fields.Char(string="Serie FEL", store=True, related='move_id.serie_fel')-->
+<!--                    tipo_documento_fel = fields.Selection(string="Tipo Documento FEL", store=True, related='move_id.journal_id.tipo_documento_fel')-->
+                    <field name="session_identifier" optional="hide"/>
+                    <field name="product_id" optional="hide"/>
+                    <field name="tipo_gasto" optional="hide"/>
+                    <field name="quantity" optional="hide"/>
+                    <field name="tax_ids" optional="hide"/>
+                    <field name="numero_fel" optional="hide"/>
+                    <field name="serie_fel" optional="hide"/>
+                    <field name="tipo_documento_fel" optional="hide"/>
+                    <field name="payment_state" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+
+        <record id="account_account_v_purchase_view_tree" model="ir.ui.view">
+            <field name="name">account.account.v.purchase.view.tree</field>
+            <field name="model">account.account.v</field>
+            <field name="arch" type="xml">
+                <list string="Reporte Compras IVA" default_order="fecha asc" create="0" edit="1" js_class="AccountAccountVTreeView">
+                    <field name="fecha"/>
+                    <field name="numero_fel"/>
+                    <field name="serie_fel"/>
+                    <field name="tipo_documento"/>
+                    <field name="partner_id" widget="many2one"/>
+                    <field name="tipo_gasto"/>
+                    <field name="description"/>
+                    <field name="quantity"/>
+                    <field name="price_unit"/>
+                    <field name="price_subtotal"/>
+<!--                    <field name="tax_ids" widget="many2many_tags"/>-->
+                    <field name="tax_names"/>
+                    <field name="session_identifier" optional="hide"/>
+                    <field name="product_id" widget="many2one"  optional="hide"/>
+                    <field name="move_id" widget="many2one" optional="hide"/>
+                    <field name="account_id" widget="many2one" optional="hide"/>
+                    <field name="journal_id" widget="many2one" optional="hide"/>
+                    <field name="move_type" optional="hide"/>
+                    <field name="tipo_documento_fel" optional="hide"/>
+                    <field name="tipo_transaccion" optional="hide"/>
+                    <field name="ref" optional="hide"/>
+                    <field name="analytic_tags" string="Etiquetas Analíticas" optional="hide"/>
+                    <field name="balance" optional="hide"/>
+                </list>
+            </field>
+        </record>
+        <record id="account_account_v_inventario_view_tree" model="ir.ui.view">
+            <field name="name">account.account.v.inventario.tree</field>
+            <field name="model">account.account.v</field>
+            <field name="arch" type="xml">
+                <list string="Informe Inventario" create="0" edit="1" js_class="AccountAccountVTreeView">
+                    <field name="fecha"                                 optional="hide"/>
+                    <field name="move_id"           widget="many2one"   optional="hide"/>
+                    <field name="account_id"        widget="many2one"   optional="hide"/>
+                    <field name="journal_id"        widget="many2one"   optional="hide"/>
+                    <field name="default_code"/>
+                    <field name="description"/>
+                    <field name="product_uom_id"/>
+                    <field name="move_type"                             optional="hide"/>
+                    <field name="tipo_documento"                        optional="hide"/>
+                    <field name="tipo_transaccion"                      optional="hide"/>
+                    <field name="ref"                                   optional="hide"/>
+                    <field name="partner_id"        widget="many2one"   optional="hide"/>
+                    <field name="analytic_tags" string="Etiquetas Analíticas" optional="hide"/>
+                    <field name="balance"                               optional="hide" sum="Total"/>
+                    <field name="quantity"/>
+                    <field name="standard_price"/>
+                    <field name="total_cost" sum="Total"/>
+                    <field name="session_identifier"                    optional="hide"/>
+                    <field name="product_id" widget="many2one"          optional="hide"/>
+                    <field name="tipo_gasto"                            optional="hide"/>
+                    <field name="tax_ids"                               optional="hide"/>
+                    <field name="numero_fel"                            optional="hide"/>
+                    <field name="serie_fel"                             optional="hide"/>
+                    <field name="tipo_documento_fel"                    optional="hide"/>
+                </list>
+
+            </field>
+        </record>
+        <record id="view_account_account_v_search" model="ir.ui.view">
+            <field name="name">account.account.v.search</field>
+            <field name="model">account.account.v</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="fecha"/>
+                    <field name="account_id"/>
+                    <field name="move_id"/>
+                    <field name="journal_id"/>
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Contacto" name="partner_id" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Fecha" name="thfecha" context="{'group_by': 'fecha'}"/>
+                        <filter string="Cuenta Contable" name="account_id" context="{'group_by': 'account_id'}"/>
+                        <filter string="Diario" name="journal_id" context="{'group_by': 'journal_id'}"/>
+                        <filter string="Producto" name="product_id" context="{'group_by': 'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_account_account_vv_tree" model="ir.actions.server">
+            <field name="name">Open Account Account V</field>
+            <field name="model_id" ref="model_account_account_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.account.v'].action_open_account_account_v()
+            </field>
+        </record>
+
+        <!-- Acción para abrir la vista de árbol -->
+        <record id="action_account_account_v_tree" model="ir.actions.act_window">
+            <field name="name">Datos</field>
+            <field name="res_model">account.account.v</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="account_account_v_view_tree"/>
+<!--            <field name="context">{'use_prestaciones_list': True}</field>-->
+            <field name="context">{'use_prestaciones_list': True}</field>
+            <field name="context">{'session_identifier': user.get_session_identifier()}</field>
+            <field name="context">{'group_by': ['fecha']}</field>
+            <field name="domain">[('session_identifier', '=', context.get('session_identifier'))]</field>
+        </record>
+        <menuitem id="menu_account_account_v_tree"
+          name="Datos por Cuenta Contable"
+          action="action_account_account_vv_tree"
+          parent="account.menu_finance_reports"/>
+        <!-- Menú para acceder a la vista -->
+<!--        <menuitem -->
+<!--                id="menu_account_account_v_tree" -->
+<!--                name="Datos por Cuenta Contable" -->
+<!--                action="action_account_account_v_tree" -->
+<!--                parent="account.menu_finance_reports"/>-->
+
+    </data>
+</odoo>

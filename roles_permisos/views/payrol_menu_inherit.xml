@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+         <!-- Nomina   -->
+        <record id="hr_payroll.menu_hr_payroll_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+
+
+         <!-- Nómina/Recibos de nómina    -->
+        <record id="hr_payroll.menu_hr_payroll_payslips" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- Nómina/Informes/Planilla de Sueldos    -->
+        <record id="nomina_report.menu_wizard_planilla_sueldos" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- nomina_report.menu_wizard_pasivo_laboral_empleado -->
+        <record id="nomina_report.menu_wizard_pasivo_laboral_empleado" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- Nómina/Informes/Pasivo Laboral Consolidado-->
+        <record id="nomina_report.menu_wizard_pasivo_laboral_consolidado" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- Nómina/Informes/Reporte de Descuentos-->
+        <record id="nomina_report.menu_wizard_reporte_descuentos" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Informes/Libro Sueldos y Salarios -->
+        <record id="nomina_report.menu_wizard_libro_sueldos_salarios" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Informes/Reporte de Facturación -->
+        <record id="nomina_report.menu_wizard_report_facturacion" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Informes/Informe del Empleador -->
+        <record id="nomina_report.menu_wizard_informe_empleador" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Informes/Reporte Planilla IGSS -->
+        <record id="nomina_report.menu_wizard_informe_empleador" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Informes/Reporte Liquidación Empleados-->
+        <record id="nomina_report.menu_wizard_reporte_liquidacion_empleados" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- Nómina/Informes/Prestaciones de Nómina -->
+        <record id="nomina.menu_prestaciones_tree" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+          <!-- Nómina/Informes/Nómina -->
+        <record id="hr_payroll.menu_report_payroll" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+          <!-- Nómina/Informes/Análisis de entrada de trabajo  -->
+        <record id="hr_payroll.menu_hr_work_entry_report" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+          <!--Nómina/Informes/Reporte de archivo adjunto de salario  -->
+        <record id="hr_payroll.menu_hr_payroll_attachment_salary_report" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+           <!--Nómina/Configuración/Entradas de trabajo/Tipo de entradas de trabajo  -->
+        <record id="hr_work_entry_contract_enterprise.menu_hr_work_entry_type_view" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Entradas de trabajo/Tiempos de Trabajo  -->
+        <record id="hr_work_entry_contract_enterprise.menu_resource_calendar_view" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Entradas de trabajo/Entradas de trabajo  -->
+        <record id="hr_work_entry_contract_enterprise.menu_work_entry" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!-- Nómina/Entradas de trabajo/Conflictos -->
+        <record id="hr_work_entry_contract_enterprise.menu_work_entry_conflicts" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!-- Nómina/Entradas de trabajo/Ausencia para informar -->
+        <record id="hr_payroll_holidays.menu_work_entry_leave_to_approve" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                        ])]"/>
+        </record>
+
+        <!-- Nómina/Configuración/Ajustes  -->
+        <record id="hr_payroll.menu_hr_payroll_global_settings" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                        ])]"/>
+        </record>
+
+        <!-- Nómina/Configuración/Entradas de trabajo  -->
+        <record id="hr_work_entry_contract_enterprise.menu_hr_work_entry_configuration" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_medio_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                        ])]"/>
+        </record>
+
+        <!-- Nómina/Configuración/Salario  -->
+        <record id="hr_payroll.menu_hr_salary_configuration" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
+                                                        ref('roles_permisos.group_gerencia_finanzas'),
+                                                        ref('roles_permisos.group_gerencia_gth')
+                                                        ])]"/>
+        </record>
+
+        <!-- Nómina/Contratos/Empleados -->
+        <record id="hr_payroll.menu_hr_payroll_contracts_configuration" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_gth')
+             ])]"/>
+        </record>
+
+         <!-- Nómina/Contratos/Contratos -->
+        <record id="hr_payroll.hr_menu_all_contracts" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_gth')
+             ])]"/>
+        </record>
+
+        <!-- Nómina/Contratos/Archivos adjuntos de salario -->
+        <record id="hr_payroll.hr_menu_salary_attachments" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                     ref('roles_permisos.group_gerencia_gth')
+             ])]"/>
+        </record>
+
+  <!--Nómina/Recibos de nómina/Por pagar  -->
+        <record id="hr_payroll.menu_hr_payroll_employee_payslips_to_pay" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+
+            </record>
+
+
+    <!-- Nómina/Recibos de nómina/Todos los recibos de nómina -->
+        <record id="hr_payroll.menu_hr_payroll_employee_payslips" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+
+         <!-- Nómina/Recibos de nómina/Lotes -->
+        <record id="hr_payroll.menu_hr_payslip_run" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Tablero -->
+        <record id="hr_payroll.menu_hr_payroll_dashboard_root" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_alto_finanzas')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Contratos -->
+        <record id="hr_payroll.menu_hr_payroll_employees_root" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+             ])]"/>
+        </record>
+
+        <!--Nómina/Entradas de trabajo -->
+        <record id="hr_work_entry_contract_enterprise.menu_hr_payroll_work_entries_root" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+
+         <!--Nómina/Entradas de trabajo -->
+        <record id="hr_payroll.menu_hr_payroll_work_entries_root" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!--Nómina/informes-->
+        <record id="hr_payroll.menu_hr_payroll_report" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración -->
+        <record id="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+             ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Salario/Tipos de estructura -->
+        <record id="hr_payroll.menu_hr_payroll_structure_type" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Salario/Estructuras -->
+        <record id="hr_payroll.menu_hr_payroll_structure_view" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+         <!--Nómina/Configuración/Salario/Estructuras -->
+        <record id="hr_payroll.menu_action_hr_salary_rule_form" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Salario/Categorías de reglas -->
+        <record id="hr_payroll.menu_hr_salary_rule_category" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Salario/Parámetros de reglas-->
+        <record id="hr_payroll.menu_action_hr_salary_rule_parameter" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+        <!--Nómina/Configuración/Salario/Otros tipos de entrada-->
+        <record id="hr_payroll.menu_hr_payslip_entry_type_view" model="ir.ui.menu">
+             <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_gth')
+                                                    ])]"/>
+        </record>
+
+    </data>
+
+</odoo>

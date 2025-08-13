@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_stock_move_form_inherit" model="ir.ui.view">
+        <field name="name">stock.move.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- Botón validar -->
+            <xpath expr="//button[@name='button_validate']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+            <!-- Botón establecer cantidades -->
+            <xpath expr="//button[@name='action_set_quantities_to_reservation']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_medio_prov,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+             <!-- Botón imprimir-->
+            <xpath expr="//button[@name='do_print_picking']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_medio_prov,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+             <!-- Botón imprimir etiquetas -->
+            <xpath expr="//button[@name='action_open_label_type']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_medio_prov,
+                    roles_permisos.group_gerencia_prov,
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+     <!-- Botón desbloquear -->
+            <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                 </attribute>
+            </xpath>
+
+
+            <!-- Botón cancelar -->
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+            <!-- Botón vaciar cantidades -->
+            <xpath expr="//button[@name='action_clear_quantities_to_zero']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+            <!-- Botón    desechar-->
+            <xpath expr="//button[@name='button_scrap']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_prov,
+                    roles_permisos.group_gerencia_prov
+                </attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <record id="view_stock_move_form_inherit2" model="ir.ui.view">
+        <field name="name">stock.move.form.inherit</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+        <field name="arch" type="xml">
+
+    <!--Boton Validar en la opcion Ordenes de desecho-->
+           <xpath expr="//button[@name='action_validate']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto
+                </attribute>
+            </xpath>
+         </field>
+    </record>
+
+</odoo>
+

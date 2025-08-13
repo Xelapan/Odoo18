@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <!-- Empleados/Prestamos y Descuentos/Descuentos/Descuentos    -->
+        <record id="ent_ohrms_salary_advance.menu_salary_advance" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                     ref('roles_permisos.group_medio_nominas')
+
+            ])]"/>
+        </record>
+
+
+         <!-- Empleados/Prestamos y Descuentos/Descuentos/Descuentos    -->
+        <record id="ent_ohrms_loan.menu_base_hr_loan_request" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_medio_nominas')
+            ])]"/>
+        </record>
+
+        <!-- Empleados/Prestamos y Descuentos/Descuentos    -->
+        <record id="ent_ohrms_salary_advance.parent_menu_salary_advance" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_alto_gth'),
+                                                    ref('roles_permisos.group_gerencia_gth'),
+                                                    ref('roles_permisos.group_medio_nominas')
+            ])]"/>
+        </record>
+
+
+
+    </data>
+</odoo>

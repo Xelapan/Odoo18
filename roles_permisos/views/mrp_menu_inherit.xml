@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Fabricación -->
+        <record id="mrp.menu_mrp_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Operaciones-->
+        <record id="mrp.menu_mrp_manufacturing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+        <!-- Fabricación/Operaciones/Órdenes de producción-->
+        <record id="mrp.menu_mrp_production_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+        <!--Fabricación/Operaciones/Ordenes de trabajo-->
+         <record id="mrp.menu_mrp_workorder_todo" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Operaciones/Ordenes de desconstrucción-->
+        <record id="mrp.menu_mrp_unbuild" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Operaciones/Desechar-->
+         <record id="mrp.menu_mrp_scrap" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Informes-->
+        <record id="mrp.menu_mrp_reporting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Informes/Ordenes de trabajo-->
+          <record id="mrp.menu_mrp_work_order_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Informes/Órdenes de producción-->
+        <record id="mrp.menu_mrp_production_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Informes/Eficacia general del equipo-->
+        <record id="mrp.menu_mrp_workcenter_productivity_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Informes/Análisis de producción-->
+        <record id="mrp_account_enterprise.mrp_dashboard_menuitem" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Planificación-->
+        <record id="mrp.mrp_planning_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Planificación/Ejecutar Planificador-->
+        <record id="mrp.menu_procurement_compute_mrp" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Productos-->
+         <record id="mrp.menu_mrp_bom" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Productos/Productos-->
+       <record id="mrp.menu_mrp_product_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Productos/Variantes de producto-->
+        <record id="mrp.product_variant_mrp" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Fabricación/Productos/Lista de materiales-->
+        <record id="mrp.menu_mrp_bom_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--  Fabricación/Productos/Lotes/Números de serie-->
+        <record id="mrp.menu_mrp_traceability" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas'),
+                ref('roles_permisos.group_medio_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Configuración-->
+        <record id="mrp.menu_mrp_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Fabricación/Configuración/Ajustes-->
+        <record id="mrp.menu_mrp_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas'),
+                ref('roles_permisos.group_alto_finanzas')
+            ])]"/>
+        </record>
+
+    <!--  Fabricación/Configuración/Centros de producción-->
+        <record id="mrp.menu_view_resource_search_mrp" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                 ref('roles_permisos.group_gerencia_mto'),
+                 ref('roles_permisos.group_gerencia_finanzas'),
+                 ref('roles_permisos.group_alto_finanzas')
+            ])]"/>
+        </record>
+
+
+    <!--Fabricación/Configuración/Operaciones-->
+        <record id="mrp.menu_mrp_routing_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                 ref('roles_permisos.group_gerencia_mto'),
+                 ref('roles_permisos.group_gerencia_finanzas'),
+                 ref('roles_permisos.group_alto_finanzas')
+            ])]"/>
+        </record>
+    </data>
+</odoo>

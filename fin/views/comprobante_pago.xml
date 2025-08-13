@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_external_report_fin" >
+<t t-name="web.external_report_fin">
+<!--        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">-->
+<!--            <div class="row">-->
+<!--                <div class="col-3 mb4">-->
+<!--                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>-->
+<!--                </div>-->
+<!--                <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>-->
+<!--            </div>-->
+<!--            <div t-if="company.logo or company.report_header" class="row zero_min_height">-->
+<!--                <div class="col-12">-->
+<!--                    <div style="border-bottom: 1px solid black;"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="col-6" name="company_address">-->
+<!--                    <span t-if="company.company_details" t-field="company.company_details"/>-->
+<!--                    <span t-else="" t-field="company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <div class="pt-5">
+                <!-- This div ensures that the address is not cropped by the header. -->
+                <t t-call="web.address_layout"/>
+            </div>
+            <t t-out="0"/>
+        </div>
+
+<!--        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">-->
+<!--            <div class="text-center" style="border-top: 1px solid black;">-->
+<!--                <ul class="list-inline mb4">-->
+<!--                    <div t-field="company.report_footer"/>-->
+<!--                </ul>-->
+
+<!--                <div t-if="report_type == 'pdf'" class="text-muted">-->
+<!--                    Page: <span class="page"/> / <span class="topage"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </t>
+    </template>
+    <template id="comprobante_pago">
+        <t t-call="web.html_container">
+            <t t-call="fin.custom_external_report_fin">
+              <t t-foreach="docs" t-as="doc">
+                <t t-set="company" t-value="doc.company_id"/>
+                <div class="page" t-attf-style="font-family: Arial; font-size: 14px; ">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                    <div class="row">
+                        <div class="col-3 text-center">
+                            <t t-if="doc.company_id.logo">
+                                <img t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 50px; width: auto; margin-left: auto; margin-right: auto;" alt="Logo"/>
+                            </t>
+<!--                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 50px; width: auto; margin-left: auto; margin-right: auto;" alt="Logo"/>-->
+                        </div>
+                        <div class="col-3 text-center">
+                            <b> <t t-esc="doc.company_id.name"/></b>
+                            <br/>
+                            <b>Nit: <t t-esc="doc.company_id.vat"/></b>
+                        </div>
+                        <div class="col-2"/>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Registro No.: </b>
+                                </div>
+                                <div class="col-6">
+                                    <t t-esc="doc.ref"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Fecha: </b>
+                                </div>
+                                <div class="col-6">
+                                    <t t-esc="doc.get_date()"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <b>Monto: </b>
+                                </div>
+                                <div class="col-6">
+                                    Q <t t-esc="'{:,.2f}'.format(doc.amount)"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <strong>Proveedor: </strong> <t t-esc="doc.partner_id.name"/>
+                            <br/>
+                            <b>Comprobante de Pago</b>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th><span>Fecha</span></th>
+                                <th><span>No. Doc</span></th>
+                                <th><span>Referencia</span></th>
+                                <th><span>Monto</span></th>
+                                <th><span>Pago</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.dev_invoice_line_ids" t-as="inv">
+                                <!-- MOVE -->
+                                <tr>
+                                    <td><span t-field="inv.invoice_id.date"/></td>
+                                    <td><span t-field="inv.invoice_id.name"/></td>
+                                    <td><span t-field="inv.invoice_id.ref"/></td>
+                                    <td class="text-end"><span t-field="inv.original_amount"/></td>
+                                    <td class="text-end"><span t-field="inv.allocation"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-8"/>
+                        <div class="col-2">
+                            <strong>Total Aplicado: </strong>
+                        </div>
+                        <div class="col-2 text-center" style="border-top: 1px solid black;">
+                            Q <t t-esc="'{:,.2f}'.format(doc.amount)"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <strong>Nombre:_________________________________ </strong>
+                            <br/>
+                            <br/>
+                            <strong>Firma:___________________________________ </strong>
+                            <br/>
+                            <br/>
+                            <strong>No. DPI:__________________________________ </strong>
+                            <br/>
+                            <br/>
+                            <strong>Fecha:__________________________________ </strong>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                <div style="page-break-after: always;"/>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

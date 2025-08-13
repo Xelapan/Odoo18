@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <!--Servicio de asistencia-->
+        <record id="helpdesk.menu_helpdesk_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+
+
+            ])]"/>
+        </record>
+
+    <!-- Servicio de asistencia/Informes-->
+        <record id="helpdesk.helpdesk_ticket_report_menu_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!-- Servicio de asistencia/Informes/Análisis del estado SLA-->
+        <record id="helpdesk.helpdesk_ticket_report_menu_sla_analysis" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Informes/Análisis de tíquets-->
+        <record id="helpdesk.helpdesk_ticket_report_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Informes/Calificación de clientes-->
+        <record id="helpdesk.helpdesk_ticket_report_menu_ratings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Información general-->
+        <record id="helpdesk.helpdesk_menu_team_dashboard" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+        <!--Servicio de asistencia/Tíquets-->
+        <record id="helpdesk.helpdesk_ticket_menu_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+    <!--Servicio de asistencia/Tíquets/Mis tickets-->
+        <record id="helpdesk.helpdesk_ticket_menu_my" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_basico_mto'),
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Tíquets/Todos los tickets-->
+        <record id="helpdesk.helpdesk_ticket_menu_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_medio_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Configuración-->
+        <record id="helpdesk.helpdesk_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Configuración/Equipos-->
+        <record id="helpdesk.helpdesk_team_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Configuración/Etapas-->
+        <record id="helpdesk.helpdesk_stage_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Configuración/Políticas SLA-->
+         <record id="helpdesk.helpdesk_sla_menu_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+        </record>
+
+    <!--Servicio de asistencia/Configuración/Tipos-->
+         <record id="helpdesk.helpdesk_ticket_type_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+         </record>
+
+    <!-- Servicio de asistencia/Configuración/Etiquetas-->
+        <record id="helpdesk.helpdesk_tag_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+         </record>
+
+    <!-- Servicio de asistencia/Configuración/Tipos de actividad-->
+        <record id="helpdesk.helpdesk_menu_config_activity_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [
+                ref('roles_permisos.group_gerencia_mto'),
+                ref('roles_permisos.group_alto_mto'),
+                ref('roles_permisos.group_gerencia_finanzas')
+            ])]"/>
+         </record>
+
+
+    </data>
+    </odoo>

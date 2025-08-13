@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+          <!-- tableros    -->
+        <record id="spreadsheet_dashboard.spreadsheet_dashboard_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+         <!-- tableros    -->
+        <record id="base.menu_board_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+         <!-- proyectos    -->
+        <record id="project.menu_main_pm" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- Planificacion    -->
+        <record id="planning.planning_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- web site   -->
+        <record id="website.menu_website_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- marketin por email   -->
+        <record id="mass_mailing.mass_mailing_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- Encuentas   -->
+        <record id="survey.menu_surveys" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- Encuentas   -->
+        <record id="mrp.menu_mrp_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+
+        <!-- apliaciones  -->
+        <record id="base.menu_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+        <!-- Rastr. enlaces  -->
+        <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_inf')])]"/>
+        </record>
+
+
+
+    </data>
+</odoo>

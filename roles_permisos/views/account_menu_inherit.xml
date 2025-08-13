@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="accountant.menu_accounting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_basico_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Restricciones al menú de Contabilidad -->
+        <record id="accountant.menu_accounting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_basico_finanzas'),
+                                                  ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                   ref('roles_permisos.group_medio_nominas'),
+                                                   ref('roles_permisos.group_alto_nominas')
+                                                  ])]"/>
+        </record>
+    <!-- Contabilidad/Proveedores/Facturas rectificativas -->
+         <record id="account.menu_action_move_in_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas'),
+                                                  ref('roles_permisos.group_alto_nominas'),
+                                                  ref('roles_permisos.group_medio_nominas')
+                                                  ])]"/>
+        </record>
+      <!-- Facturas rectificatvias clientes -->
+        <record id="account.menu_action_move_out_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_alto_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas')
+                                                  ])]"/>
+        </record>
+
+         <!-- Contabilidad/Configuración/Facturación / Contabilidad  -->
+        <record id="account.account_invoicing_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Facturas  Clientes -->
+        <record id="account.menu_action_move_out_invoice_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+          <!-- Facturas  -->
+        <record id="account.menu_action_account_invoice_report_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                  ref('roles_permisos.group_gerencia_finanzas')
+                                                  ])]"/>
+        </record>
+
+
+         <!-- Contabilidad/Proveedores/Facturas -->
+        <record id="account.menu_action_move_in_invoice_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_basico_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Diarios contables/Asientos contables -->
+        <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Diarios contables -->
+        <record id="account.menu_action_account_journal_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Configuración/Contabilidad -->
+        <record id="account.account_account_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Configuración/Contabilidad/Diarios contables -->
+        <record id="account.menu_action_account_journal_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Contabilidad  -->
+        <record id="account.menu_finance_entries" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Configuración/Contabilidad analítica  -->
+        <record id="account.menu_analytic_accounting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Configuración/Administración/Informes contables  -->
+        <record id="account_reports.menu_action_account_report_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Datos por Cuenta Contable  -->
+        <record id="fin.menu_account_account_v_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Contabilidad/Diarios contables/Apuntes contables -->
+        <record id="account.menu_action_account_moves_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+          <!-- Contabilidad/Informes/Visor de Inventario Contable -->
+        <record id="fin.menu_account_inventory_v_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+          <!-- Contabilidad/Configuración/Bancos/Agregar una cuenta bancaria  -->
+        <record id="account.menu_action_account_bank_journal_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Informes/Informes de extractos bancarios  -->
+        <record id="account.account_reports_legal_statements_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contactos/Configuración/Cuentas bancarias/Bancos  -->
+        <record id="contacts.menu_action_res_bank_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contactos/Configuración/Cuentas bancarias -->
+        <record id="account.account_banks_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')
+                                                    ])]"/>
+        </record>
+
+          <!-- Contabilidad/Informes/Libro de banco  -->
+        <record id="l10n_gt_extra.menu_asistente_reporte_banco" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+
+         <!-- Contabilidad/Informes/Informes de auditoría/Conciliacion Bancaria - Excel   -->
+        <record id="account_report_financial.menu_conciliacion_bancaria_menu2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                     ref('roles_permisos.group_alto_nominas'),
+                                                      ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Informes de auditoría/Reporte Bancarización - Excel   -->
+        <record id="account_report_financial.menu_reporte_bancarizacion_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Informes de auditoría/Libro de Ventas - Excel   -->
+        <record id="account_report_financial.menu_libro_ventas_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+          <!-- Contabilidad/Proveedores/Proveedores   -->
+        <record id="account.menu_account_supplier" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+ <!-- Contabilidad/Proveedores/Proveedores   -->
+        <record id="account_payment.payment_provider_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Contabilidad/Administración/Transferencias automáticas   -->
+        <record id="account_auto_transfer.menu_auto_transfer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Contabilidad/Administración/Apuntes analíticos   -->
+        <record id="account.menu_action_analytic_lines_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Contabilidad/Administración/Activos   -->
+        <record id="account_asset.menu_action_account_asset_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+<!-- Contabilidad/Contabilidad/Administración/Ingresos diferidos   -->
+        <record id="account_reports.menu_action_account_report_deferred_revenue" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+
+        <!-- Contabilidad/Contabilidad/Administración/Gastos diferidos   -->
+        <record id="account_reports.menu_action_account_report_deferred_expense" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Contabilidad/Administración/Gastos diferidos   -->
+        <record id="account_reports.menu_action_account_report_deferred_expense" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Informes/Informes de auditoría   -->
+        <record id="account_reports.account_reports_audit_reports_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Informes de auditoría/Libro de Compras - Excel  -->
+        <record id="account_report_financial.menu_libro_compras_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+
+        <!-- Contabilidad/Informes/Informes de socios   -->
+        <record id="account_reports.account_reports_partners_reports_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Administración  -->
+        <record id="account.account_reports_management_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Informes/Libro de Inventarios ER
+        <record id="__custom__.custom.informes.libroinventarioer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')])]"/>
+        </record>
+-->
+        <!-- Contabilidad/Informes/Estado de Resultados ER
+        <record id="__custom__.estado.de.resultadoser" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')])]"/>
+        </record>
+ -->
+         <!-- Contabilidad/Informes/  -->
+        <record id="fin.menu_account_asset_v_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Informes/Reporte de Depreciaciones  -->
+        <record id="fin.menu_account_asset_d_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!-- Contabilidad/Informes/Correlativo Partidas  -->
+        <record id="fin.menu_numeracion_partidas_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>F
+
+         <!-- Contabilidad/Informes/Reporte de Equipo Fungible  -->
+        <record id="fin.menu_account_asset_viaceq_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- Contabilidad/Informes/Datos de Pagos  -->
+        <record id="fin.menu_account_payment_v_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!-- CContabilidad/Informes/Libro de compras  -->
+        <record id="l10n_gt_extra.menu_asistente_reporte_compras" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Informes/Libro de ventas  -->
+        <record id="l10n_gt_extra.menu_asistente_reporte_ventas" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Informes/Libro diario  -->
+        <record id="l10n_gt_extra.menu_asistente_reporte_diario" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Informes/Libro mayor -->
+        <record id="l10n_gt_extra.menu_asistente_reporte_mayor" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Requisitions/Purchase Requisition/Purchase Requisitions -->
+        <record id="material_purchase_requisitions.menu_action_purchase_requisition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Tablero -->
+        <record id="account.menu_board_journal_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_basico_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Clientes -->
+        <record id="account.menu_finance_receivables" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_basico_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Proveedores -->
+        <record id="account.menu_finance_payables" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+
+        <!--Contabilidad/Informes -->
+        <record id="account.menu_finance_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_basico_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Informes -->
+        <record id="account.menu_finance_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Contabilidad/Generar asientos -->
+        <record id="account.menu_finance_entries_generate_entries" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Contabilidad/Administración -->
+        <record id="account.menu_finance_entries_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Contabilidad/Acciones -->
+        <record id="account.menu_finance_entries_actions" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Facturación / Contabilidad/Plazos de pago -->
+        <record id="account.menu_action_payment_term_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Facturación / Contabilidad/Niveles de seguimiento -->
+        <record id="account_followup.account_followup_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Facturación / Contabilidad/Incoterms -->
+        <record id="account.menu_action_incoterm_open" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Proveedores/Recibos -->
+        <record id="account.menu_action_move_in_receipt_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Proveedores/Liquidaciones -->
+        <record id="bolson.menu_bolson_bolson" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Proveedores/Pagos -->
+        <record id="account.menu_action_account_payments_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Proveedores/Pago por lotes -->
+        <record id="account_batch_payment.menu_batch_payment_purchases" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Proveedores/Productos -->
+        <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Ajustes -->
+        <record id="account.menu_account_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                            ])]"/>
+        </record>
+
+        <!--Contabilidad/Proveedores/Productos -->
+        <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Pagos -->
+        <record id="account.root_payment_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Administración -->
+        <record id="account.account_management_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Activos e ingresos -->
+        <record id="account_asset.menu_finance_config_assets" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Informes/Informes de extractos bancarios/Pérdidas y ganancias -->
+        <record id="account_reports.menu_action_account_report_profit_and_loss" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Informes/Informes de extractos bancarios/Balance de situación -->
+        <record id="account_reports.menu_action_account_report_balance_sheet" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+
+        <!--Contabilidad/Informes/Informes de extractos bancarios/Estado de flujos de efectivo -->
+        <record id="account_reports.menu_action_account_report_cash_flow" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Informes/Informes de extractos bancarios/Resumen ejecutivo -->
+        <record id="account_reports.menu_action_account_report_exec_summary" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_alto_nominas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                       ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Informes/Informes de extractos bancarios/Informe de impuestos -->
+        <record id="account_reports.menu_action_account_report_gt" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Administración/Modelos de activos -->
+        <record id="account_asset.menu_action_account_asset_model_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Administración/Modelos de ingresos diferidos -->
+        <record id="account_asset.menu_action_account_revenue_model_recognition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--CContabilidad/Configuración/Administración/Modelos de gastos diferidos-->
+        <record id="account_asset.menu_action_account_expense_model_recognition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Administración/Categorías de productos-->
+        <record id="account.menu_product_product_categories" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Administración/Redondeos de Efectivo-->
+        <record id="account.menu_action_rounding_form_view" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Contabilidad/Plan de cuentas-->
+        <record id="account.menu_action_account_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Impuestos-->
+        <record id="account.menu_action_tax_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Impuestos globales-->
+        <record id="l10n_gt_extra.menu_action_l10n_gt_extra_impuesto_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Monedas-->
+        <record id="account.menu_action_currency_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+          <!--Contabilidad/Configuración/Contabilidad/Informes-->
+        <record id="account.account_report_folder" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Contabilidad/Posiciones fiscales-->
+        <record id="account.menu_action_account_fiscal_position_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Contabilidad/Grupos de Diarios-->
+        <record id="account.menu_action_account_journal_group_list" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Contabilidad/Grupos de impuestos-->
+        <record id="account.menu_action_tax_group" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Unidades tributarias-->
+        <record id="account_reports.menu_view_tax_units" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Grupos horizontales-->
+        <record id="account_reports.menu_action_account_report_horizontal_groups" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Configuración/Contabilidad/Ejercicio fiscal-->
+        <record id="accountant.menu_account_fiscal_year" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Grupos de cuentas-->
+        <record id="accountant.menu_account_group" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Configuración/Contabilidad/Etiquetas de cuenta-->
+        <record id="accountant.account_tag_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--CContabilidad/Clientes/Pago por lotes-->
+        <record id="account_batch_payment.menu_batch_payment_sales" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--Contabilidad/Clientes/Pagos-->
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                     ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Clientes/Informes de seguimiento-->
+        <record id="account_followup.customer_statements_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+         <!--Contabilidad/Clientes/Productos-->
+        <record id="account.product_product_menu_sellable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas')
+                                                    ])]"/>
+        </record>
+
+        <!--CContabilidad/Clientes/Clientess-->
+        <record id="account.menu_account_customer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+
+    </data>
+</odoo>

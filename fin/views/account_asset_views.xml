@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_account_asset_form_custom" model="ir.ui.view">
+            <field name="name">account.asset.form.custom</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='model_id']" position="after">
+                    <group string="Identificación" groups="account.group_account_user">
+                        <field name="no_placa"/>
+                        <field name="marca"/>
+                        <field name="descripcion"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <!-- Vista de árbol personalizada -->
+        <record id="account_asset_v_view_tree" model="ir.ui.view">
+            <field name="name">account.asset.v.view.tree</field>
+            <field name="model">account.asset.v</field>
+            <field name="arch" type="xml">
+<!--                <list string="Activos" create="0" edit="1" js_class="AccountAssetVTreeView">-->
+                <list string="Activos" create="0" edit="1">
+                    <header>
+
+                    <button name="open_wizard" string="Visor de Activos"
+                                 type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
+                    <field name="asset_id" widget="many2one"/>
+                    <field name="model_id" widget="many2one"/>
+                    <field name="company_id" widget="many2one" optional="hide"/>
+                    <field name="acquisition_date"/>
+                    <field name="marca"/>
+                    <field name="descripcion"/>
+                    <field name="no_placa"/>
+                    <field name="original_move_line" widget="many2one"/>
+                    <field name="serie_fel"/>
+                    <field name="numero_fel"/>
+                    <field name="original_value"/>
+                    <field name="book_value"/>
+                </list>
+            </field>
+        </record>
+        <record id="account_asset_d_view_tree" model="ir.ui.view">
+            <field name="name">account.asset.d.view.tree</field>
+            <field name="model">account.asset.d</field>
+            <field name="arch" type="xml">
+<!--                <list string="Reporte de Depreciaciones" create="0" edit="1" js_class="AccountAssetDTreeView">-->
+                <list string="Reporte de Depreciaciones" create="0" edit="1" >
+
+                    <field name="asset_id" widget="many2one"/>
+                    <field name="model_id" widget="many2one"/>
+                    <field name="company_id" widget="many2one" optional="hide"/>
+                    <field name="acquisition_date"/>
+                    <field name="marca"/>
+                    <field name="descripcion"/>
+                    <field name="no_placa"/>
+                    <field name="asiento_id" widget="many2one"/>
+                    <field name="serie_fel"/>
+                    <field name="numero_fel"/>
+                    <field name="original_value"/>
+                    <field name="book_value"/>
+                    <field name="depreciacion_acumulada"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="account_asset_viaceq_view_tree" model="ir.ui.view">
+            <field name="name">account.asset.viaceq.view.tree</field>
+            <field name="model">account.asset.viaceq</field>
+            <field name="arch" type="xml">
+                <list string="Reporte de Equipo Fungible" create="0" edit="1" js_class="AccountAssetViaceqTreeView">
+<!--                <list string="Activos" >-->
+                    <field name="product_id" widget="many2one" />
+<!--                    <field name="product_model_id" widget="many2one"/>-->
+                    <field name="model_id" widget="many2one"/>
+                    <field name="acquisition_date"/>
+                    <field name="company_id" widget="many2one" optional="hide"/>
+<!--                    <field name="move_id"/>-->
+                    <field name="asiento_id" widget="many2one"/>
+<!--                    <field name="asiento_contable"/>-->
+                    <field name="serie_fel"/>
+                    <field name="numero_fel"/>
+                    <field name="partner_name"/>
+                    <field name="descripcion"/>
+                    <field name="original_value"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_account_asset_v_search" model="ir.ui.view">
+            <field name="name">account.asset.v.search</field>
+            <field name="model">account.asset.v</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="asset_id"/>
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Activo" name="asset_id" context="{'group_by': 'asset_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="view_account_asset_d_search" model="ir.ui.view">
+            <field name="name">account.asset.d.search</field>
+            <field name="model">account.asset.d</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="asset_id"/>
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Activo" name="asset_id" context="{'group_by': 'asset_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="view_account_asset_viaceq_search" model="ir.ui.view">
+            <field name="name">account.asset.viaceq.search</field>
+            <field name="model">account.asset.viaceq</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="product_id"/>
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Activo" name="product_id" context="{'group_by': 'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_account_asset_v1_tree" model="ir.actions.server">
+            <field name="name">Abrir reporte Activos</field>
+            <field name="model_id" ref="model_account_asset_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.asset.v'].action_open_account_asset_v()
+            </field>
+        </record>
+        <record id="action_account_asset_v3_tree" model="ir.actions.server">
+            <field name="name">Abrir Reporte de Depreciaciones</field>
+            <field name="model_id" ref="model_account_asset_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.asset.d'].action_open_account_asset_d()
+            </field>
+        </record>
+        <record id="action_account_asset_v2_tree" model="ir.actions.server">
+            <field name="name">Abrir Reporte de Equipo Fungible</field>
+            <field name="model_id" ref="model_account_asset_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.asset.viaceq'].action_open_account_asset_viaceq()
+            </field>
+        </record>
+
+        <record id="action_account_asset_viaceq_tree" model="ir.actions.act_window">
+            <field name="name">Reporte de Equipo Fungible</field>
+            <field name="res_model">account.asset.viaceq</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="account_asset_viaceq_view_tree"/>
+            <field name="context">{'session_identifier': user.get_session_identifier()}</field>
+            <field name="context">{'group_by': ['asset_id']}</field>
+            <field name="domain">[('session_identifier', '=', context.get('session_identifier'))]</field>
+        </record>
+
+        <!-- Acción para abrir la vista de árbol -->
+        <record id="action_account_asset_v_tree" model="ir.actions.act_window">
+            <field name="name">Reporte Activos</field>
+            <field name="res_model">account.asset.v</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="account_asset_v_view_tree"/>
+            <field name="context">{'session_identifier': user.get_session_identifier()}</field>
+            <field name="context">{'group_by': ['asset_id']}</field>
+            <field name="domain">[('session_identifier', '=', context.get('session_identifier'))]</field>
+        </record>
+        <record id="action_account_asset_d_tree" model="ir.actions.act_window">
+            <field name="name">Reporte Activos y Depreciación</field>
+            <field name="res_model">account.asset.d</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="account_asset_d_view_tree"/>
+            <field name="context">{'session_identifier': user.get_session_identifier()}</field>
+            <field name="context">{'group_by': ['asset_id']}</field>
+            <field name="domain">[('session_identifier', '=', context.get('session_identifier'))]</field>
+        </record>
+        <menuitem id="menu_account_asset_v_tree"
+          name="Datos de Activos"
+          action="action_account_asset_v1_tree"
+          parent="account.menu_finance_reports"/>
+        <menuitem id="menu_account_asset_d_tree"
+          name="Reporte de Depreciaciones"
+          action="action_account_asset_v3_tree"
+          parent="account.menu_finance_reports"/>
+        <menuitem id="menu_account_asset_viaceq_tree"
+          name="Reporte de Equipo Fungible"
+          action="action_account_asset_v2_tree"
+          parent="account.menu_finance_reports"/>
+    </data>
+</odoo>

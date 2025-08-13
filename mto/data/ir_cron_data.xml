@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!-- Tarea programada para ejecutar cada 24 horas -->
+<!--        <record id="ir_cron_delete_old_sale_order_13_records" model="ir.cron">-->
+<!--            <field name="name">Eliminar Datos Consolidado Ticekts</field>-->
+<!--            <field name="model_id" ref="mto.model_sale_order_13_report"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.delete_old_ticket_records()</field>-->
+<!--            <field name="interval_number">24</field>-->
+<!--            <field name="interval_type">hours</field>-->
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
+<!--            <field name="active" eval="True"/>-->
+<!--        </record>-->
+<!--        Tarea programada para cada 24 horas que ejecute synchronize_employee_tickets de helpdesk.team-->
+<!--        <record id="group_medio_mto" model="res.groups">-->
+<!--            <field name="name">Medio MTO</field>-->
+<!--        </record>-->
+        <record id="ir_cron_synchronize_employee_tickets" model="ir.cron">
+            <field name="name">Sincronizar Empleados de Ticket</field>
+            <field name="model_id" ref="helpdesk.model_helpdesk_team"/>
+            <field name="state">code</field>
+            <field name="code">model.synchronize_employee_tickets()</field>
+            <field name="interval_number">24</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

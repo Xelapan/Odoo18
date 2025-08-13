@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<record id="view_product_move_form_inherit" model="ir.ui.view">
+     <field name="name">product.move.form.inherit</field>
+     <field name="model">product.template</field>
+     <field name="inherit_id" ref="product.product_template_only_form_view"/>
+     <field name="arch" type="xml">
+
+    <!--Imprimir Etiquetas-->
+
+           <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_basico_mto,
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto
+                </attribute>
+            </xpath>
+
+    <!--Actualizar la Cantidad-->
+           <xpath expr="//button[@name='action_update_quantity_on_hand']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto
+                </attribute>
+            </xpath>
+     </field>
+</record>
+
+<record id="view_product_move_form_inherit2" model="ir.ui.view">
+     <field name="name">product.move.form.inherit</field>
+     <field name="model">product.product</field>
+     <field name="inherit_id" ref="product.product_normal_form_view"/>
+     <field name="arch" type="xml">
+
+    <!--Varientes de producto // Imprimir Etiquetas-->
+
+           <xpath expr="//button[@name='action_open_label_layout']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_basico_mto,
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto
+                </attribute>
+            </xpath>
+
+     </field>
+</record>
+</odoo>

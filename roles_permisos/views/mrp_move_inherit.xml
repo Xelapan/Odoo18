@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+ <record id="view_mrp_move_form_inherit" model="ir.ui.view">
+     <field name="name">mrp.move.form.inherit</field>
+     <field name="model">mrp.production</field>
+     <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+     <field name="arch" type="xml">
+
+        <!--Boton Confirmar-->
+           <xpath expr="//button[@name='action_confirm']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                     roles_permisos.group_medio_finanzas
+                </attribute>
+            </xpath>
+
+        <!--Marcar como Hecho-->
+          <xpath expr="//button[@name='button_mark_done']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+          </xpath>
+
+        <!-- Comprobar la disponibilidad-->
+        <xpath expr="//button[@name='action_assign']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+          </xpath>
+
+        <!--    Desechar-->
+         <xpath expr="//button[@name='button_scrap']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+        </xpath>
+        <!--Button Desbloquear-->
+         <xpath expr="//button[@name='action_toggle_is_locked']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas
+                </attribute>
+          </xpath>
+
+          <!--Button Cancelar-->
+         <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+          </xpath>
+     </field>
+ </record>
+
+<record id="view_mrp_move_form_inherit2" model="ir.ui.view">
+     <field name="name">mrp.move.form.inherit</field>
+     <field name="model">mrp.unbuild</field>
+     <field name="inherit_id" ref="mrp.mrp_unbuild_form_view"/>
+     <field name="arch" type="xml">
+           <xpath expr="//button[@name='action_validate']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_medio_mto,
+                    roles_permisos.group_alto_mto,
+                    roles_permisos.group_gerencia_mto,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+            </xpath>
+     </field>
+</record>
+</odoo>

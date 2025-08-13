@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_view_account_move_line_list_bank_rec_widget" model="ir.ui.view">
+        <field name="name">account.move.line.list.bank_rec_widget.inherit</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="accountant.view_account_move_line_list_bank_rec_widget"/>
+        <field name="arch" type="xml">
+            <!-- Asegurar que el campo ref sea visible -->
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="optional">show</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

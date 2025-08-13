@@ -1,0 +1,22 @@
+<odoo>
+    <record id="paperformat_comprobante_pago" model="report.paperformat">
+        <field name="name">Formato Comprobante de Pago</field>
+        <field name="default" eval="False"/>
+        <field name="format">Letter</field> <!-- Formato carta -->
+        <field name="margin_top">10</field> <!-- Márgenes en milímetros -->
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">15</field>
+        <field name="margin_right">15</field>
+        <field name="orientation">Portrait</field> <!-- Orientación vertical -->
+        <field name="disable_shrinking">True</field>
+    </record>
+    <record id="report_comprobante_pago" model="ir.actions.report">
+        <field name="name">Comprobante de Pago</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">fin.comprobante_pago</field>
+        <field name="report_file">fin.comprobante_pago</field>
+        <field name="print_report_name">'comprobante_pago - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="paperformat_comprobante_pago"/>
+    </record>
+</odoo>

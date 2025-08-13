@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Vista de árbol personalizada -->
+        <record id="account_payment_v_view_tree" model="ir.ui.view">
+            <field name="name">account.payment.v.view.tree</field>
+            <field name="model">account.payment.v</field>
+            <field name="arch" type="xml">
+                <list string="Pagos" create="0" edit="1" js_class="AccountPaymentVTreeView">
+<!--                <list string="Movimientos" create="0" edit="1">-->
+                    <field name="date"/>
+                    <field name="payment_id" widget="many2one"/>
+                    <field name="no_liquidacion"/>
+                    <field name="ref"/>
+                    <field name="factura_id" widget="many2one"/>
+                    <field name="factura_fecha"/>
+                    <field name="factura_no_liquidacion"/>
+                    <field name="factura_tipo_documento"/>
+                    <field name="factura_numero_fel"/>
+                    <field name="factura_serie_fel"/>
+                    <field name="factura_nit"/>
+                    <field name="partner_id" widget="many2one"/>
+                    <field name="factura_partner_id" widget="many2one"/>
+                    <field name="factura_amount_total"/>
+                    <field name="factura_iva_credito" widget="monetary"/>
+                    <field name="factura_isr_retenido" widget="monetary"/>
+                    <field name="factura_iva_retenido" widget="monetary"/>
+                    <field name="factura_arbitrios" widget="monetary"/>
+                    <field name="amount"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_account_payment_v_search" model="ir.ui.view">
+            <field name="name">account.payment.v.search</field>
+            <field name="model">account.payment.v</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="date"/>
+                    <field name="factura_partner_id"/>
+                    <field name="factura_id"/>
+                    <group expand="1" string="Agrupar por">
+                        <filter string="Proveedor" name="partner_id" context="{'group_by': 'factura_partner_id'}"/>
+                        <filter string="Fecha" name="thdate" context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <record id="action_account_payment_vv_tree" model="ir.actions.server">
+            <field name="name">Open Account Payment V</field>
+            <field name="model_id" ref="model_account_payment_v"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = env['account.payment.v'].action_open_account_payment_v()
+            </field>
+        </record>
+
+<!--        &lt;!&ndash; Acción para abrir la vista de árbol &ndash;&gt;-->
+<!--        <record id="action_account_payment_v_tree" model="ir.actions.act_window">-->
+<!--            <field name="name">Datos de pagos</field>-->
+<!--            <field name="res_model">account.payment.v</field>-->
+<!--            <field name="view_mode">list</field>-->
+<!--            <field name="view_id" ref="account_payment_v_view_tree"/>-->
+<!--&lt;!&ndash;            <field name="context">{'use_prestaciones_list': True}</field>&ndash;&gt;-->
+<!--            <field name="context">{'session_identifier': user.get_session_identifier()}</field>-->
+<!--            <field name="domain">[('session_identifier', '=', context.get('session_identifier'))]</field>-->
+<!--        </record>-->
+        <menuitem id="menu_account_payment_v_tree"
+          name="Datos de Pagos"
+          action="action_account_payment_vv_tree"
+          parent="account.menu_finance_reports"/>
+    </data>
+</odoo>

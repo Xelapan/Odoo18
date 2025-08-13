@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="website_hr_recruitment_inner_apply" name="Website HR Recruitment Inner Apply" inherit_id="website_hr_recruitment.apply">
+            <xpath expr="//div[@class='container']/form[@id='hr_recruitment_form']" position="replace">
+        <div class="container">
+            <form id="hr_recruitment_form" action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required row" data-mark="*" data-model_name="hr.applicant" data-success-mode="redirect" data-success-page="/job-thank-you" hide-change-model="true">
+                <div class="s_website_form_rows row s_col_no_bgcolor">
+
+                  <!--nombre completo oculto -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field s_website_form_dnone">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment0">
+                              <span class="s_website_form_label_content">Nombre Completo Candidato</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment0" type="text" class="form-control s_website_form_input" name="partner_name"/>
+                          </div>
+                      </div>
+                  </div>
+                    <!-- Primer nombre -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment10">
+                              <span class="s_website_form_label_content">Primer Nombre</span>
+                              <span class="s_website_form_mark"> *</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment10" type="text" class="form-control s_website_form_input" name="primer_nombre_Candidato" placeholder="Ingrese su primer nombre "/>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Segundo nombre -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment11">
+                              <span class="s_website_form_label_content">Segundo Nombre</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment11" type="text" class="form-control s_website_form_input" name="segundo_nombre_Candidato" placeholder="Ingrese su segundo nombre (opcional)"/>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Primer apellido -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment12">
+                              <span class="s_website_form_label_content">Primer Apellido</span>
+                              <span class="s_website_form_mark"> *</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment12" type="text" class="form-control s_website_form_input" name="primer_apellido_Candidato" placeholder="Ingrese su primer apellido "/>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Segundo apellido -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment13">
+                              <span class="s_website_form_label_content">Segundo Apellido</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment13" type="text" class="form-control s_website_form_input" name="segundo_apellido_Candidato" placeholder="Ingrese segundo apellido (opcional)"/>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Apellido de casada -->
+                  <div class="col-12 mb-0 py-2 s_website_form_field" data-type="char" data-name="Field">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment14">
+                              <span class="s_website_form_label_content">Apellido Casada</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment14" type="text" class="form-control s_website_form_input" name="apellido_casada_Candidato" placeholder="Ingrese apellido casada (opcional)"/>
+                          </div>
+                      </div>
+                  </div>
+
+                    <script>
+
+                      // Actualizar el nombre completo
+                      function updatePartnerName() {
+                          // Obtener los valores de cada campo
+                          const primerNombre = document.getElementById('recruitment10').value;
+                          const segundoNombre = document.getElementById('recruitment11').value;
+                          const primerApellido = document.getElementById('recruitment12').value;
+                          const segundoApellido = document.getElementById('recruitment13').value;
+                          const apellidoCasada = document.getElementById('recruitment14').value;
+
+                          // Concatenar los valores en un solo string para el nombre completo
+                          const nombreCompleto = [primerNombre, segundoNombre, primerApellido, segundoApellido, apellidoCasada]
+                              .filter(Boolean) // Elimina valores vacíos
+                              .join(' ');
+
+                          // Establecer el valor concatenado en el campo oculto partner_name
+                          document.getElementById('recruitment0').value = nombreCompleto;
+
+
+                      }
+
+                      // Llamar a la función cada vez que cambien los campos
+                      document.querySelectorAll('#recruitment10, #recruitment11, #recruitment12, #recruitment13, #recruitment14').forEach(input =&gt; {
+                          input.addEventListener('input', updatePartnerName);
+                      });
+
+                  </script>
+                    <!--correo elecronico -->
+                    <div class="col-12 mb-0 py-2 s_website_form_field s_website_form_required" data-type="email" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment2">
+                                <span class="s_website_form_label_content">Correo Electrónico</span>
+                                <span class="s_website_form_mark"> *</span>
+                            </label>
+                            <div class="col-sm">
+                                <input id="recruitment2" type="email" class="form-control s_website_form_input" name="email_from" placeholder="Ingrese su correo electrónico"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-0 py-2 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment3">
+                                <span class="s_website_form_label_content">Your Phone Number</span>
+                                <span class="s_website_form_mark"> *</span>
+                            </label>
+                            <div class="col-sm">
+                                <input id="recruitment3" type="tel" class="form-control s_website_form_input" name="partner_mobile" data-fill-with="phone"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-0 py-2 s_website_form_field s_website_form_dnone">
+                      <div class="row s_col_no_resize s_col_no_bgcolor">
+                          <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment7">
+                              <span class="s_website_form_label_content">Job</span>
+                          </label>
+                          <div class="col-sm">
+                              <input id="recruitment7" type="hidden" class="form-control s_website_form_input" name="job_id"/>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-0 py-2 s_website_form_field s_website_form_dnone">
+                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <label class="col-4 col-sm-auto s_website_form_label" style="width: 200px" for="recruitment8">
+                                <span class="s_website_form_label_content">Department</span>
+                            </label>
+                            <div class="col-sm">
+                                <input id="recruitment8" type="hidden" class="form-control s_website_form_input" name="department_id"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Agrega aquí el resto de los campos personalizados, siguiendo el mismo formato de modificación si es necesario -->
+                    <div class="col-12 s_website_form_submit mb64" data-name="Submit Button">
+                        <div style="width: 200px" class="s_website_form_label"/>
+                        <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send">Enviar solicitud</a>
+                        <span id="s_website_form_result"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </xpath>
+
+        </template>
+    </data>
+</odoo>

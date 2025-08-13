@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_payment_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+
+
+<!--            &lt;!&ndash; Botón Anular"  &ndash;&gt;-->
+<!--            <xpath expr="//button[@name='anular']" position="attributes">-->
+<!--                <attribute name="groups">-->
+<!--                    roles_permisos.group_alto_finanzas,-->
+<!--                    roles_permisos.group_gerencia_finanzas-->
+<!--                </attribute>-->
+<!--            </xpath>-->
+<!--            -->
+
+            <!-- Botón establecer a borrador -->
+            <xpath expr="//button[@name='action_draft']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_nominas,
+                    roles_permisos.group_medio_nominas,
+                    roles_permisos.group_medio_finanzas
+                </attribute>
+            </xpath>
+             <!-- Botón  marcar como enviado -->
+            <xpath expr="//button[@name='mark_as_sent']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_nominas,
+                    roles_permisos.group_medio_nominas
+                </attribute>
+            </xpath>
+
+             <!-- Botón  confirmar -->
+            <xpath expr="//button[@name='action_post']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_nominas,
+                    roles_permisos.group_medio_nominas
+                </attribute>
+            </xpath>
+
+     <!-- Botón  cancelar -->
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_medio_finanzas,
+                    roles_permisos.group_alto_nominas,
+                    roles_permisos.group_medio_nominas
+                </attribute>
+            </xpath>
+
+
+             <!-- Botón  asiento contable -->
+            <xpath expr="//button[@name='button_open_journal_entry']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_nominas
+                </attribute>
+            </xpath>
+
+
+             <!-- Botón  conciliacion -->
+            <xpath expr="//button[@name='action_open_manual_reconciliation_widget']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_nominas
+                </attribute>
+            </xpath>
+
+              <!-- Botón  desmarcar como enviado -->
+            <xpath expr="//button[@name='unmark_as_sent']" position="attributes">
+                <attribute name="groups">
+                    roles_permisos.group_alto_finanzas,
+                    roles_permisos.group_gerencia_finanzas,
+                    roles_permisos.group_alto_nominas
+
+                </attribute>
+            </xpath>
+
+
+
+
+        </field>
+    </record>
+
+
+</odoo>
+

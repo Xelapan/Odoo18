@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_x_mesa_g,acc_x_mesa_g,model_x_mesa_servicio,roles_permisos.group_medio_mto,1,1,1,1
+access_x_mesa_a,acc_x_mesa_a,model_x_mesa_servicio,roles_permisos.group_medio_mto,1,1,1,1
+access_x_mesa_m,acc_x_mesa_m,model_x_mesa_servicio,roles_permisos.group_medio_mto,1,1,1,1
+access_x_mesa_b,acc_x_mesa_b,model_x_mesa_servicio,roles_permisos.group_medio_mto,1,1,1,1

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="fel_infile_view_move_form">
+            <field name="name">fel_infile.account.move.form</field>
+            <field name="model">account.move</field>
+<!--            <field name="inherit_id" ref="l10n_gt_extra.l10n_gt_view_move_form"/>-->
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <!--agregar boton que se llama button cancel -->
+                    <xpath expr="//button[@name='button_draft']" position="after">
+                        <button name="button_cancel" id="button_cancel_anula" string="Anular FEL" class="btn-primary" type="object" attrs="{'invisible': ['|',('firma_fel', '=', False),('state','not in',['posted'])]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name="firma_fel"/>
+                        <field name="serie_fel"/>
+                        <field name="numero_fel"/>
+                        <field name="pdf_fel" widget="url" readonly="1"/>
+                        <field name="factura_original_id" readonly="1"/>
+                    </xpath>
+                    <xpath expr="//label[@for='journal_id']/following-sibling::div[@name='journal_div']" position="after">
+<!--                        <field name="journal_id"/>-->
+<!--                        <field name="x_name_partida"/>-->
+                        <field name="tipo_documento"/>
+                        <field name="tipo_transaccion"/>
+                        <field name="motivo_fel"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="journal_form_fel_infile">
+            <field name="name">account.journal.form.fel_infile</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <field name="currency_id" position="after">
+                        <field name="generar_fel"/>
+                        <field name="tipo_documento_fel"/>
+                        <field name="razon_social"/>
+                        <field name="nombre_comercial"/>
+                    </field>
+                </data>
+            </field>
+        </record>
+
+        <record id="view_company_form_fel_infile" model="ir.ui.view">
+            <field name="name">res.company.form.fel_infile</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook position="inside">
+                        <page string="FEL Infile">
+                            <group string="Infile">
+                                <group>
+                                    <field name="razon_social"/>
+                                    <field name="nombre_comercial"/>
+                                    <field name="usuario_fel"/>
+                                    <field name="clave_fel"/>
+                                    <field name="token_firma_fel"/>
+                                    <field name="frases_fel"/>
+                                    <field name="adenda_fel"/>
+                                    <field name="resolucion"/>
+                                    <field name="utilidades_de_actividades_lucrativas"/>
+                                    <field name="opcional_simplificado"/>
+                                    <field name="retencion"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</openerp>
