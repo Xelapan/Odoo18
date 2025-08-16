@@ -24,7 +24,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     </group>
                 </group>
                     <seperator string='Invoices'/>
-                    <field name="invoice_ids">
+                    <field name="invoice_ids" widget="one2many_list">
 <!--                        <list editable="buttom">-->
                         <list>
                             <field name="invoice_id" string="Factura"/>
