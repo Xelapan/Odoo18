@@ -66,6 +66,6 @@ class ResPartner(models.Model):
         )
 
         records = self.search([("vat", "ilike", name)], limit=limit)
-        res2 = records.name_get()
+        # res2 = records.name_get()
 
-        return res1 + res2
+        return res1 #+ res2
