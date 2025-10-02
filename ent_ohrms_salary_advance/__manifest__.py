@@ -38,7 +38,7 @@
         "hr",
         "account_accountant",
         "hr_contract",
-        # "ent_ohrms_loan",
+        "ent_ohrms_loan",
     ],
     "data": [
         "security/ir.model.access.csv",

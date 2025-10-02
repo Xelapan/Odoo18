@@ -48,7 +48,7 @@
                 <xpath expr="//page[@name='personal_information']/group" position="replace">
                     <group>
                         <group string="CONTACTO PRIVADO">
-                            <field name="address_home_id" string="Contacto" />
+                            <field name="work_contact_id" string="Contacto" />
                             <field name="private_email" string="Correo electrónico" />
                             <field name="phone" string="Teléfono" />
                             <field name="bank_account_id" />
@@ -103,13 +103,13 @@
                 </xpath>
                 <xpath expr="//page[@name='hr_settings']/group/group[@name='identification_group']" position="replace">
                 </xpath>
-                <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="replace">
-                  <group string="Nómina">
-                    <field name="job_id" />
-                    <field name="jornada_trabajo" />
-                    <field name="ocupacion_puesto_id" />
-                  </group>
-                </xpath>
+<!--                <xpath expr="//page[@name='hr_settings']/group/group[@name='payroll_group']" position="replace">-->
+<!--                  <group string="Nómina">-->
+<!--                    <field name="job_id" />-->
+<!--                    <field name="jornada_trabajo" />-->
+<!--                    <field name="ocupacion_puesto_id" />-->
+<!--                  </group>-->
+<!--                </xpath>-->
                 <xpath expr="//notebook" position="inside">
                     <page string="Record Laboral">
                         <group string="Historial laboral">
@@ -199,17 +199,17 @@
                 </xpath>
             </field>
         </record>
-        <record id="view_employee_form_inherit_contract" model="ir.ui.view">
-            <field name="name">view.employee.form.inherit.contract</field>
-            <field name="model">hr.employee</field>
-            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" />
-            <field name="arch" type="xml">
-                
-                <xpath expr="//field[@name='contract_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
-            </field>
-        </record>
+<!--        <record id="view_employee_form_inherit_contract" model="ir.ui.view">-->
+<!--            <field name="name">view.employee.form.inherit.contract</field>-->
+<!--            <field name="model">hr.employee</field>-->
+<!--            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2" />-->
+<!--            <field name="arch" type="xml">-->
+<!--                -->
+<!--&lt;!&ndash;                <xpath expr="//field[@name='contract_id']" position="attributes">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <attribute name="invisible">1</attribute>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+<!--            </field>-->
+<!--        </record>-->
 
 
 

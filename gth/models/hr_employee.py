@@ -239,9 +239,9 @@ class HrEmployee(models.Model):
             self.municipio_id = (
                 existe_codigo.municipio_id.id if existe_codigo.municipio_id else False
             )
-            self.address_home_id = (
-                existe_codigo.address_home_id.id
-                if existe_codigo.address_home_id
+            self.work_contact_id = (
+                existe_codigo.work_contact_id.id
+                if existe_codigo.work_contact_id
                 else False
             )
             self.bank_account_id = (
@@ -317,8 +317,8 @@ class HrEmployee(models.Model):
                         "municipio_id": (
                             rec.municipio_id.id if rec.municipio_id else False
                         ),
-                        "address_home_id": (
-                            rec.address_home_id.id if rec.address_home_id else False
+                        "work_contact_id": (
+                            rec.work_contact_id.id if rec.work_contact_id else False
                         ),
                         "bank_account_id": (
                             rec.bank_account_id.id if rec.bank_account_id else False
@@ -369,8 +369,8 @@ class HrEmployee(models.Model):
                         "municipio_id": (
                             rec.municipio_id.id if rec.municipio_id else False
                         ),
-                        "address_home_id": (
-                            rec.address_home_id.id if rec.address_home_id else False
+                        "work_contact_id": (
+                            rec.work_contact_id.id if rec.work_contact_id else False
                         ),
                         "bank_account_id": (
                             rec.bank_account_id.id if rec.bank_account_id else False
@@ -431,9 +431,9 @@ class HrEmployee(models.Model):
                     if existe_codigo.municipio_id
                     else False
                 )
-                rec.address_home_id = (
-                    existe_codigo.address_home_id.id
-                    if existe_codigo.address_home_id
+                rec.work_contact_id = (
+                    existe_codigo.work_contact_id.id
+                    if existe_codigo.work_contact_id
                     else False
                 )
                 rec.bank_account_id = (
@@ -544,7 +544,7 @@ class HrEmployee(models.Model):
         "birthday",
         "departamento_id",
         "municipio_id",
-        "address_home_id",
+        "work_contact_id",
         "bank_account_id",
     )
     def _onchange_employee_data(self):
@@ -577,8 +577,8 @@ class HrEmployee(models.Model):
                     self.departamento_id.id if self.departamento_id else False
                 ),
                 "municipio_id": self.municipio_id.id if self.municipio_id else False,
-                "address_home_id": (
-                    self.address_home_id.id if self.address_home_id else False
+                "work_contact_id": (
+                    self.work_contact_id.id if self.work_contact_id else False
                 ),
                 "bank_account_id": (
                     self.bank_account_id.id if self.bank_account_id else False
@@ -592,11 +592,11 @@ class HrEmployee(models.Model):
                 {key: value for key, value in fields_to_update.items() if value}
             )
 
-    @api.onchange("address_home_id")
+    @api.onchange("work_contact_id")
     def _onchange_address_home_id(self):
-        if self.address_home_id:
-            self.nit = self.address_home_id.vat
-            bank = self.address_home_id.bank_ids[:1]
+        if self.work_contact_id:
+            self.nit = self.work_contact_id.vat
+            bank = self.work_contact_id.bank_ids[:1]
             if bank:
                 self.bank_account_id = bank.id
         else:

@@ -34,7 +34,7 @@
                     <button name="action_post" position="after">
                         <button name="anular" string="Anular" type="object" modifiers="{}" />
                     </button>
-                    <field name="ref" position="after">
+                    <field name="memo" position="after">
                         <field name="anulado" readonly="1" />
                         <field name="fecha_anulacion" readonly="1" />
                         <field name="descripcion" />

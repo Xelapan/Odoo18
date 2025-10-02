@@ -447,7 +447,7 @@ class MrpProduction(models.Model):
                                 empleado = self.env["hr.employee"].search(
                                     [
                                         (
-                                            "address_home_id",
+                                            "work_contact_id",
                                             "=",
                                             proyecto.x_autorizador.id,
                                         )

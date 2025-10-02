@@ -32,9 +32,9 @@
                     <field name="frecuencia_pago"/>
                     <field name="empresa_facturar"/>
                 </xpath>
-                <xpath expr="//page[@name='part_time']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
+<!--                <xpath expr="//page[@name='part_time']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
             </field>
         </record>
     </data>

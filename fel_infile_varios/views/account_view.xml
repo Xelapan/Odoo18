@@ -25,7 +25,7 @@
 
                         <field name="tipo_documento" />
                         <field name="tipo_transaccion" />
-                        <field name="motivo_fel" />
+
                     </xpath>
                 </data>
             </field>

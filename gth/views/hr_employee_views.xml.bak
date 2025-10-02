@@ -48,7 +48,7 @@
                 <xpath expr="//page[@name='personal_information']/group" position="replace">
                     <group>
                         <group string="CONTACTO PRIVADO">
-                            <field name="address_home_id" string="Contacto"/>
+                            <field name="work_contact_id" string="Contacto"/>
                             <field name="private_email" string="Correo electrónico"/>
                             <field name="phone" string="Teléfono"/>
                             <field name="bank_account_id"/>

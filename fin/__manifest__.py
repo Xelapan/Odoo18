@@ -54,7 +54,7 @@
         "views/comprobante_pago.xml",
         "report/comprobante_pago_report.xml",
         "views/account_inventory_v_views.xml",
-        "views/res_partner_views.xml",
+        #"views/res_partner_views.xml",
         #"views/account_move_line_list_bank_rec_widget_views.xml",
         "views/account_move_line_views.xml",
     ],

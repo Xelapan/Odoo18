@@ -18,7 +18,7 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         context = dict(self._context or {})
         active_ids = context.get("active_ids", [])
         payslips = self.env["hr.payslip"].browse(active_ids)
-        return payslips.employee_id.address_home_id.id
+        return payslips.employee_id.work_contact_id.id
 
     partner_id = fields.Many2one(
         "res.partner", string="Partner", required=True, default=_default_partner_id

@@ -218,11 +218,11 @@
                               <div class="col-12">
                                   <b>Dirección</b>
                               <span style="display: inline-block; border-bottom: 1px solid black; width: 515px; padding: 0 5px; text-align: center;">
-                                   <t t-esc="doc.address_home_id.street"/>
+                                   <t t-esc="doc.work_contact_id.street"/>
                               </span>
                               <span style="margin-left: 5px;"><b>Zona:</b></span>
                               <span style="display: inline-block; border-bottom: 1px solid black; width: 100px; padding: 0 5px; text-align: center;">
-                                   <t t-esc="doc.address_home_id.zip"/>
+                                   <t t-esc="doc.work_contact_id.zip"/>
                               </span>
                                 </div>
 
@@ -232,11 +232,11 @@
                               <div class="col-12">
                                   <b>Departamento:</b>
                               <span style="display: inline-block; border-bottom: 1px solid black; width: 190px; padding: 0 5px; text-align: center;">
-                                   <t t-esc="doc.address_home_id.state_id.name"/>
+                                   <t t-esc="doc.work_contact_id.state_id.name"/>
                               </span>
                               <span style="margin-left: 5px;"><b>Municipio:</b></span>
                               <span style="display: inline-block; border-bottom: 1px solid black; width: 175px; padding: 0 5px; text-align: center;">
-                                   <t t-esc="doc.address_home_id.city"/>
+                                   <t t-esc="doc.work_contact_id.city"/>
                               </span>
                               <span style="margin-left: 5px;"><b>Teléfono emergencia:</b></span>
                               <span style="display: inline-block; border-bottom: 1px solid black; width: 85px; padding: 0 5px; text-align: center;">

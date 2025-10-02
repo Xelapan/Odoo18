@@ -10,8 +10,8 @@
             <field name="user_id" ref="base.user_root"/> <!-- Usuario con el que se ejecuta -->
             <field name="interval_number">1</field> <!-- Intervalo de repetición -->
             <field name="interval_type">days</field> <!-- Se ejecuta mensualmente -->
-            <field name="numbercall">-1</field> <!-- Ejecutar indefinidamente -->
-            <field name="doall" eval="False"/> <!-- No ejecutar si la fecha ya ha pasado -->
+<!--            <field name="numbercall">-1</field> &lt;!&ndash; Ejecutar indefinidamente &ndash;&gt;-->
+<!--            <field name="doall" eval="False"/> &lt;!&ndash; No ejecutar si la fecha ya ha pasado &ndash;&gt;-->
         </record>
     </data>
     <data noupdate="1">
@@ -23,8 +23,8 @@
             <field name="code">model.delete_old_records()</field>
             <field name="interval_number">24</field>
             <field name="interval_type">hours</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
             <field name="active" eval="True"/>
         </record>
     </data>
@@ -37,8 +37,8 @@
             <field name="code">model.delete_old_account_asset_v_records()</field>
             <field name="interval_number">24</field>
             <field name="interval_type">hours</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
             <field name="active" eval="True"/>
         </record>
     </data>
@@ -51,8 +51,8 @@
             <field name="code">model.delete_old_payment_records()</field>
             <field name="interval_number">24</field>
             <field name="interval_type">hours</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
             <field name="active" eval="True"/>
         </record>
     </data>
@@ -65,8 +65,8 @@
             <field name="code">model.delete_old_inventory_records()</field>
             <field name="interval_number">24</field>
             <field name="interval_type">hours</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
+<!--            <field name="numbercall">-1</field>-->
+<!--            <field name="doall" eval="False"/>-->
             <field name="active" eval="True"/>
         </record>
     </data>

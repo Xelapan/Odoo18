@@ -37,7 +37,7 @@
         "hr",
         "account",
         "ent_hr_payroll_extension",
-        "ent_ohrms_salary_advance",
+        #"ent_ohrms_salary_advance",
     ],
     "data": [
         "security/ir.model.access.csv",

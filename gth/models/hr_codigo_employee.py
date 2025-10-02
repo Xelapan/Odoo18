@@ -83,7 +83,7 @@ class HrCodigoEmployeeUser(models.Model):
         "hr.departamento", string="Departamento", store=True
     )
     municipio_id = fields.Many2one("hr.municipio", string="Municipio", store=True)
-    address_home_id = fields.Many2one(
+    work_contact_id = fields.Many2one(
         "res.partner", string="Dirección de casa", store=True
     )
     bank_account_id = fields.Many2one(

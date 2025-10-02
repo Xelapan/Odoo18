@@ -15,6 +15,7 @@
                                 <field name="serie_fel" />
                                 <field name="numero_fel" />
                                 <field name="factura_original_id" />
+                                <field name="motivo_fel"/>
                             </group>
                             <group>
                                 <field name="documento_xml_fel_name" invisible="1" />

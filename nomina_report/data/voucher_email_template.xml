@@ -15,8 +15,8 @@
                 </div>
                    ]]>
             </field>
-            <field name="report_template" ref="report_voucher"/>
-            <field name="report_name">Recibo de Pago {{object.employee_id.name}}</field>
+<!--            <field name="report_template_ids" ref="report_voucher"/>-->
+<!--            <field name="report_name">Recibo de Pago {{object.employee_id.name}}</field>-->
         </record>
     </data>
 </odoo>

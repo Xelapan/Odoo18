@@ -80,7 +80,7 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
             record.ensure_one()
             for batch_id in record.batch_id:
                 for payslip_lines in batch_id.slip_ids:
-                    if not payslip_lines.employee_id.address_home_id:
+                    if not payslip_lines.employee_id.work_contact_id:
                         raise ValidationError(
                             _("Por favor defina un contacto para el empleado %s.")
                             % (payslip_lines.employee_id.name)
@@ -99,7 +99,7 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
                             payment_values = {
                                 "partner_type": "supplier",
                                 "payment_type": "outbound",
-                                "partner_id": payslip.employee_id.address_home_id.id,
+                                "partner_id": payslip.employee_id.work_contact_id.id,
                                 "payslip_id": payslip.id,
                                 "journal_id": record.journal_id.id,
                                 "company_id": record.company_id.id,

@@ -875,9 +875,9 @@ class MaterialPurchaseRequisition(models.Model):
                     rec.employee_id.company_id == rec.company_id.id
                     or rec.employee_id.company_id == False
                 ):
-                    thPartner = rec.employee_id.address_home_id
+                    thPartner = rec.employee_id.work_contact_id
                 else:
-                    thPartner = rec.requisiton_responsible_id.address_home_id
+                    thPartner = rec.requisiton_responsible_id.work_contact_id
                 picking_vals = {
                     #'partner_id' : rec.employee_id.sudo().address_home_id.id, Alex 09 03 2024
                     "partner_id": thPartner,

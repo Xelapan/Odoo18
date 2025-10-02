@@ -189,7 +189,7 @@ class SalaryAdvancePayment(models.Model):
     def approve_request(self):
         """This Approves the employee salary advance request."""
         emp_obj = self.env["hr.employee"]
-        address = emp_obj.browse([self.employee_id.id]).address_home_id
+        address = emp_obj.browse([self.employee_id.id]).work_contact_id
         if not address.id:
             raise UserError(
                 "Defina la dirección particular del empleado. es decir, dirección bajo información privada del empleado. Campo - Direccion - en la ficha del empleado"

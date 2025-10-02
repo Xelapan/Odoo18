@@ -17,7 +17,7 @@
         "website_partner",
         "website_mail",
         #'website_hr_recruitment',
-        #'hr_recruitment',
+        'hr_recruitment',
         "hr_payroll",
     ],
     "data": [

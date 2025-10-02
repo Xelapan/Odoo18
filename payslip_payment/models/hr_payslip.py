@@ -86,13 +86,13 @@ class HrPayslip(models.Model):
                     slip.balance -= payment.amount
 
     def _prepare_line_values(self, line, account_id, date, debit, credit):
-        if not line.employee_id.address_home_id:
+        if not line.employee_id.work_contact_id:
             raise UserError(
                 _("El empleado %s no un contacto vinculado.") % line.employee_id.name
             )
         return {
             "name": line.name,
-            "partner_id": line.employee_id.address_home_id.id,
+            "partner_id": line.employee_id.work_contact_id.id,
             "account_id": account_id,
             "journal_id": line.slip_id.struct_id.journal_id.id,
             "date": date,
@@ -112,7 +112,7 @@ class HrPayslip(models.Model):
         existing_lines = (
             line_id
             for line_id in line_ids
-            if line_id["partner_id"] == line.employee_id.address_home_id.id
+            if line_id["partner_id"] == line.employee_id.work_contact_id.id
             and line_id["name"] == line.name
             and line_id["account_id"] == account_id
             and (

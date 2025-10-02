@@ -18,13 +18,15 @@
         "web",
         "hr_contract",
         "hr_payroll",
+        "hr_payroll_holidays",
+        "hr_holidays"
     ],
     "data": [
         "security/ir.model.access.csv",
         "views/hr_employee_views.xml",
         "views/hr_contract_views_inherit.xml",
         "views/hr_employee_work_history.xml",
-        # "security/security.xml",
+        "security/security.xml",
         # "security/hr_request_employee_security.xml",
         # "views/wizard_motivo_rechazo.xml",
         # "data/experiencia_data.xml",

@@ -18,7 +18,7 @@ class HrEmployeeTicket(models.Model):
     job_id = fields.Integer(string="Job ID")
     team_name = fields.Char(string="Equipo", related="team_id.name")
     team_id = fields.Many2many("helpdesk.team", string="Equipos de Mesa de Ayuda")
-    address_home_id = fields.Integer(string="Contacto", store=True)
+    work_contact_id = fields.Integer(string="Contacto", store=True)
     phone = fields.Char(string="Celular", store=True)
     mobile_phone = fields.Char(string="Celular Trabajo", store=True)
     active = fields.Boolean(string="Active", default=True)
@@ -72,7 +72,7 @@ class HelpdeskTeam(models.Model):
                         "job_title": employee.job_id.name,
                         "job_id": employee.job_id.id,
                         "active": employee.active,
-                        "address_home_id": employee.address_home_id.id,
+                        "address_home_id": employee.work_contact_id.id,
                         "phone": employee.phone,
                         "mobile_phone": employee.mobile_phone,
                         "registration_number": employee.registration_number,
@@ -95,7 +95,7 @@ class HelpdeskTeam(models.Model):
                         "job_title": employee.job_id.name,
                         "job_id": employee.job_id.id,
                         "active": employee.active,
-                        "address_home_id": employee.address_home_id,
+                        "address_home_id": employee.work_contact_id,
                         "phone": employee.phone,
                         "mobile_phone": employee.mobile_phone,
                         "registration_number": employee.registration_number,

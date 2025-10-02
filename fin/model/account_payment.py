@@ -4,7 +4,7 @@ from odoo import models, fields, api
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
-    ref = fields.Char(string="Memo", store=True, copy=False, readonly=False)
+    ref = fields.Char(string="Memo", store=True, copy=False, readonly=False, related="memo")
     communication = fields.Char(
         string="Memo - Comunicación",
         store=True,
