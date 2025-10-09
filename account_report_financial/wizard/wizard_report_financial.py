@@ -16919,16 +16919,17 @@ class wizard_flujo_efectivo(models.TransientModel):
                 ]
             )
         if x_cuentas:
+            thCompany = self.company_id.id
             query = """
                             SELECT 
                                 account_id,
-                                a.code as code,
+                                a.code_store ->> '{thCompany}' AS code,
                                 a.name as name, 
                                 sum(balance) as balance
                             FROM account_move_line aml
                             inner join account_account a on a.id = aml.account_id
                             WHERE aml.id IN %s
-                            GROUP BY account_id, a.code, a.name
+                            GROUP BY account_id, a.code_store, a.name
                         """
             self.env.cr.execute(query, (tuple(x_cuentas.ids),))
             result = self.env.cr.dictfetchall()
@@ -16997,7 +16998,7 @@ class wizard_flujo_efectivo(models.TransientModel):
             query = """
                             SELECT 
                                 account_id,
-                                a.code_store --> {thCompany},
+                                a.code_store ->> '{thCompany}' AS code,
                                 a.name as name, 
                                 sum(balance) as balance
                             FROM account_move_line aml
