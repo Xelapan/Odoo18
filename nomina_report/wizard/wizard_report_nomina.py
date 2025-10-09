@@ -2284,14 +2284,21 @@ class WizardInformeEmpleador(models.TransientModel):
             }
         )
         return {
-            "name": "Informe del Empleador",
-            "type": "ir.actions.act_window",
-            "res_model": self._name,
-            "view_mode": "form",
-            "view_type": "form",
-            "res_id": self.id,
-            "target": "new",
+            'type': 'ir.actions.act_url',
+            'url': '/web/content/?model=%s&id=%s&field=data&filename=%s&download=true' % (
+                self._name, self.id, xls_filename
+            ),
+            'target': 'new',
         }
+        # return {
+        #     "name": "Informe del Empleador",
+        #     "type": "ir.actions.act_window",
+        #     "res_model": self._name,
+        #     "view_mode": "form",
+        #     "view_type": "form",
+        #     "res_id": self.id,
+        #     "target": "new",
+        # }
 
 
 class WizardReporteDescuentos(models.TransientModel):
