@@ -15,6 +15,7 @@ from datetime import datetime, date
 from calendar import monthrange
 import tempfile
 import os
+import time
 import locale
 
 import math
@@ -2274,6 +2275,7 @@ class WizardInformeEmpleador(models.TransientModel):
                 x_rows += 1
 
         workbook.close()
+        time.sleep(3)
         self.write(
             {
                 "state": "get",
