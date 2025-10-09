@@ -1698,7 +1698,7 @@ class WizardInformeEmpleador(models.TransientModel):
 
     def print_xls_informe_empleador(self):
         self.check_date()
-        xls_filename = "Informe del Empleador.xlsx"
+        xls_filename = "Informe_del_Empleador.xlsx"
         temp_dir = tempfile.gettempdir()
         xls_path = os.path.join(temp_dir, xls_filename)
         workbook = xlsxwriter.Workbook(xls_path)

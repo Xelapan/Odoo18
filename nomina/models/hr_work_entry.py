@@ -155,6 +155,7 @@ class HrWorkEntry(models.Model):
     def _unlink_except_validated_work_entries(self):
         pass
 
+
     # @api.model
     # def create(self, vals_list):
     #     # agregar a vals_list date_stop y duration
