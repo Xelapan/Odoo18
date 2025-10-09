@@ -151,9 +151,6 @@ class HrWorkEntry(models.Model):
         res = super(HrWorkEntry, self).write(vals_list)
         return res
 
-    @api.ondelete(at_uninstall=False)
-    def _unlink_except_validated_work_entries(self):
-        pass
     # @api.model
     # def create(self, vals_list):
     #     # agregar a vals_list date_stop y duration
