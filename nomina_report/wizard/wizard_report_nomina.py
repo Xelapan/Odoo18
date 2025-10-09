@@ -15,7 +15,6 @@ from datetime import datetime, date
 from calendar import monthrange
 import tempfile
 import os
-import time
 import locale
 
 import math
@@ -1698,7 +1697,7 @@ class WizardInformeEmpleador(models.TransientModel):
 
     def print_xls_informe_empleador(self):
         self.check_date()
-        xls_filename = "Informe del Empleador.xlsx"
+        xls_filename = "Informe_del_Empleador.xlsx"
         temp_dir = tempfile.gettempdir()
         xls_path = os.path.join(temp_dir, xls_filename)
         workbook = xlsxwriter.Workbook(xls_path)
@@ -2275,7 +2274,6 @@ class WizardInformeEmpleador(models.TransientModel):
                 x_rows += 1
 
         workbook.close()
-        time.sleep(3)
         self.write(
             {
                 "state": "get",
