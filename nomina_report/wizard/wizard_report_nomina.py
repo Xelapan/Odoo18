@@ -15,7 +15,6 @@ from datetime import datetime, date
 from calendar import monthrange
 import tempfile
 import os
-import time
 import locale
 
 import math
@@ -1698,7 +1697,7 @@ class WizardInformeEmpleador(models.TransientModel):
 
     def print_xls_informe_empleador(self):
         self.check_date()
-        xls_filename = "Informe_del_Empleador.xlsx"
+        xls_filename = "Informe del Empleador.xlsx"
         temp_dir = tempfile.gettempdir()
         xls_path = os.path.join(temp_dir, xls_filename)
         workbook = xlsxwriter.Workbook(xls_path)
@@ -2275,7 +2274,6 @@ class WizardInformeEmpleador(models.TransientModel):
                 x_rows += 1
 
         workbook.close()
-        time.sleep(3)
         self.write(
             {
                 "state": "get",
@@ -2284,21 +2282,14 @@ class WizardInformeEmpleador(models.TransientModel):
             }
         )
         return {
-            'type': 'ir.actions.act_url',
-            'url': '/web/content/?model=%s&id=%s&field=data&filename=%s&download=true' % (
-                self._name, self.id, xls_filename
-            ),
-            'target': 'new',
+            "name": "Descargar Informe del Empleador",
+            "type": "ir.actions.act_window",
+            "res_model": self._name,
+            "view_mode": "form",
+            "view_type": "form",
+            "res_id": self.id,
+            "target": "new",
         }
-        # return {
-        #     "name": "Informe del Empleador",
-        #     "type": "ir.actions.act_window",
-        #     "res_model": self._name,
-        #     "view_mode": "form",
-        #     "view_type": "form",
-        #     "res_id": self.id,
-        #     "target": "new",
-        # }
 
 
 class WizardReporteDescuentos(models.TransientModel):
