@@ -6095,7 +6095,7 @@ class wizard_report_balance_saldo(models.TransientModel):
         # report_in_sql = self.env['report.account_report_financial.report_financial']
         cuentas = self.env["account.account"].search(
             [
-                ("company_id", "=", self.company_id.id)
+                ("company_ids", "in", [self.company_id.id])
                 # ,('code', 'in', ['1.0.01.03','1010201','1010202','1010301','1010302','1010403'])
             ],
             order="code asc",
@@ -16788,16 +16788,17 @@ class wizard_flujo_efectivo(models.TransientModel):
                 ]
             )
         if x_cuentas:
+            thCompany = self.company_id.id
             query = """
                             SELECT 
                                 account_id,
-                                a.code as code,
+                                a.code_store ->> '{thCompany}' AS code,
                                 a.name as name, 
                                 sum(balance) as balance
                             FROM account_move_line aml
                             inner join account_account a on a.id = aml.account_id
                             WHERE aml.id IN %s
-                            GROUP BY account_id, a.code, a.name
+                            GROUP BY account_id, a.code_store, a.name
                         """
             self.env.cr.execute(query, (tuple(x_cuentas.ids),))
             result = self.env.cr.dictfetchall()
@@ -16847,16 +16848,17 @@ class wizard_flujo_efectivo(models.TransientModel):
                 ]
             )
         if x_cuentas:
+            thCompany = self.company_id.id
             query = """
                 SELECT 
                     account_id,
-                    a.code as code,
+                    a.code_store ->> '{thCompany}' AS code,
                     a.name as name, 
                     sum(balance) as balance
                 FROM account_move_line aml
                 inner join account_account a on a.id = aml.account_id
                 WHERE aml.id IN %s
-                GROUP BY account_id, a.code, a.name
+                GROUP BY account_id, a.code_store, a.name
             """
             self.env.cr.execute(query, (tuple(x_cuentas.ids),))
             result = self.env.cr.dictfetchall()
@@ -17568,9 +17570,13 @@ class wizard_flujo_efectivo(models.TransientModel):
                             worksheet.write(
                                 x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
                             )
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][4], frmt_cuenta
-                            )
+                            #worksheet.write(
+                            #    x_rows, 2, a_imprimir[x_recorre][4], frmt_cuenta
+                            #)
+                            worksheet.write(x_rows, 2, (
+                                a_imprimir[x_recorre][4].get('en_US') if isinstance(a_imprimir[x_recorre][4], dict) else
+                                a_imprimir[x_recorre][4]), frmt_cuenta)
+
                             worksheet.write(
                                 x_rows, 3, a_imprimir[x_recorre][5], debe_haber
                             )
