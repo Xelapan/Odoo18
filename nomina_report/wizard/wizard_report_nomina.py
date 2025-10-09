@@ -4,6 +4,8 @@
 # Copyright 2024 SIESA
 #
 ##############################################################################
+import logging
+
 from decorator import append
 from xlsxwriter.utility import xl_rowcol_to_cell
 from collections import defaultdict
@@ -1700,6 +1702,9 @@ class WizardInformeEmpleador(models.TransientModel):
         xls_filename = "Informe del Empleador.xlsx"
         temp_dir = tempfile.gettempdir()
         xls_path = os.path.join(temp_dir, xls_filename)
+        #un log para ver las rutas
+        logging.error('La ruta del archivo es -----------------: %s', xls_path)
+        logging.error('El temp_dir es +++++++++++++++++++: %s', temp_dir)
         workbook = xlsxwriter.Workbook(xls_path)
         worksheet = workbook.add_worksheet("Informe del Empleador")
         frmt_folio = workbook.add_format(
@@ -2281,6 +2286,7 @@ class WizardInformeEmpleador(models.TransientModel):
                 "data": base64.b64encode(open(xls_path, "rb").read()),
             }
         )
+        logging.error('El archivo se generó correctamente y se guardó en **********************: %s', xls_path)
         return {
             "name": "Descargar Informe del Empleador",
             "type": "ir.actions.act_window",
