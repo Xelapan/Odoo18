@@ -504,7 +504,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -530,7 +531,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -693,7 +695,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -905,7 +908,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                 worksheet.write(
                                     x_rows,
                                     1,
-                                    str(linea.get("codigo"))
+                                    #str(linea.get("codigo"))
+                                    str(list(linea.get("codigo").values())[0])
                                     + " "
                                     + str(linea.get("cuenta")),
                                     detail_description_format,
@@ -1094,7 +1098,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -1124,7 +1129,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -1591,7 +1597,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -1617,7 +1624,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -1780,7 +1788,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -1992,7 +2001,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                 worksheet.write(
                                     x_rows,
                                     1,
-                                    str(linea.get("codigo"))
+                                    #str(linea.get("codigo"))
+                                    str(list(linea.get("codigo").values())[0])
                                     + " "
                                     + str(linea.get("cuenta")),
                                     detail_description_format,
@@ -2181,7 +2191,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -2211,7 +2222,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -2493,7 +2505,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -2519,7 +2532,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -2682,7 +2696,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -2894,7 +2909,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                 worksheet.write(
                                     x_rows,
                                     1,
-                                    str(linea.get("codigo"))
+                                    #str(linea.get("codigo"))
+                                    str(list(linea.get("codigo").values())[0])
                                     + " "
                                     + str(linea.get("cuenta")),
                                     detail_description_format,
@@ -3083,7 +3099,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -3113,7 +3130,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -3310,7 +3328,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -3336,7 +3355,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -3499,7 +3519,8 @@ class wizard_inventory_valuation(models.TransientModel):
                             worksheet.write(
                                 x_rows,
                                 1,
-                                str(linea.get("codigo"))
+                                #str(linea.get("codigo"))
+                                str(list(linea.get("codigo").values())[0])
                                 + " "
                                 + str(linea.get("cuenta")),
                                 detail_description_format,
@@ -3711,7 +3732,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                 worksheet.write(
                                     x_rows,
                                     1,
-                                    str(linea.get("codigo"))
+                                    #str(linea.get("codigo"))
+                                    str(list(linea.get("codigo").values())[0])
                                     + " "
                                     + str(linea.get("cuenta")),
                                     detail_description_format,
@@ -3900,7 +3922,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -3930,7 +3953,8 @@ class wizard_inventory_valuation(models.TransientModel):
                                     worksheet.write(
                                         x_rows,
                                         1,
-                                        str(linea.get("codigo"))
+                                        #str(linea.get("codigo"))
+                                        str(list(linea.get("codigo").values())[0])
                                         + " "
                                         + str(linea.get("cuenta")),
                                         detail_description_format,
@@ -4407,7 +4431,7 @@ class wizard_report_mayor_financial(models.TransientModel):
 
                     # ---------------------------- Fin Encabezado ----------------------------------------------------------
                     if x_last_codigo_cuenta == str(
-                        linea.get("codigodebe") + " " + linea.get("cuentadebe")
+                        str(list(linea.get("codigodebe").values())[0]) + " " + linea.get("cuentadebe")
                     ):  # estamos en la misma cuenta
                         if (
                             x_row_page == x_max_rows - 1
@@ -4524,7 +4548,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                 x_rows,
                                 5,
                                 str(
-                                    linea.get("codigodebe")
+                                    str(list(linea.get("codigodebe").values())[0])
                                     + " "
                                     + linea.get("cuentadebe")
                                 ),
@@ -4801,7 +4825,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                 x_rows,
                                 5,
                                 str(
-                                    linea.get("codigodebe")
+                                    str(list(linea.get("codigodebe").values())[0])
                                     + " "
                                     + linea.get("cuentadebe")
                                 ),
@@ -5090,7 +5114,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                     x_rows,
                                     5,
                                     str(
-                                        linea.get("codigodebe")
+                                        str(list(linea.get("codigodebe").values())[0])
                                         + " "
                                         + linea.get("cuentadebe")
                                     ),
@@ -5251,7 +5275,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                     x_rows,
                                     5,
                                     str(
-                                        linea.get("codigodebe")
+                                        str(list(linea.get("codigodebe").values())[0])
                                         + " "
                                         + linea.get("cuentadebe")
                                     ),
@@ -5403,7 +5427,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                         x_rows,
                                         5,
                                         str(
-                                            linea.get("codigodebe")
+                                            str(list(linea.get("codigodebe").values())[0])
                                             + " "
                                             + linea.get("cuentadebe")
                                         ),
@@ -5738,7 +5762,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                             x_rows,
                                             5,
                                             str(
-                                                linea.get("codigodebe")
+                                                str(list(linea.get("codigodebe").values())[0])
                                                 + " "
                                                 + linea.get("cuentadebe")
                                             ),
@@ -5918,7 +5942,7 @@ class wizard_report_mayor_financial(models.TransientModel):
                                     # x_suma_haber_saldo += float(linea.get('haber'))
 
                     x_last_codigo_cuenta = str(
-                        linea.get("codigodebe") + " " + linea.get("cuentadebe")
+                        str(list(linea.get("codigodebe").values())[0]) + " " + linea.get("cuentadebe")
                     )
                     if x_total_row_count == x_iteracion:
                         x_rows += 1

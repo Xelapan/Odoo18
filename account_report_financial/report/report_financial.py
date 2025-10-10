@@ -59,6 +59,7 @@ class account_report_financial(models.AbstractModel):
                 )
             )
         )
+        thCompany_id = company_id
         query = (
             """
                             select 
@@ -77,8 +78,8 @@ class account_report_financial(models.AbstractModel):
 				                        am.date Fecha,
 				                        -- am.x_name_partida Partida,
 				                        am.partida_contable Partida,
-				                        aa.code Codigo,
-				                        aa."name" Cuenta,
+				                        aa.code_store as Codigo,
+				                        aa."name"->>'en_US' Cuenta,
 				                        sum(aml.debit) Debe,
 	 			                        sum(aml.credit) Haber,
 				                        cc."name" Empresa,
@@ -97,7 +98,7 @@ class account_report_financial(models.AbstractModel):
 				                        -- aml.debit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-				                        aj.name = 'Partida de Apertura'and
+				                        aj.name->>'en_US' = 'Partida de Apertura'and
 				                        -- (aml.move_name like '%Partida de Apertura%' or aml.move_name like '%APERT%') and
 				                        am.company_id = """
             + str(company_id)
@@ -252,7 +253,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -262,8 +263,8 @@ class account_report_financial(models.AbstractModel):
 				am.date Fecha,
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				cc."name" Empresa,
@@ -282,7 +283,7 @@ class account_report_financial(models.AbstractModel):
 				-- aml.credit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-				aj.name = 'Partida de Apertura' and
+				aj.name->>'en_US' = 'Partida de Apertura' and
 				-- (aml.move_name like '%Partida de Apertura%' or aml.move_name like '%APERT%') and
 				am.company_id =  """
             + str(company_id)
@@ -430,7 +431,7 @@ class account_report_financial(models.AbstractModel):
  																	' ',
  																	"""
             + str(anio)
-            + """
+            + f"""
  															),
  												'DD Mon YYYY'
  											)
@@ -438,7 +439,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -500,9 +501,10 @@ class account_report_financial(models.AbstractModel):
         if no_incluir_ids:
             filtro_sql = f"am.id NOT IN ({', '.join(map(str, no_incluir_ids))})"
         else:
-            filtro_sql = "1=1"  # No hay IDs que excluir, así que no se filtra nada
+            filtro_sql = "1=1"  # No hay IDs que excluir, así que no se filtra nada.
+        thCompany_id = company_id
         query = (
-            """
+            f"""
                             select 
 		                        distinct
 		                        Consulta.Fecha Fecha,
@@ -519,8 +521,8 @@ class account_report_financial(models.AbstractModel):
 				                        am.date Fecha,
 				                        -- am.x_name_partida Partida,
 				                        am.partida_contable Partida,
-				                        aa.code Codigo,
-				                        aa."name" Cuenta,
+				                        aa.code_store as Codigo,
+				                        aa."name"->>'en_US' Cuenta,
 				                        sum(aml.debit) Debe,
 	 			                        sum(aml.credit) Haber,
 				                        cc."name" Empresa,
@@ -539,7 +541,7 @@ class account_report_financial(models.AbstractModel):
 				                        -- aml.debit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-				                        aj.name = 'Partida de Cierre' and
+				                        aj.name->>'en_US' = 'Partida de Cierre' and
 				                        --(aml.move_name like '%CIERR%' or aml.move_name like '%Partida de Cierre%') and
 				                        am.company_id = """
             + str(company_id)
@@ -694,7 +696,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -704,8 +706,8 @@ class account_report_financial(models.AbstractModel):
 				am.date Fecha,
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				cc."name" Empresa,
@@ -724,7 +726,7 @@ class account_report_financial(models.AbstractModel):
 				-- aml.credit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-                aj.name = 'Partida de Cierre' and
+                aj.name->>'en_US' = 'Partida de Cierre' and
                 -- (aml.move_name like '%CIERR%' or aml.move_name like '%Partida de Cierre%') and
 				am.company_id =  """
             + str(company_id)
@@ -880,7 +882,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -943,14 +945,14 @@ class account_report_financial(models.AbstractModel):
             filtro_sql = f"am.id NOT IN ({', '.join(map(str, no_incluir_ids))})"
         else:
             filtro_sql = "1=1"  # No hay IDs que excluir, así que no se filtra nada
-
+        thCompany_id = company_id
         query = (
-            """
+            f"""
                             select 
 		                        distinct
 		                        Consulta.Fecha Fecha,
 		                        Consulta.Partida Partida,
-		                        Consulta.Codigo Codigo,
+		                        Consulta.Codigo,
 		                        Consulta.Cuenta Cuenta,
 		                        Consulta.Debe,
 		                        Consulta.Haber,
@@ -962,8 +964,8 @@ class account_report_financial(models.AbstractModel):
 				                        am.date Fecha,
 				                        -- am.x_name_partida Partida,
 				                        am.partida_contable Partida,
-				                        aa.code Codigo,
-				                        aa."name" Cuenta,
+				                        aa.code_store as Codigo,
+				                        aa."name"->>'en_US' Cuenta,
 				                        sum(aml.debit) Debe,
 	 			                        sum(aml.credit) Haber,
 				                        cc."name" Empresa,
@@ -1134,7 +1136,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -1144,8 +1146,8 @@ class account_report_financial(models.AbstractModel):
 				am.date Fecha,
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				cc."name" Empresa,
@@ -1317,7 +1319,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -1387,7 +1389,7 @@ class account_report_financial(models.AbstractModel):
 		                        distinct
 		                        Consulta.Fecha Fecha,
 		                        Consulta.Partida Partida,
-		                        Consulta.Codigo Codigo,
+		                        Consulta.Codigo,
 		                        Consulta.Cuenta Cuenta,
 		                        Consulta.Debe,
 		                        Consulta.Haber,
@@ -1399,8 +1401,8 @@ class account_report_financial(models.AbstractModel):
 				                        am.date Fecha,
 				                        -- am.x_name_partida Partida,
 				                        am.partida_contable Partida,
-				                        aa.code Codigo,
-				                        aa."name" Cuenta,
+				                        aa.code_store as Codigo,
+				                        aa."name"->>'en_US' Cuenta,
 				                        sum(aml.debit) Debe,
 	 			                        sum(aml.credit) Haber,
 				                        cc."name" Empresa,
@@ -1419,7 +1421,7 @@ class account_report_financial(models.AbstractModel):
 				                        -- aml.debit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-				                        aj.name not in ('Partida de Apertura', 'Partida de Cierre') and
+				                        aj.name->>'en_US' not in ('Partida de Apertura', 'Partida de Cierre') and
 				                        -- (aml.move_name not like '%Partida de Apertura%' or aml.move_name not like '%APERT%' ) and
 				                        -- (aml.move_name not like '%Partida de Cierre%' or aml.move_name not like '%CIERR%'  ) and
 				                        am.company_id = """
@@ -1575,7 +1577,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -1585,8 +1587,8 @@ class account_report_financial(models.AbstractModel):
 				am.date Fecha,
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				cc."name" Empresa,
@@ -1605,7 +1607,7 @@ class account_report_financial(models.AbstractModel):
 				-- aml.credit>0 """
             + (f"AND {exclusion_bancos} " if exclusion_bancos else "")
             + """ AND
-                aj.name not in ('Partida de Apertura', 'Partida de Cierre') and
+                aj.name->> 'en_US' not in ('Partida de Apertura', 'Partida de Cierre') and
                 -- (aml.move_name not like '%Partida de Apertura%' or aml.move_name not like '%APERT%' ) and
                 -- (aml.move_name not like '%Partida de Cierre%' or aml.move_name not like '%CIERR%'  ) and
 				am.company_id =  """
@@ -1762,7 +1764,7 @@ class account_report_financial(models.AbstractModel):
 				am.date,
 				-- am.x_name_partida,
 				am.partida_contable,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc."name",
 				rp.vat
@@ -1873,8 +1875,8 @@ select
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
 				aa.id IdCuenta,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				sum(aml.balance) balance,
@@ -2056,14 +2058,14 @@ select
 				-- am.x_name_partida,
 				am.partida_contable,
 				aa.id,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc.id,
 				cc."name",
 				rp.vat
 			having sum(debit) > 0 
 			order by 
-				aa.code,
+				aa.code_store,
 				am.date,
 				am.partida_contable,
 				sum(debit) asc
@@ -2075,8 +2077,8 @@ select
 				-- am.x_name_partida Partida,
 				am.partida_contable Partida,
 				aa.id IdCuenta,
-				aa.code Codigo,
-				aa."name" Cuenta,
+				aa.code_store as Codigo,
+				aa."name"->>'en_US' Cuenta,
 				sum(aml.debit) Debe,
 	 			sum(aml.credit) Haber,
 				sum(aml.balance) balance,
@@ -2258,14 +2260,14 @@ select
 				-- am.x_name_partida,
 				am.partida_contable,
 				aa.id,
-				aa.code,
+				aa.code_store,
 				aa."name",
 				cc.id,
 				cc."name",
 				rp.vat
 			having sum(credit) > 0
 			order by 
-				aa.code,
+				aa.code_store,
 				am.date,
 				am.partida_contable,
 				sum(credit) asc
@@ -2325,7 +2327,7 @@ select
  																	),
  														'DD Mon YYYY'
  													)
-							,aa.company_id),0) SaldoDebe,
+							,rc.res_company_id),0) SaldoDebe,
 						coalesce(Fin_SaldoCuentaHaber(aa.id,
 							to_date(
  														concat(
@@ -2373,12 +2375,13 @@ select
  																	),
  														'DD Mon YYYY'
  													)
-							,aa.company_id),0) SaldoHaber
+							,rc.res_company_id),0) SaldoHaber
 					 from account_account aa
-					 where aa.company_id = """
+					 inner join account_account_res_company_rel rc on rc.account_account_id = aa.id
+					 where rc.res_company_id = """
             + str(company_id)
             + """
-					 order by aa.code asc
+					 order by aa.code_store asc
 				 ) as Saldo on Saldo.idcuenta = Debe.idcuenta or Saldo.idcuenta = Haber.idcuenta ) as QueryTotal order by QueryTotal.codigodebe asc, QueryTotal.fechadebe asc, QueryTotal.fechahaber asc """,
             False,
         )
