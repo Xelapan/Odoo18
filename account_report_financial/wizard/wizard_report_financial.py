@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 from xlsxwriter.utility import xl_rowcol_to_cell
 from collections import defaultdict
 from odoo import models, api, fields, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 import xlsxwriter
 import base64
 from datetime import datetime, date
@@ -22326,7 +22326,13 @@ class wizard_libro_inventario(models.TransientModel):
                 ):
                     if a_imprimir[x_recorre][9] == "nivel_c":
                         x_suma_nivel_d = 0
-                        x_suma_nivel_c += float(a_imprimir[x_recorre][7])
+                        try:
+                            x_suma_nivel_c += float(a_imprimir[x_recorre][7] or 0)
+                        # la excpetion
+                        except Exception as e:
+                            raise UserError('error '+e)
+
+
 
                 elif (
                     x_ctrl_nivel_i == a_imprimir[x_recorre][0]
