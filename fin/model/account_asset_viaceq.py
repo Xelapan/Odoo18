@@ -108,3 +108,19 @@ class AccountAssetViaceq(models.Model):
             #                 record.serie_fel = False
             #         else:
             #             record.serie_fel = False
+
+    def open_wizard(self):
+        return {
+            "name": "Reporte de Equipo Fungible",
+            "type": "ir.actions.act_window",
+            "res_model": "account.asset.viaceq.wizard",
+            "view_mode": "form",
+            "view_id": self.env.ref("fin.view_account_asset_viaceq_wizard_form").id,
+            "target": "new",
+            "context": {
+                "default_product_ids": [(6, 0, self.ids)],
+                "default_company_id": (
+                    self.company_ids[0].id if self.company_id else self.env.company.id
+                ),
+            },
+        }
