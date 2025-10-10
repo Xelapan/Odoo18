@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-        <record id="view_employee_form_inherit" model="ir.ui.view">
+        <record id="view_gth_employee_form_inherit" model="ir.ui.view">
             <field name="name">view.employee.form.inherit</field>
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr.view_employee_form" />
@@ -193,7 +193,7 @@
             <field name="model">hr.employee</field>
             <field name="inherit_id" ref="hr_payroll.payroll_hr_employee_view_form" />
             <field name="arch" type="xml">
-                
+
                 <xpath expr="//field[@name='registration_number']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
