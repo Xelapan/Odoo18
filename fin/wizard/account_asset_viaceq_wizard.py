@@ -35,7 +35,7 @@ class AccountAssetViaceq(models.TransientModel):
         """Obtain default account IDs based on `account_name` and the active company."""
         company = self.env.company
         accounts = self.env["account.account"].search(
-            [("name", "in", self.account_name), ("company_id", "=", company.id)]
+            [("name", "in", self.account_name), ("company_ids", "in", [company.id])]
         )
         return accounts.ids  # Devuelve una lista de IDs
 
