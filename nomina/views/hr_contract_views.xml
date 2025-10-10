@@ -16,6 +16,12 @@
                 <xpath expr="//field[@name='wage_type']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//field[@name='schedule_pay']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='wage']" position="attributes">
+                    <attribute name="string">Salario Base</attribute>
+                </xpath>
                 <xpath expr="//group[@name='salary']" position="inside">
                             <field name="bonificacion_incentivo"/>
                             <field name="bonificacion_fija"/>
