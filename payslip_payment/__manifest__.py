@@ -25,9 +25,9 @@ Key Features
     "data": [
         "wizard/hr_payroll_register_payment.xml",
         "wizard/hr_payroll_batchwise_register_payment.xml",
+        "views/hr_payslip_views.xml",
         # "views/salary_voucher_report.xml",
         "security/ir.model.access.csv",
-        "views/hr_payslip_views.xml",
         "views/account_payment_views.xml",
     ],
     "installable": True,

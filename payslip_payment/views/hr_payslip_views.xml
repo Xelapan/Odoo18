@@ -13,7 +13,7 @@
 
 
 
-        <record id="view_hr_payslip_form_inherit_uae_payroll" model="ir.ui.view">
+        <record id="view_hr_payslip_form_inherit_uaes_payroll" model="ir.ui.view">
             <field name="name">hr.payslip.form.inherit</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
@@ -40,7 +40,7 @@
                                             <field name="date" />
                                             <field name="partner_id" />
                                             <field name="journal_id" />
-    
+
                                             <field name="amount" />
                                             <field name="state" />
                                         </list>

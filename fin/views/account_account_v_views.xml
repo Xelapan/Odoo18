@@ -63,7 +63,13 @@
             <field name="name">account.account.v.purchase.view.tree</field>
             <field name="model">account.account.v</field>
             <field name="arch" type="xml">
-                <list string="Reporte Compras IVA" default_order="fecha asc" create="0" edit="1" js_class="AccountAccountVTreeView">
+<!--                <list string="Reporte Compras IVA" default_order="fecha asc" create="0" edit="1" js_class="AccountAccountVTreeView">-->
+                <list string="Reporte Compras IVA" default_order="fecha asc" create="0" edit="1">
+                    <header>
+                        <button name="open_wizard" string="Datos a la Fecha"
+                                type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
                     <field name="fecha"/>
                     <field name="numero_fel"/>
                     <field name="serie_fel"/>
@@ -94,7 +100,13 @@
             <field name="name">account.account.v.inventario.tree</field>
             <field name="model">account.account.v</field>
             <field name="arch" type="xml">
-                <list string="Informe Inventario" create="0" edit="1" js_class="AccountAccountVTreeView">
+<!--                <list string="Informe Inventario" create="0" edit="1" js_class="AccountAccountVTreeView">-->
+                <list string="Informe Inventario" create="0" edit="1">
+                    <header>
+                        <button name="open_wizard" string="Datos a la Fecha"
+                                type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
                     <field name="fecha"                                 optional="hide"/>
                     <field name="move_id"           widget="many2one"   optional="hide"/>
                     <field name="account_id"        widget="many2one"   optional="hide"/>
