@@ -45,6 +45,8 @@ class HrPayslip(models.Model):
 
     def write(self, vals):
         res = super(HrPayslip, self).write(vals)
+        if any(field in vals for field in ['worked_days_line_ids', 'state']):
+            return res
         for payslip in self:
             for worked_day in payslip.worked_days_line_ids:
                 if (
