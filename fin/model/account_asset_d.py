@@ -108,7 +108,7 @@ class AccountAssetD(models.Model):
             "type": "ir.actions.act_window",
             "res_model": "account.asset.d.wizard",
             "view_mode": "form",
-            "view_id": self.env.ref("fin.account_asset_d_wizard_view_form").id,
+            "view_id": self.env.ref("fin.view_account_asset_d_wizard_form").id,
             "target": "new",
             "context": {
                 "default_session_identifier": request.session.sid,

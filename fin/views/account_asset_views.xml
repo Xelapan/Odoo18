@@ -23,8 +23,7 @@
 <!--                <list string="Activos" create="0" edit="1" js_class="AccountAssetVTreeView">-->
                 <list string="Activos" create="0" edit="1">
                     <header>
-
-                    <button name="open_wizard" string="Visor de Activos"
+                        <button name="open_wizard" string="Visor de Activos"
                                  type="object" class="btn-primary"
                                  display="always"/>
                     </header>
@@ -49,7 +48,11 @@
             <field name="arch" type="xml">
 <!--                <list string="Reporte de Depreciaciones" create="0" edit="1" js_class="AccountAssetDTreeView">-->
                 <list string="Reporte de Depreciaciones" create="0" edit="1" >
-
+                    <header>
+                        <button name="open_wizard" string="Nueva Consulta"
+                                type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
                     <field name="asset_id" widget="many2one"/>
                     <field name="model_id" widget="many2one"/>
                     <field name="company_id" widget="many2one" optional="hide"/>
@@ -71,8 +74,14 @@
             <field name="name">account.asset.viaceq.view.tree</field>
             <field name="model">account.asset.viaceq</field>
             <field name="arch" type="xml">
-                <list string="Reporte de Equipo Fungible" create="0" edit="1" js_class="AccountAssetViaceqTreeView">
+<!--                <list string="Reporte de Equipo Fungible" create="0" edit="1" js_class="AccountAssetViaceqTreeView">-->
 <!--                <list string="Activos" >-->
+                <list string="Reporte de Equipo Fungible" create="0" edit="1">
+                    <header>
+                        <button name="open_wizard" string="Visor de Activos"
+                                 type="object" class="btn-primary"
+                                 display="always"/>
+                    </header>
                     <field name="product_id" widget="many2one" />
 <!--                    <field name="product_model_id" widget="many2one"/>-->
                     <field name="model_id" widget="many2one"/>
