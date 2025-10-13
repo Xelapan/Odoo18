@@ -18834,35 +18834,33 @@ class wizard_cambio_patrimonio(models.TransientModel):
 
 
 class wizard_libro_inventario(models.TransientModel):
-    _name = "wizard.libro.inventario"
+    _name = 'wizard.libro.inventario'
     _description = "Wizard Libro de Inventario"
-    company_id = fields.Many2one(
-        "res.company", string="Company", default=lambda self: self.env.company.id
-    )
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company.id)
     end_date = fields.Date(string="Al")
     folio = fields.Integer(string="Folio")
     certificacion = fields.Char(string="Certificación")
     representante = fields.Char(string="Representante Legal")
     contador = fields.Char(string="Contador")
-    state = fields.Selection([("choose", "choose"), ("get", "get")], default="choose")
-    name = fields.Char(string="File Name", readonly=True)
-    data = fields.Binary(string="File", readonly=True)
+    state = fields.Selection([('choose', 'choose'), ('get', 'get')], default='choose')
+    name = fields.Char(string='File Name', readonly=True)
+    data = fields.Binary(string='File', readonly=True)
 
-    @api.onchange("company_id")
+    @api.onchange('company_id')
     def onchange_company_id(self):
-        domain = [("id", "in", self.env.user.company_ids.ids)]
-        return {"domain": {"company_id": domain}}
+        domain = [('id', 'in', self.env.user.company_ids.ids)]
+        return {'domain': {'company_id': domain}}
 
     def go_back(self):
-        self.state = "choose"
+        self.state = 'choose'
         return {
-            "name": "Libro de Inventario",
-            "type": "ir.actions.act_window",
-            "res_model": self._name,
-            "view_mode": "form",
-            "view_type": "form",
-            "res_id": self.id,
-            "target": "new",
+            'name': 'Libro de Inventario',
+            'type': 'ir.actions.act_window',
+            'res_model': self._name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': self.id,
+            'target': 'new'
         }
 
     def print_xls_libro_inventario(self):
@@ -18893,133 +18891,39 @@ class wizard_libro_inventario(models.TransientModel):
         else:
             thMes = "Diciembre"
 
-        xls_filename = "Libro de Inventario.xlsx"
+        xls_filename = 'Libro de Inventario.xlsx'
         temp_dir = tempfile.gettempdir()
         xls_path = os.path.join(temp_dir, xls_filename)
         workbook = xlsxwriter.Workbook(xls_path)
-        # workbook = xlsxwriter.Workbook('/tmp/' + xls_filename)
-        frmt_folio = workbook.add_format(
-            {"bold": False, "align": "right", "font": "Arial", "font_size": 8}
-        )
-        frmt_encabezado = workbook.add_format(
-            {
-                "bold": True,
-                "align": "center",
-                "valign": "vcenter",
-                "font": "Arial",
-                "font_size": 8,
-            }
-        )
-        frmt_borde_superior = workbook.add_format(
-            {
-                "bold": True,
-                "align": "center",
-                "valign": "vcenter",
-                "font": "Arial",
-                "font_size": 8,
-            }
-        )
-        frmt_cuenta_head_foot = workbook.add_format(
-            {"align": "left", "font": "Arial", "font_size": 8, "bold": True}
-        )
-        frmt_cuenta = workbook.add_format(
-            {"align": "left", "font": "Arial", "font_size": 8}
-        )
-        frmt_van_vacio = workbook.add_format(
-            {"align": "left", "font": "Arial", "font_size": 8, "border": 1}
-        )
-        frmt_codigo = workbook.add_format(
-            {"align": "right", "font": "Arial", "font_size": 8, "bold": True}
-        )
-        frmt_codigo_c = workbook.add_format(
-            {"align": "right", "font": "Arial", "font_size": 8}
-        )
+        #workbook = xlsxwriter.Workbook('/tmp/' + xls_filename)
+        frmt_folio = workbook.add_format({'bold': False, 'align': 'right', \
+                                          'font': 'Arial', 'font_size': 8})
+        frmt_encabezado = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter', \
+                                               'font': 'Arial', 'font_size': 8})
+        frmt_borde_superior = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter', \
+                                                   'font': 'Arial', 'font_size': 8})
+        frmt_cuenta_head_foot = workbook.add_format({'align': 'left', 'font': 'Arial', 'font_size': 8, 'bold': True})
+        frmt_cuenta = workbook.add_format({'align': 'left', 'font': 'Arial', 'font_size': 8})
+        frmt_van_vacio = workbook.add_format({'align': 'left', 'font': 'Arial', 'font_size': 8, 'border': 1})
+        frmt_codigo = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8, 'bold': True})
+        frmt_codigo_c = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8})
         frmt_codigo_utilidad_ejercicio = workbook.add_format(
-            {"align": "right", "font": "Arial", "font_size": 8, "bold": True}
-        )
-        frmt_utilidad_ejercicio = workbook.add_format(
-            {"align": "left", "font": "Arial", "font_size": 8, "bold": True}
-        )
+            {'align': 'right', 'font': 'Arial', 'font_size': 8, 'bold': True})
+        frmt_utilidad_ejercicio = workbook.add_format({'align': 'left', 'font': 'Arial', 'font_size': 8, 'bold': True})
         debe_utilidad_ejercicio = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "border": 1,
-                "bold": True,
-            }
-        )
+            {'align': 'right', 'font': 'Arial', 'font_size': 8, 'border': 1, 'bold': True})
         haber_utilidad_ejercicio = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "border": 1,
-                "bold": True,
-                "num_format": "Q#,##0.00",
-            }
-        )
-        debe_haber_vacio = workbook.add_format(
-            {"align": "right", "font": "Arial", "font_size": 8}
-        )
-        debe_haber_vacio_gc = workbook.add_format(
-            {"align": "right", "font": "Arial", "font_size": 8}
-        )
-        debe_haber = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "num_format": "Q#,##0.00",
-            }
-        )
-        debe_haber_gc = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "num_format": "Q#,##0.00",
-            }
-        )
-        debe_haber_nivel_ii = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "bold": True,
-                "num_format": "Q#,##0.00",
-            }
-        )
-        debe_haber_nivel_i = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "bold": True,
-                "num_format": "Q#,##0.00",
-            }
-        )
+            {'align': 'right', 'font': 'Arial', 'font_size': 8, 'border': 1, 'bold': True, 'num_format': 'Q#,##0.00'})
+        debe_haber_vacio = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8})
+        debe_haber_vacio_gc = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8})
+        debe_haber = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8, 'num_format': 'Q#,##0.00'})
+        debe_haber_gc = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8, 'num_format': 'Q#,##0.00'})
+        debe_haber_nivel_ii = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8, 'bold': True, 'num_format': 'Q#,##0.00'})
+        debe_haber_nivel_i = workbook.add_format({'align': 'right', 'font': 'Arial', 'font_size': 8, 'bold': True, 'num_format': 'Q#,##0.00'})
         debe_haber_van_vienen = workbook.add_format(
-            {
-                "align": "right",
-                "font": "Arial",
-                "font_size": 8,
-                "bold": True,
-                "border": 1,
-                "num_format": "Q#,##0.00",
-            }
-        )
-        frmt_van = workbook.add_format(
-            {
-                "bold": True,
-                "align": "center",
-                "valign": "vcenter",
-                "font": "Arial",
-                "font_size": 8,
-                "border": 1,
-                "num_format": "Q#,##0.00",
-            }
-        )
+            {'align': 'right', 'font': 'Arial', 'font_size': 8, 'bold': True, 'border': 1, 'num_format': 'Q#,##0.00'})
+        frmt_van = workbook.add_format({'bold': True, 'align': 'center', 'valign': 'vcenter', \
+                                        'font': 'Arial', 'font_size': 8, 'border': 1, 'num_format': 'Q#,##0.00'})
         frmt_codigo_utilidad_ejercicio.set_bottom(1)
         frmt_codigo_utilidad_ejercicio.set_left(1)
         frmt_utilidad_ejercicio.set_bottom(1)
@@ -19053,22 +18957,22 @@ class wizard_libro_inventario(models.TransientModel):
         worksheet.set_paper(1)
         worksheet.set_margins(0.7, 0.7, 0.7, 0.7)
         # Tamaños
-        worksheet.set_column("A:A", 4)
-        worksheet.set_column("B:B", 8)
-        worksheet.set_column("C:C", 38)
-        worksheet.set_column("D:D", 12)
-        worksheet.set_column("E:E", 12)
-        worksheet.set_column("F:F", 12)
+        worksheet.set_column('A:A', 4)
+        worksheet.set_column('B:B', 8)
+        worksheet.set_column('C:C', 38)
+        worksheet.set_column('D:D', 12)
+        worksheet.set_column('E:E', 12)
+        worksheet.set_column('F:F', 12)
         # Empieza detalle
         x_rows = 0  # Linea a imprimir
         x_page = 0  # Numero de pagina
         x_max_rows = 47  # Maximo de lineas por pagina
         x_row_page = 0  # Linea actual vrs maximo de lineas
-        x_ctrl_nivel_i = ""
-        x_ctrl_nivel_ii = ""
-        x_ctrl_nivel_gc = ""
-        x_ctrl_nivel_c = ""
-        x_ctrl_nivel_d = ""
+        x_ctrl_nivel_i = ''
+        x_ctrl_nivel_ii = ''
+        x_ctrl_nivel_gc = ''
+        x_ctrl_nivel_c = ''
+        x_ctrl_nivel_d = ''
         x_altura = 0
         x_recorre = 0
         x_suma_nivel_i = 0
@@ -19076,516 +18980,209 @@ class wizard_libro_inventario(models.TransientModel):
         x_suma_nivel_iii = 0
         x_suma_nivel_gc = 0
         x_suma_nivel_c = 0
-        x_suma_nivel_d = 0  #
+        x_suma_nivel_d = 0 #
         x_NiveliInicial = 1  # Aca empezamos desde activo
         x_NiveliFinal = 3
         auxrows = 0
 
         # Calculo de la utilidad del ejercicio
         x_balance_4 = 0
-        x_balance_4 = (
-            sum(
-                self.env["account.move.line"]
-                .search(
-                    [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "4",
-                        ),
-                        ("move_id.state", "=", "posted"),
-                        # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
-                        ("date", "<=", self.end_date),
-                        ("balance", "!=", 0),
-                        ("company_id.id", "=", self.company_id.id),
-                    ]
-                )
-                .mapped("balance")
-            )
-            * -1
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) *- 1
+        x_balance_4 = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '4'),
+            ('move_id.state', '=', 'posted'),
+            #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) *- 1
+            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) *- 1
         x_balance_5 = 0
-        x_balance_5 = sum(
-            self.env["account.move.line"]
-            .search(
-                [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "5",
-                    ),
-                    ("move_id.state", "=", "posted"),
-                    # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
-                    ("date", "<=", self.end_date),
-                    ("balance", "!=", 0),
-                    ("company_id.id", "=", self.company_id.id),
-                ]
-            )
-            .mapped("balance")
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+        x_balance_5 = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '5'),
+            ('move_id.state', '=', 'posted'),
+            #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_6 = 0
-        x_balance_6 = sum(
-            self.env["account.move.line"]
-            .search(
-                [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "6",
-                    ),
-                    ("move_id.state", "=", "posted"),
-                    # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
-                    ("date", "<=", self.end_date),
-                    ("balance", "!=", 0),
-                    ("company_id.id", "=", self.company_id.id),
-                ]
-            )
-            .mapped("balance")
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+        x_balance_6 = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '6'),
+            ('move_id.state', '=', 'posted'),
+            #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_7 = 0
-        x_balance_7 = (
-            sum(
-                self.env["account.move.line"]
-                .search(
-                    [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "7",
-                        ),
-                        ("move_id.state", "=", "posted"),
-                        # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
-                        ("date", "<=", self.end_date),
-                        ("balance", "!=", 0),
-                        ("company_id.id", "=", self.company_id.id),
-                    ]
-                )
-                .mapped("balance")
-            )
-            * -1
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+        x_balance_7 = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '7'),
+            ('move_id.state', '=', 'posted'),
+            #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))*-1
+            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_8 = 0
-        x_balance_8 = sum(
-            self.env["account.move.line"]
-            .search(
-                [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "8",
-                    ),
-                    ("move_id.state", "=", "posted"),
-                    # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
-                    ("date", "<=", self.end_date),
-                    ("balance", "!=", 0),
-                    ("company_id.id", "=", self.company_id.id),
-                ]
-            )
-            .mapped("balance")
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+        x_balance_8 = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '8'),
+            ('move_id.state', '=', 'posted'),
+            #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
 
-        x_pasivo_capital = (
-            sum(
-                self.env["account.move.line"]
-                .search(
-                    [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "2",
-                        ),
-                        ("move_id.state", "=", "posted"),
-                        ("date", "<=", self.end_date),
-                        ("balance", "!=", 0),
-                        ("company_id.id", "=", self.company_id.id),
-                    ]
-                )
-                .mapped("balance")
-            )
-            * -1
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
-        x_pasivo_capital += (
-            sum(
-                self.env["account.move.line"]
-                .search(
-                    [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "3",
-                        ),
-                        ("move_id.state", "=", "posted"),
-                        ("date", "<=", self.end_date),
-                        ("balance", "!=", 0),
-                        ("company_id.id", "=", self.company_id.id),
-                    ]
-                )
-                .mapped("balance")
-            )
-            * -1
-        )
-        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
+        x_pasivo_capital = sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '2'),
+            ('move_id.state', '=', 'posted'),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) * -1
+            # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
+        x_pasivo_capital += sum(self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '3'),
+            ('move_id.state', '=', 'posted'),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) * -1
+            # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
 
-        x_utilidad_ejercicio = (
-            (x_balance_4 - x_balance_5 - x_balance_6) + x_balance_7 - x_balance_8
-        )
+        x_utilidad_ejercicio = (x_balance_4 - x_balance_5 - x_balance_6) + x_balance_7 - x_balance_8
         x_pasivo_capital += x_utilidad_ejercicio
         a_imprimir = []
-        while (
-            x_NiveliInicial <= x_NiveliFinal
-        ):  # Principal ciclo para saber que grupos van a ser tomados en cuenta en este caso 4 ingresos 5 cotos 6 gastos
+        while x_NiveliInicial <= x_NiveliFinal: # Principal ciclo para saber que grupos van a ser tomados en cuenta en este caso 4 ingresos 5 cotos 6 gastos
             # Buscamos el id de grupo de la raiz nivel i
-            NivelI = self.env["account.group"].search(
-                [
-                    ("company_id.id", "=", self.company_id.id),
-                    ("parent_id", "=", False),
-                    ("code_prefix_start", "=", x_NiveliInicial),
-                ],
-                order="code_prefix_start asc",
-                limit=1,
-            )
+            NivelI = self.env['account.group'].search([
+                ('company_id.id', '=', self.company_id.id),
+                ('parent_id', '=', False),
+                ('code_prefix_start', '=', x_NiveliInicial)],
+                order="code_prefix_start asc", limit=1)
 
             if NivelI:
                 for x_NivelI in NivelI:
                     x_control_i = 0
-                    x_control_i = sum(
-                        self.env["account.move.line"]
-                        .search(
-                            [
-                                (
-                                    "account_id.group_id.parent_id.parent_id.id",
-                                    "in",
-                                    x_NivelI.ids,
-                                ),
-                                ("move_id.state", "=", "posted"),
-                                ("date", "<=", self.end_date),
-                                ("balance", "!=", 0),
-                                ("company_id.id", "=", self.company_id.id),
-                            ]
-                        )
-                        .mapped("balance")
-                    )
-                    # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+                    x_control_i = sum(self.env['account.move.line'].search([
+                        ('account_id.group_id.parent_id.parent_id.id', 'in', x_NivelI.ids),
+                        ('move_id.state', '=', 'posted'),
+                        ('date', '<=', self.end_date),
+                        ('balance', '!=', 0),
+                        ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+                        #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
 
                     if x_control_i != 0:
                         a_imprimir.append([])
-                        a_imprimir[x_altura].append(
-                            x_NivelI.code_prefix_start
-                        )  # Nivel I 1
-                        a_imprimir[x_altura].append("")  # Nivel II 101
-                        a_imprimir[x_altura].append("")  # Nivel III 10101
-                        a_imprimir[x_altura].append(
-                            x_NivelI.code_prefix_start
-                        )  # Codigo Nivel
-                        a_imprimir[x_altura].append("")  # Espacio para cantidades
-                        a_imprimir[x_altura].append(x_NivelI.name)  # Nombre Nivel
-                        a_imprimir[x_altura].append(0)  # Celda valor 1
-                        a_imprimir[x_altura].append(0)  # Celda valor 2
-                        a_imprimir[x_altura].append(0)  # Celda valor 3
-                        a_imprimir[x_altura].append("head_nivel_i")  # Tipo de fila
-                        a_imprimir[x_altura].append("")  # Cuenta desglozada
+                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I 1
+                        a_imprimir[x_altura].append('') # Nivel II 101
+                        a_imprimir[x_altura].append('')  # Nivel III 10101
+                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Codigo Nivel
+                        a_imprimir[x_altura].append('')  # Espacio para cantidades
+                        a_imprimir[x_altura].append(x_NivelI.name) # Nombre Nivel
+                        a_imprimir[x_altura].append(0) # Celda valor 1
+                        a_imprimir[x_altura].append(0) # Celda valor 2
+                        a_imprimir[x_altura].append(0) # Celda valor 3
+                        a_imprimir[x_altura].append('head_nivel_i')  # Tipo de fila
+                        a_imprimir[x_altura].append('')  # Cuenta desglozada
 
                         x_altura += 1
                         # Buscamos el id de grupo del nivel ii que pertenezcan a nivel i
-                        NivelII = self.env["account.group"].search(
-                            [("parent_id.id", "in", x_NivelI.ids)],
-                            order="code_prefix_start asc",
-                        )
+                        NivelII = self.env['account.group'].search([('parent_id.id', 'in', x_NivelI.ids)],
+                                                                   order="code_prefix_start asc")
                         if NivelII:
                             for x_NivelII in NivelII:
                                 x_control_ii = 0
-                                x_control_ii = sum(
-                                    self.env["account.move.line"]
-                                    .search(
-                                        [
-                                            (
-                                                "account_id.group_id.parent_id.id",
-                                                "in",
-                                                x_NivelII.ids,
-                                            ),
-                                            ("move_id.state", "=", "posted"),
-                                            ("date", "<=", self.end_date),
-                                            ("balance", "!=", 0),
-                                            ("company_id.id", "=", self.company_id.id),
-                                        ]
-                                    )
-                                    .mapped("balance")
-                                )
-                                # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+                                x_control_ii = sum(self.env['account.move.line'].search([
+                                    ('account_id.group_id.parent_id.id', 'in', x_NivelII.ids),
+                                    ('move_id.state', '=', 'posted'),
+                                    ('date', '<=', self.end_date),
+                                    ('balance', '!=', 0),
+                                    ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+                                    # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                                 if x_control_ii != 0:
                                     a_imprimir.append([])
-                                    a_imprimir[x_altura].append(
-                                        x_NivelI.code_prefix_start
-                                    )  # Nivel I   1
-                                    a_imprimir[x_altura].append(
-                                        x_NivelII.code_prefix_start
-                                    )  # Nivel II 101
-                                    a_imprimir[x_altura].append(
-                                        ""
-                                    )  # Nivel grupo cuenta balance general
-                                    a_imprimir[x_altura].append(
-                                        x_NivelII.code_prefix_start
-                                    )  # Codigo Nivel
-                                    a_imprimir[x_altura].append(
-                                        ""
-                                    )  # Espacio para cantidades
-                                    a_imprimir[x_altura].append(
-                                        x_NivelII.name
-                                    )  # Nombre Nivel
-                                    a_imprimir[x_altura].append(0)  # Celda valor 1
-                                    a_imprimir[x_altura].append(0)  # Celda valor 2
-                                    a_imprimir[x_altura].append(0)  # Celda valor 3
-                                    a_imprimir[x_altura].append(
-                                        "head_nivel_ii"
-                                    )  # Tipo de fila
-                                    a_imprimir[x_altura].append("")  # Cuenta desglozada
+                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                                    a_imprimir[x_altura].append('')  # Nivel grupo cuenta balance general
+                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Codigo Nivel
+                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                    a_imprimir[x_altura].append(x_NivelII.name) # Nombre Nivel
+                                    a_imprimir[x_altura].append(0) # Celda valor 1
+                                    a_imprimir[x_altura].append(0) # Celda valor 2
+                                    a_imprimir[x_altura].append(0) # Celda valor 3
+                                    a_imprimir[x_altura].append('head_nivel_ii')  # Tipo de fila
+                                    a_imprimir[x_altura].append('')  # Cuenta desglozada
 
                                     x_altura += 1
                                     # Buscamos el id de grupo de cuenta que pertenezca a nivel ii
-                                    NivelGrupoCuenta = self.env["account.group"].search(
-                                        [("parent_id.id", "in", x_NivelII.ids)],
-                                        order="code_prefix_start asc",
-                                    )
+                                    NivelGrupoCuenta = self.env['account.group'].search(
+                                        [('parent_id.id', 'in', x_NivelII.ids)],
+                                        order="code_prefix_start asc")
                                     if NivelGrupoCuenta:
                                         for x_NivelGrupoCuenta in NivelGrupoCuenta:
                                             x_control_gc = 0.0
-                                            x_control_gc = round(
-                                                sum(
-                                                    self.env["account.move.line"]
-                                                    .search(
-                                                        [
-                                                            (
-                                                                "account_id.group_id.id",
-                                                                "in",
-                                                                x_NivelGrupoCuenta.ids,
-                                                            ),
-                                                            (
-                                                                "move_id.state",
-                                                                "=",
-                                                                "posted",
-                                                            ),
-                                                            (
-                                                                "date",
-                                                                "<=",
-                                                                self.end_date,
-                                                            ),
-                                                            ("balance", "!=", 0),
-                                                            (
-                                                                "company_id.id",
-                                                                "=",
-                                                                self.company_id.id,
-                                                            ),
-                                                        ]
-                                                    )
-                                                    .mapped("balance")
-                                                ),
-                                                2,
-                                            )
-                                            # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+                                            x_control_gc = round(sum(self.env['account.move.line'].search([
+                                                ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                ('move_id.state', '=', 'posted'),
+                                                ('date', '<=', self.end_date),
+                                                ('balance', '!=', 0),
+                                                ('company_id.id', '=', self.company_id.id)]).mapped('balance')),2)
+                                                # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                                             contador = 0
-                                            NivelCuenta2 = self.env[
-                                                "account.account"
-                                            ].search(
-                                                [
-                                                    (
-                                                        "group_id.id",
-                                                        "in",
-                                                        x_NivelGrupoCuenta.ids,
-                                                    )
-                                                ],
-                                                order="code asc",
-                                            )
+                                            NivelCuenta2 = self.env['account.account'].search(
+                                                [('group_id.id', 'in', x_NivelGrupoCuenta.ids),('group_id','!=', False)],
+                                                order="code asc").filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                             if NivelCuenta2:
                                                 x_control_c2 = 0.0
                                                 for x_NivelCuenta2 in NivelCuenta2:
-                                                    x_control_c2 = round(
-                                                        sum(
-                                                            self.env[
-                                                                "account.move.line"
-                                                            ]
-                                                            .search(
-                                                                [
-                                                                    (
-                                                                        "account_id.id",
-                                                                        "=",
-                                                                        x_NivelCuenta2.id,
-                                                                    ),
-                                                                    (
-                                                                        "move_id.state",
-                                                                        "=",
-                                                                        "posted",
-                                                                    ),
-                                                                    (
-                                                                        "date",
-                                                                        "<=",
-                                                                        self.end_date,
-                                                                    ),
-                                                                    (
-                                                                        "balance",
-                                                                        "!=",
-                                                                        0,
-                                                                    ),
-                                                                    (
-                                                                        "company_id.id",
-                                                                        "=",
-                                                                        self.company_id.id,
-                                                                    ),
-                                                                ]
-                                                            )
-                                                            .mapped("balance")
-                                                        ),
-                                                        2,
-                                                    )
+                                                    x_control_c2 = round(sum(self.env['account.move.line'].search([
+                                                        ('account_id.id', '=', x_NivelCuenta2.id),
+                                                        ('move_id.state', '=', 'posted'),
+                                                        ('date', '<=', self.end_date),
+                                                        ('balance', '!=', 0),
+                                                        ('company_id.id', '=', self.company_id.id)]).mapped('balance')),2)
                                                     if x_control_c2 != 0:
                                                         contador += 1
-                                            if (
-                                                (x_control_gc != 0)
-                                                or (
-                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                    == "30103"
-                                                    and x_utilidad_ejercicio != 0
-                                                )
-                                                or (contador != 0)
-                                            ):
+                                            if (x_control_gc != 0) or (x_NivelGrupoCuenta.code_prefix_start == '30103' and x_utilidad_ejercicio != 0) or (contador != 0):
                                                 a_imprimir.append([])
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelI.code_prefix_start
-                                                )  # Nivel I   1
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelII.code_prefix_start
-                                                )  # Nivel II 101
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                )  # Nivel grupo cuenta balance general
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                )  # Codigo Nivel
-                                                if x_NivelII.code_prefix_start in [
-                                                    "301"
-                                                ]:
-                                                    a_imprimir[x_altura].append(
-                                                        ""
-                                                    )  # Espacio para cantidades
-                                                    a_imprimir[x_altura].append(
-                                                        x_NivelGrupoCuenta.name
-                                                    )  # Nombre Nivel
-                                                    a_imprimir[x_altura].append(
-                                                        0
-                                                    )  # Celda valor 1
-                                                    a_imprimir[x_altura].append(
-                                                        0
-                                                    )  # Celda valor 2
-                                                    if (
-                                                        x_NivelI.code_prefix_start
-                                                        == "2"
-                                                        or x_NivelI.code_prefix_start
-                                                        == "3"
-                                                    ):
-                                                        if (
-                                                            x_NivelGrupoCuenta.code_prefix_start
-                                                            == "30103"
-                                                        ):
-                                                            a_imprimir[x_altura].append(
-                                                                (x_control_gc * -1)
-                                                                + x_utilidad_ejercicio
-                                                            )  # Celda valor 3
+                                                a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                                                a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start) # Codigo Nivel
+                                                if x_NivelII.code_prefix_start in ['301']:
+                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.name)  # Nombre Nivel
+                                                    a_imprimir[x_altura].append(0)  # Celda valor 1
+                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                    if x_NivelI.code_prefix_start == '2' or x_NivelI.code_prefix_start == '3':
+                                                        if x_NivelGrupoCuenta.code_prefix_start == '30103':
+                                                            a_imprimir[x_altura].append((x_control_gc *-1) + x_utilidad_ejercicio)  # Celda valor 3
                                                         else:
-                                                            a_imprimir[x_altura].append(
-                                                                x_control_gc * -1
-                                                            )  # Celda valor 3
+                                                            a_imprimir[x_altura].append(x_control_gc *-1)  # Celda valor 3
                                                     else:
-                                                        a_imprimir[x_altura].append(
-                                                            x_control_gc
-                                                        )  # Celda valor 2
-                                                    a_imprimir[x_altura].append(
-                                                        "foot_nivel_ii"
-                                                    )  # Tipo de fila
-                                                    a_imprimir[x_altura].append(
-                                                        ""
-                                                    )  # Cuenta desglozada
+                                                        a_imprimir[x_altura].append(x_control_gc)  # Celda valor 2
+                                                    a_imprimir[x_altura].append('foot_nivel_ii')  # Tipo de fila
+                                                    a_imprimir[x_altura].append('')  # Cuenta desglozada
                                                     x_altura += 1
                                                     continue
                                                 # Aqui deberia ir un else
-                                                a_imprimir[x_altura].append(
-                                                    ""
-                                                )  # Espacio para cantidades
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelGrupoCuenta.name
-                                                )  # Nombre Nivel
-                                                a_imprimir[x_altura].append(
-                                                    0
-                                                )  # Celda valor 1
-                                                a_imprimir[x_altura].append(
-                                                    0
-                                                )  # Celda valor 2
-                                                a_imprimir[x_altura].append(
-                                                    0
-                                                )  # Celda valor 3
-                                                a_imprimir[x_altura].append(
-                                                    "head_nivel_gc"
-                                                )  # Tipo de fila
-                                                a_imprimir[x_altura].append(
-                                                    ""
-                                                )  # Cuenta desglozada
+                                                a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.name) # Nombre Nivel
+                                                a_imprimir[x_altura].append(0) # Celda valor 1
+                                                a_imprimir[x_altura].append(0) # Celda valor 2
+                                                a_imprimir[x_altura].append(0) # Celda valor 3
+                                                a_imprimir[x_altura].append('head_nivel_gc')  # Tipo de fila
+                                                a_imprimir[x_altura].append('')  # Cuenta desglozada
                                                 x_altura += 1
-                                                NivelCuenta = self.env[
-                                                    "account.account"
-                                                ].search(
-                                                    [
-                                                        (
-                                                            "group_id.id",
-                                                            "in",
-                                                            x_NivelGrupoCuenta.ids,
-                                                        )
-                                                    ],
-                                                    order="code asc",
-                                                )
+                                                NivelCuenta = self.env['account.account'].search(
+                                                    [('group_id.id', 'in', x_NivelGrupoCuenta.ids), ('group_id','!=',False)],
+                                                    order="code asc").filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                                 if NivelCuenta:
                                                     for x_NivelCuenta in NivelCuenta:
-                                                        x_control_c = round(
-                                                            sum(
-                                                                self.env[
-                                                                    "account.move.line"
-                                                                ]
-                                                                .search(
-                                                                    [
-                                                                        (
-                                                                            "account_id.id",
-                                                                            "=",
-                                                                            x_NivelCuenta.id,
-                                                                        ),
-                                                                        (
-                                                                            "move_id.state",
-                                                                            "=",
-                                                                            "posted",
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            "<=",
-                                                                            self.end_date,
-                                                                        ),
-                                                                        (
-                                                                            "balance",
-                                                                            "!=",
-                                                                            0,
-                                                                        ),
-                                                                        (
-                                                                            "company_id.id",
-                                                                            "=",
-                                                                            self.company_id.id,
-                                                                        ),
-                                                                    ]
-                                                                )
-                                                                .mapped("balance")
-                                                            ),
-                                                            2,
-                                                        )
+                                                        x_control_c = round(sum(self.env['account.move.line'].search([
+                                                            ('account_id.id', '=', x_NivelCuenta.id),
+                                                            ('move_id.state', '=', 'posted'),
+                                                            ('date', '<=', self.end_date),
+                                                            ('balance', '!=', 0),
+                                                            ('company_id.id', '=', self.company_id.id)]).mapped('balance')),2)
                                                         # MovCuenta = 0
                                                         # MovCuenta = len(self.env['account.move.line'].search([
                                                         #     ('account_id.id', '=', x_NivelCuenta.id),
@@ -19594,2172 +19191,543 @@ class wizard_libro_inventario(models.TransientModel):
                                                         #     ('date', '<=', self.end_date),
                                                         #     ('balance', '!=', 0),
                                                         #     ('company_id.id', '=', self.company_id.id)]))
-                                                        # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
-                                                        if (x_control_c != 0) or (
-                                                            x_NivelCuenta.code
-                                                            == "3010301"
-                                                            and x_utilidad_ejercicio
-                                                            != 0
-                                                        ):
+                                                            #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
+                                                        if (x_control_c != 0) or (x_NivelCuenta.code == '3010301' and x_utilidad_ejercicio != 0):
                                                             a_imprimir.append([])
-                                                            a_imprimir[x_altura].append(
-                                                                x_NivelI.code_prefix_start
-                                                            )  # Nivel I   1
-                                                            a_imprimir[x_altura].append(
-                                                                x_NivelII.code_prefix_start
-                                                            )  # Nivel II 101
-                                                            a_imprimir[x_altura].append(
-                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                            )  # Nivel grupo cuenta balance general
-                                                            a_imprimir[x_altura].append(
-                                                                x_NivelCuenta.code
-                                                            )  # Codigo Nivel
-                                                            a_imprimir[x_altura].append(
-                                                                ""
-                                                            )  # Espacio para cantidades
-                                                            a_imprimir[x_altura].append(
-                                                                x_NivelCuenta.name
-                                                            )  # Nombre Nivel
+                                                            a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                                                            a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                                                            a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                            a_imprimir[x_altura].append(x_NivelCuenta.code) # Codigo Nivel
+                                                            a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                            a_imprimir[x_altura].append(x_NivelCuenta.name) # Nombre Nivel
 
-                                                            if (
-                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                                in [
-                                                                    "10103",
-                                                                    "10202",
-                                                                    "10203",
-                                                                    "10204",
-                                                                    "20101",
-                                                                    "20101",
-                                                                    "20103",
-                                                                    "20201",
-                                                                    "20202",
-                                                                ]
-                                                                and x_NivelCuenta.code
-                                                                not in [
-                                                                    "1010303",
-                                                                    "2010303",
-                                                                ]
-                                                            ) or x_NivelCuenta.code in [
-                                                                "2010211"
-                                                            ]:  # or (x_NivelGrupoCuenta.code_prefix_start == '10201' and x_NivelCuenta.code == '1020105'): # Para desglozar Cuentas por cobrar comerciales y no comerciales
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Celda valor 2
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 3
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "nivel_c"
-                                                                )  # Tipo de fila
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Cuenta desglozada
+                                                            if (x_NivelGrupoCuenta.code_prefix_start in ['10103', '10202','10203','10204', '20101', '20101', '20103', '20201', '20202'] and x_NivelCuenta.code not in ['1010303', '2010303']) or x_NivelCuenta.code in ['2010211']:# or (x_NivelGrupoCuenta.code_prefix_start == '10201' and x_NivelCuenta.code == '1020105'): # Para desglozar Cuentas por cobrar comerciales y no comerciales
+                                                                a_imprimir[x_altura].append(0) # Celda valor 1
+                                                                a_imprimir[x_altura].append('') # Celda valor 2
+                                                                a_imprimir[x_altura].append(0) # Celda valor 3
+                                                                a_imprimir[x_altura].append('nivel_c')  # Tipo de fila
+                                                                a_imprimir[x_altura].append('')  # Cuenta desglozada
                                                                 x_altura += 1
-                                                                if (
-                                                                    x_NivelCuenta.code
-                                                                    in [
-                                                                        "1010301",
-                                                                        "2010102",
-                                                                        "2010211",
-                                                                    ]
-                                                                ):
-                                                                    x_pre_desglozar = (
-                                                                        None
-                                                                    )
+                                                                if x_NivelCuenta.code in ['1010301', '2010102', '2010211']:
+                                                                    x_pre_desglozar = None
                                                                     x_desglozar = None
-                                                                    x_desglozar = self.env[
-                                                                        "account.move.line"
-                                                                    ].read_group(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            # ('move_id.journal_id.name', '!=', 'Partida de Cierre'),
-                                                                            (
-                                                                                "partner_id",
-                                                                                "!=",
-                                                                                False,
-                                                                            ),
-                                                                        ],
-                                                                        fields=[
-                                                                            "account_id.code",
-                                                                            "balance",
-                                                                            "partner_id.name",
-                                                                        ],
-                                                                        groupby=[
-                                                                            "partner_id",
-                                                                            "account_id",
-                                                                        ],
-                                                                    )
+                                                                    x_desglozar = self.env['account.move.line'].read_group([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        # ('move_id.journal_id.name', '!=', 'Partida de Cierre'),
+                                                                        ('partner_id', '!=', False)],
+                                                                        fields=['account_id.code', 'balance',
+                                                                                'partner_id.name'],
+                                                                        groupby=['partner_id', 'account_id'])
                                                                 else:
-                                                                    x_pre_desglozar = (
-                                                                        None
-                                                                    )
-                                                                    x_pre_desglozar = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<",
-                                                                                datetime.strptime(
-                                                                                    str(
-                                                                                        self.end_date.year
-                                                                                    )
-                                                                                    + "-01-01",
-                                                                                    "%Y-%m-%d",
-                                                                                ),
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                        ]
-                                                                    )
+                                                                    x_pre_desglozar = None
+                                                                    x_pre_desglozar = self.env['account.move.line'].search([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id)])
 
                                                                     x_desglozar = None
-                                                                    x_desglozar = self.env[
-                                                                        "account.move.line"
-                                                                    ].read_group(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                ">=",
-                                                                                datetime.strptime(
-                                                                                    str(
-                                                                                        self.end_date.year
-                                                                                    )
-                                                                                    + "-01-01",
-                                                                                    "%Y-%m-%d",
-                                                                                ),
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            # ('move_id.journal_id.name', '!=', 'Partida de Cierre'),
-                                                                            (
-                                                                                "partner_id",
-                                                                                "!=",
-                                                                                False,
-                                                                            ),
-                                                                        ],
-                                                                        fields=[
-                                                                            "account_id.code",
-                                                                            "balance",
-                                                                            "partner_id.name",
-                                                                        ],
-                                                                        groupby=[
-                                                                            "partner_id",
-                                                                            "account_id",
-                                                                        ],
-                                                                    )
-                                                                # if x_pre_desglozar and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
-                                                                if (
-                                                                    x_pre_desglozar
-                                                                    and round(
-                                                                        sum(
-                                                                            x_pre_desglozar.mapped(
-                                                                                "balance"
-                                                                            )
-                                                                        ),
-                                                                        2,
-                                                                    )
-                                                                    != 0
-                                                                ):  # Recorremos los registros para desglozar
-                                                                    # if x_pre_desglozar_cxc['balance'] != 0:
-                                                                    a_imprimir.append(
-                                                                        []
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelI.code_prefix_start
-                                                                    )  # Nivel I   1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelII.code_prefix_start
-                                                                    )  # Nivel II 101
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                                    )  # Nivel grupo cuenta balance general
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Codigo Nivel
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        ""
-                                                                    )  # Espacio para cantidades
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "Saldo Inicial"
-                                                                    )  # Celda valor 1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        abs(
-                                                                            round(
-                                                                                sum(
-                                                                                    x_pre_desglozar.mapped(
-                                                                                        "balance"
-                                                                                    )
-                                                                                ),
-                                                                                2,
-                                                                            )
-                                                                        )
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 3
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "nivel_d"
-                                                                    )  # Tipo de fila
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Cuenta desglozada
+                                                                    x_desglozar = self.env['account.move.line'].read_group([
+                                                                            ('account_id.group_id.id', 'in',x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                            ('account_id.code', '=', x_NivelCuenta.code),
+                                                                            ('move_id.state', '=', 'posted'),
+                                                                            ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+                                                                            ('date', '<=', self.end_date),
+                                                                            ('balance', '!=', 0),
+                                                                            ('company_id.id', '=', self.company_id.id),
+                                                                            #('move_id.journal_id.name', '!=', 'Partida de Cierre'),
+                                                                            ('partner_id', '!=', False)],
+                                                                            fields=['account_id.code', 'balance', 'partner_id.name'],
+                                                                            groupby=['partner_id', 'account_id'])
+                                                                #if x_pre_desglozar and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
+                                                                if x_pre_desglozar and round(sum(x_pre_desglozar.mapped('balance')),2)!=0: # Recorremos los registros para desglozar
+                                                                    #if x_pre_desglozar_cxc['balance'] != 0:
+                                                                    a_imprimir.append([])
+                                                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                    a_imprimir[x_altura].append('Saldo Inicial')  # Celda valor 1
+                                                                    a_imprimir[x_altura].append(abs(round(sum(x_pre_desglozar.mapped('balance')),2)))  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                    a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                     x_altura += 1
 
-                                                                if (
-                                                                    x_desglozar
-                                                                    and x_NivelCuenta.code
-                                                                    and x_NivelCuenta.code
-                                                                    not in [
-                                                                        "1010303",
-                                                                        "2010303",
-                                                                    ]
-                                                                ):  # Si hay registros para desglozar
-                                                                    for (
-                                                                        x_desglozar_cxc
-                                                                    ) in (
-                                                                        x_desglozar
-                                                                    ):  # Recorremos los registros para desglozar
-                                                                        if (
-                                                                            x_desglozar_cxc[
-                                                                                "balance"
-                                                                            ]
-                                                                            != 0
-                                                                        ):
-                                                                            a_imprimir.append(
-                                                                                []
-                                                                            )
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelI.code_prefix_start
-                                                                            )  # Nivel I   1
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelII.code_prefix_start
-                                                                            )  # Nivel II 101
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                                            )  # Nivel grupo cuenta balance general
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelCuenta.code
-                                                                            )  # Codigo Nivel
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                ""
-                                                                            )  # Espacio para cantidades
-                                                                            partner_id_tuple = x_desglozar_cxc.get(
-                                                                                "partner_id"
-                                                                            )
-                                                                            partner_name = (
-                                                                                partner_id_tuple[
-                                                                                    1
-                                                                                ]
-                                                                                if partner_id_tuple
-                                                                                else False
-                                                                            )
+                                                                if x_desglozar and x_NivelCuenta.code and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
+                                                                    for x_desglozar_cxc in x_desglozar: # Recorremos los registros para desglozar
+                                                                        if x_desglozar_cxc['balance'] != 0:
+                                                                            a_imprimir.append([])
+                                                                            a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                            a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                            a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                            a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                            a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                            partner_id_tuple = x_desglozar_cxc.get('partner_id')
+                                                                            partner_name = partner_id_tuple[1] if partner_id_tuple else False
                                                                             if partner_name:
-                                                                                a_imprimir[
-                                                                                    x_altura
-                                                                                ].append(
-                                                                                    str(
-                                                                                        partner_name
-                                                                                    )
-                                                                                )  # Nombre Nivel
+                                                                                a_imprimir[x_altura].append(str(partner_name))  # Nombre Nivel
                                                                             else:
-                                                                                a_imprimir[
-                                                                                    x_altura
-                                                                                ].append(
-                                                                                    ""
-                                                                                )  # Nombre Nivel
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                abs(
-                                                                                    x_desglozar_cxc[
-                                                                                        "balance"
-                                                                                    ]
-                                                                                )
-                                                                            )  # Celda valor 1
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                0
-                                                                            )  # Celda valor 2
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                0
-                                                                            )  # Celda valor 3
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                "nivel_d"
-                                                                            )  # Tipo de fila
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelCuenta.code
-                                                                            )  # Cuenta desglozada
-                                                                            x_altura += (
-                                                                                1
-                                                                            )
-                                                                if (
-                                                                    x_NivelCuenta.code
-                                                                    in [
-                                                                        "1010301",
-                                                                        "2010102",
-                                                                    ]
-                                                                ):
-                                                                    x_desglozar_ii = (
-                                                                        None
-                                                                    )
-                                                                    x_desglozar_ii = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            # ('move_id.journal_id.name', '!=','Partida de Cierre'),
-                                                                            (
-                                                                                "partner_id",
-                                                                                "=",
-                                                                                False,
-                                                                            ),
-                                                                        ]
-                                                                    )
+                                                                                a_imprimir[x_altura].append('')  # Nombre Nivel
+                                                                            a_imprimir[x_altura].append(abs(x_desglozar_cxc['balance']))  # Celda valor 1
+                                                                            a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                            a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                            a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                            a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
+                                                                            x_altura += 1
+                                                                if x_NivelCuenta.code in ['1010301', '2010102']:
+                                                                    x_desglozar_ii = None
+                                                                    x_desglozar_ii = self.env['account.move.line'].search([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        # ('move_id.journal_id.name', '!=','Partida de Cierre'),
+                                                                        ('partner_id', '=', False)])
                                                                 else:
-                                                                    x_desglozar_ii = (
-                                                                        None
-                                                                    )
-                                                                    x_desglozar_ii = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                ">=",
-                                                                                datetime.strptime(
-                                                                                    str(
-                                                                                        self.end_date.year
-                                                                                    )
-                                                                                    + "-01-01",
-                                                                                    "%Y-%m-%d",
-                                                                                ),
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            # ('move_id.journal_id.name', '!=','Partida de Cierre'),
-                                                                            (
-                                                                                "partner_id",
-                                                                                "=",
-                                                                                False,
-                                                                            ),
-                                                                        ]
-                                                                    )
-                                                                if (
-                                                                    x_desglozar_ii
-                                                                    and x_NivelCuenta.code
-                                                                    and x_NivelCuenta.code
-                                                                    not in [
-                                                                        "1010303",
-                                                                        "2010303",
-                                                                    ]
-                                                                ):  # Si hay registros para desglozar
+                                                                    x_desglozar_ii = None
+                                                                    x_desglozar_ii = self.env['account.move.line'].search([
+                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.code', '=', x_NivelCuenta.code),
+                                                                    ('move_id.state', '=', 'posted'),
+                                                                    ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+                                                                    ('date', '<=', self.end_date),
+                                                                    ('balance', '!=', 0),
+                                                                    ('company_id.id', '=', self.company_id.id),
+                                                                    #('move_id.journal_id.name', '!=','Partida de Cierre'),
+                                                                    ('partner_id', '=', False)])
+                                                                if x_desglozar_ii and x_NivelCuenta.code and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
 
-                                                                    a_imprimir.append(
-                                                                        []
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelI.code_prefix_start
-                                                                    )  # Nivel I   1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelII.code_prefix_start
-                                                                    )  # Nivel II 101
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                                    )  # Nivel grupo cuenta balance general
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Codigo Nivel
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        ""
-                                                                    )  # Espacio para cantidades
-                                                                    # a_imprimir[x_altura].append(x_desglozar_cxc_ii.move_id.ref)  # Referencia de movimiento
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "Desconocido"
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        abs(
-                                                                            sum(
-                                                                                x_desglozar_ii.mapped(
-                                                                                    "balance"
-                                                                                )
-                                                                            )
-                                                                        )
-                                                                    )  # Celda valor 1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 3
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "nivel_d"
-                                                                    )  # Tipo de fila
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Cuenta desglozada
+                                                                    a_imprimir.append([])
+                                                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                    #a_imprimir[x_altura].append(x_desglozar_cxc_ii.move_id.ref)  # Referencia de movimiento
+                                                                    a_imprimir[x_altura].append('Desconocido')
+                                                                    a_imprimir[x_altura].append(abs(sum(x_desglozar_ii.mapped('balance'))))  # Celda valor 1
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                    a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                     x_altura += 1
 
                                                                 a_imprimir.append([])
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelI.code_prefix_start
-                                                                )  # Nivel I   1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelII.code_prefix_start
-                                                                )  # Nivel II 101
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                                )  # Nivel grupo cuenta balance general
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelCuenta.code
-                                                                )  # Codigo Nivel
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Espacio para cantidades
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "Suma de "
-                                                                    + x_NivelCuenta.name
-                                                                )  # Nombre Nivel
-                                                            # --------------------------------------------------- 24 Diciembre 2024 Alex ----------------------------------------------------------------
-                                                            if (
-                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                                == "10201"
-                                                                and x_NivelCuenta.code
-                                                                != "1020102"
-                                                                and x_NivelCuenta.code
-                                                                != "1020104"
-                                                                and x_NivelCuenta.code
-                                                                != "1020108"
-                                                                and x_NivelCuenta.code
-                                                                != "1020110"
-                                                                and x_NivelCuenta.code
-                                                                != "1020112"
-                                                                and x_NivelCuenta.code
-                                                                != "1020114"
-                                                                and x_NivelCuenta.code
-                                                                != "1020116"
-                                                                and x_NivelCuenta.code
-                                                                != "1020118"
-                                                                and x_NivelCuenta.code
-                                                                != "1020120"
-                                                                and x_NivelCuenta.code
-                                                                != "1020122"
-                                                                and x_NivelCuenta.code
-                                                                != "1020124"
-                                                            ):  # Para desglozar Cuentas por cuenta analitica
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Celda valor 2
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 3
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "nivel_c"
-                                                                )  # Tipo de fila
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Cuenta desglozada
+                                                                a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                a_imprimir[x_altura].append('Suma de ' + x_NivelCuenta.name)  # Nombre Nivel
+                                                            #--------------------------------------------------- 24 Diciembre 2024 Alex ----------------------------------------------------------------
+                                                            if x_NivelGrupoCuenta.code_prefix_start == '10201' and x_NivelCuenta.code != '1020102' and x_NivelCuenta.code != '1020104' and x_NivelCuenta.code != '1020108' and x_NivelCuenta.code != '1020110' and x_NivelCuenta.code != '1020112' and x_NivelCuenta.code != '1020114' and x_NivelCuenta.code != '1020116' and x_NivelCuenta.code != '1020118' and x_NivelCuenta.code != '1020120' and x_NivelCuenta.code != '1020122' and x_NivelCuenta.code != '1020124': # Para desglozar Cuentas por cuenta analitica
+                                                                a_imprimir[x_altura].append(0) # Celda valor 1
+                                                                a_imprimir[x_altura].append('') # Celda valor 2
+                                                                a_imprimir[x_altura].append(0) # Celda valor 3
+                                                                a_imprimir[x_altura].append('nivel_c')  # Tipo de fila
+                                                                a_imprimir[x_altura].append('')  # Cuenta desglozada
                                                                 x_altura += 1
                                                                 # Saldo Inicial
                                                                 pre_lines = None
-                                                                pre_lines = self.env[
-                                                                    "account.move.line"
-                                                                ].search(
-                                                                    [
-                                                                        (
-                                                                            "account_id.group_id.id",
-                                                                            "in",
-                                                                            x_NivelGrupoCuenta.ids,
-                                                                        ),
-                                                                        (
-                                                                            "account_id.code",
-                                                                            "=",
-                                                                            x_NivelCuenta.code,
-                                                                        ),
-                                                                        (
-                                                                            "account_id.code",
-                                                                            "not in",
-                                                                            [
-                                                                                "1020101",
-                                                                                "1020103",
-                                                                                "1020105",
-                                                                                "1020106",
-                                                                                "1020107",
-                                                                                "1020109",
-                                                                                "1020111",
-                                                                                "1020113",
-                                                                                "1020115",
-                                                                                "1020117",
-                                                                                "1020119",
-                                                                                "1020121",
-                                                                                "1020123",
-                                                                                "1020125",
-                                                                                "1020127",
-                                                                            ],
-                                                                        ),
-                                                                        (
-                                                                            "move_id.state",
-                                                                            "=",
-                                                                            "posted",
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            "<",
-                                                                            datetime.strptime(
-                                                                                str(
-                                                                                    self.end_date.year
-                                                                                )
-                                                                                + "-01-01",
-                                                                                "%Y-%m-%d",
-                                                                            ),
-                                                                        ),
-                                                                        (
-                                                                            "balance",
-                                                                            "!=",
-                                                                            0,
-                                                                        ),
-                                                                        (
-                                                                            "company_id.id",
-                                                                            "=",
-                                                                            self.company_id.id,
-                                                                        ),
-                                                                    ]
-                                                                )
-                                                                if (
-                                                                    round(
-                                                                        sum(
-                                                                            pre_lines.mapped(
-                                                                                "balance"
-                                                                            )
-                                                                        ),
-                                                                        2,
-                                                                    )
-                                                                    != 0
-                                                                ):
-                                                                    a_imprimir.append(
-                                                                        []
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelI.code_prefix_start
-                                                                    )  # Nivel I   1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelII.code_prefix_start
-                                                                    )  # Nivel II 101
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                                    )  # Nivel grupo cuenta balance general
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Código Nivel
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        ""
-                                                                    )  # Espacio para cantidades
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "Saldo Inicial"
-                                                                    )  # Nombre de la cuenta analítica
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        abs(
-                                                                            sum(
-                                                                                pre_lines.mapped(
-                                                                                    "balance"
-                                                                                )
-                                                                            )
-                                                                        )
-                                                                    )  # Celda valor 1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 3
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "nivel_d"
-                                                                    )  # Tipo de fila
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Cuenta desglozada
+                                                                pre_lines = self.env['account.move.line'].search([
+                                                                    ('account_id.group_id.id', 'in',x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.code', '=', x_NivelCuenta.code),
+                                                                    ('account_id.code', 'not in', ['1020101', '1020103', '1020105', '1020106','1020107', '1020109', '1020111', '1020113', '1020115', '1020117', '1020119', '1020121', '1020123','1020125','1020127']),
+                                                                    ('move_id.state', '=', 'posted'),
+                                                                    ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
+                                                                    ('balance', '!=', 0),
+                                                                    ('company_id.id', '=', self.company_id.id),
+                                                                ])
+                                                                if round(sum(pre_lines.mapped('balance')),2)!=0:
+                                                                    a_imprimir.append([])
+                                                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Código Nivel
+                                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                    a_imprimir[x_altura].append("Saldo Inicial")  # Nombre de la cuenta analítica
+                                                                    a_imprimir[x_altura].append(abs(sum(pre_lines.mapped('balance'))))  # Celda valor 1
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                    a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                     x_altura += 1
-                                                                if (
-                                                                    x_NivelCuenta.code
-                                                                    == "1020105"
-                                                                ):
+                                                                if x_NivelCuenta.code == '1020105':
                                                                     # Leer las líneas de diario que cumplen los criterios
                                                                     lines = None
-                                                                    lines = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',  "%Y-%m-%d")),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            # ('partner_id', '!=', False)
-                                                                        ]
-                                                                    )
+                                                                    lines = self.env['account.move.line'].search([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',  "%Y-%m-%d")),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        #('partner_id', '!=', False)
+                                                                    ])
 
                                                                     # Diccionario para agrupar por cuenta analítica
-                                                                    grouped_analytics = (
-                                                                        {}
-                                                                    )
+                                                                    grouped_analytics = {}
 
                                                                     # Procesar cada línea y agrupar por `analytic_distribution`
                                                                     for line in lines:
-                                                                        if (
-                                                                            line.analytic_distribution
-                                                                        ):
+                                                                        if line.analytic_distribution:
                                                                             # Procesar si `analytic_distribution` tiene contenido
-                                                                            for (
-                                                                                analytic_id,
-                                                                                percentage,
-                                                                            ) in (
-                                                                                line.analytic_distribution.items()
-                                                                            ):
-                                                                                if (
-                                                                                    analytic_id
-                                                                                    not in grouped_analytics
-                                                                                ):
-                                                                                    grouped_analytics[
-                                                                                        analytic_id
-                                                                                    ] = 0
+                                                                            for analytic_id, percentage in line.analytic_distribution.items():
+                                                                                if analytic_id not in grouped_analytics:
+                                                                                    grouped_analytics[analytic_id] = 0
                                                                                 # Sumar el balance ponderado por el porcentaje
                                                                                 grouped_analytics[
-                                                                                    analytic_id
-                                                                                ] += (
-                                                                                    line.balance
-                                                                                    * (
-                                                                                        percentage
-                                                                                        / 100
-                                                                                    )
-                                                                                )
+                                                                                    analytic_id] += line.balance * (
+                                                                                            percentage / 100)
                                                                         else:
                                                                             # Si `analytic_distribution` está vacío, agrupar en una clave genérica
-                                                                            generic_key = "no_analytic"
-                                                                            if (
-                                                                                generic_key
-                                                                                not in grouped_analytics
-                                                                            ):
-                                                                                grouped_analytics[
-                                                                                    generic_key
-                                                                                ] = 0
-                                                                            grouped_analytics[
-                                                                                generic_key
-                                                                            ] += (
-                                                                                line.balance
-                                                                            )
+                                                                            generic_key = 'no_analytic'
+                                                                            if generic_key not in grouped_analytics:
+                                                                                grouped_analytics[generic_key] = 0
+                                                                            grouped_analytics[generic_key] += line.balance
 
                                                                     # Crear las filas para `a_imprimir` con la agrupación por analítica
-                                                                    for (
-                                                                        analytic_id,
-                                                                        total_balance,
-                                                                    ) in (
-                                                                        grouped_analytics.items()
-                                                                    ):
-                                                                        a_imprimir.append(
-                                                                            []
-                                                                        )
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelI.code_prefix_start
-                                                                        )  # Nivel I   1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelII.code_prefix_start
-                                                                        )  # Nivel II 101
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelGrupoCuenta.code_prefix_start
-                                                                        )  # Nivel grupo cuenta balance general
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Código Nivel
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            ""
-                                                                        )  # Espacio para cantidades
+                                                                    for analytic_id, total_balance in grouped_analytics.items():
+                                                                        a_imprimir.append([])
+                                                                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                        a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                        a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Código Nivel
+                                                                        a_imprimir[x_altura].append('')  # Espacio para cantidades
 
-                                                                        if (
-                                                                            analytic_id
-                                                                            == "no_analytic"
-                                                                        ):
-                                                                            analytic_name = "Sin Analítica"
+                                                                        if analytic_id == 'no_analytic':
+                                                                            analytic_name = 'Sin Analítica'
                                                                         else:
-                                                                            analytic_name = (
-                                                                                self.env[
-                                                                                    "account.analytic.account"
-                                                                                ]
-                                                                                .browse(
-                                                                                    int(
-                                                                                        analytic_id
-                                                                                    )
-                                                                                )
-                                                                                .display_name
-                                                                                or ""
-                                                                            )
+                                                                            analytic_name = self.env['account.analytic.account'].browse(int(analytic_id)).display_name or ''
 
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            str(
-                                                                                analytic_name
-                                                                            )
-                                                                        )  # Nombre de la cuenta analítica
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            abs(
-                                                                                total_balance
-                                                                            )
-                                                                        )  # Celda valor 1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 2
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 3
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            "nivel_d"
-                                                                        )  # Tipo de fila
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Cuenta desglozada
+                                                                        a_imprimir[x_altura].append(str(analytic_name))  # Nombre de la cuenta analítica
+                                                                        a_imprimir[x_altura].append(abs(total_balance))  # Celda valor 1
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                        a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                         x_altura += 1
-                                                                elif (
-                                                                    x_NivelCuenta.code
-                                                                    in [
-                                                                        "1020106",
-                                                                        "1020125",
-                                                                    ]
-                                                                ):
+                                                                elif x_NivelCuenta.code in ['1020106', '1020125']:
                                                                     x_desglozar = None
                                                                     x_desglozar = self.env[
-                                                                        "account.move.line"
-                                                                    ].read_group(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            (
-                                                                                "name",
-                                                                                "!=",
-                                                                                False,
-                                                                            ),
-                                                                        ],
-                                                                        fields=[
-                                                                            "account_id.code",
-                                                                            "balance",
-                                                                            "name",
-                                                                        ],
-                                                                        groupby=[
-                                                                            "name",
-                                                                            "account_id",
-                                                                        ],
-                                                                    )
-                                                                    for (
-                                                                        x_desglozar_cxc
-                                                                    ) in (
-                                                                        x_desglozar
-                                                                    ):  # Recorremos los registros para desglozar
-                                                                        a_imprimir.append(
-                                                                            []
-                                                                        )
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelI.code_prefix_start
-                                                                        )  # Nivel I   1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelII.code_prefix_start
-                                                                        )  # Nivel II 101
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelGrupoCuenta.code_prefix_start
-                                                                        )  # Nivel grupo cuenta balance general
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Codigo Nivel
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            ""
-                                                                        )  # Espacio para cantidades
+                                                                        'account.move.line'].read_group([('account_id.group_id.id', 'in',x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        ('name', '!=', False)],
+                                                                        fields=['account_id.code', 'balance', 'name'],
+                                                                        groupby=['name', 'account_id'])
+                                                                    for x_desglozar_cxc in x_desglozar: # Recorremos los registros para desglozar
+                                                                        a_imprimir.append([])
+                                                                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                        a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                        a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                        a_imprimir[x_altura].append('')  # Espacio para cantidades
                                                                         # partner_id_tuple = x_desglozar_cxc.get('name')
                                                                         # partner_name = partner_id_tuple[1] if partner_id_tuple else False
                                                                         # if partner_name:
                                                                         #     a_imprimir[x_altura].append(str(partner_name))  # Nombre Nivel
                                                                         # else:
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_desglozar_cxc[
-                                                                                "name"
-                                                                            ]
-                                                                        )  # Nombre Nivel
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            abs(
-                                                                                x_desglozar_cxc[
-                                                                                    "balance"
-                                                                                ]
-                                                                            )
-                                                                        )  # Celda valor 1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 2
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 3
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            "nivel_d"
-                                                                        )  # Tipo de fila
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Cuenta desglozada
+                                                                        a_imprimir[x_altura].append(x_desglozar_cxc['name'])  # Nombre Nivel
+                                                                        a_imprimir[x_altura].append(abs(x_desglozar_cxc['balance']))  # Celda valor 1
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                        a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                         x_altura += 1
-                                                                    x_desglozar_ii = (
-                                                                        None
-                                                                    )
-                                                                    x_desglozar_ii = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            (
-                                                                                "name",
-                                                                                "=",
-                                                                                False,
-                                                                            ),
-                                                                        ]
-                                                                    )
-                                                                    if (
-                                                                        x_desglozar_ii
-                                                                        and x_NivelCuenta.code
-                                                                    ):  # Si hay registros para desglozar
-                                                                        a_imprimir.append(
-                                                                            []
-                                                                        )
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelI.code_prefix_start
-                                                                        )  # Nivel I   1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelII.code_prefix_start
-                                                                        )  # Nivel II 101
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelGrupoCuenta.code_prefix_start
-                                                                        )  # Nivel grupo cuenta balance general
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Codigo Nivel
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            ""
-                                                                        )  # Espacio para cantidades
+                                                                    x_desglozar_ii = None
+                                                                    x_desglozar_ii = self.env['account.move.line'].search([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        ('name', '=', False)])
+                                                                    if x_desglozar_ii and x_NivelCuenta.code :  # Si hay registros para desglozar
+                                                                        a_imprimir.append([])
+                                                                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                        a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                        a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                        a_imprimir[x_altura].append('')  # Espacio para cantidades
                                                                         # a_imprimir[x_altura].append(x_desglozar_cxc_ii.move_id.ref)  # Referencia de movimiento
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            "Desconocido"
-                                                                        )
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            abs(
-                                                                                sum(
-                                                                                    x_desglozar_ii.mapped(
-                                                                                        "balance"
-                                                                                    )
-                                                                                )
-                                                                            )
-                                                                        )  # Celda valor 1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 2
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 3
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            "nivel_d"
-                                                                        )  # Tipo de fila
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Cuenta desglozada
+                                                                        a_imprimir[x_altura].append('Desconocido')
+                                                                        a_imprimir[x_altura].append(abs(sum(x_desglozar_ii.mapped('balance'))))  # Celda valor 1
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                        a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                         x_altura += 1
                                                                 else:
                                                                     lines = None
-                                                                    lines = self.env[
-                                                                        "account.move.line"
-                                                                    ].search(
-                                                                        [
-                                                                            (
-                                                                                "account_id.group_id.id",
-                                                                                "in",
-                                                                                x_NivelGrupoCuenta.ids,
-                                                                            ),
-                                                                            (
-                                                                                "account_id.code",
-                                                                                "=",
-                                                                                x_NivelCuenta.code,
-                                                                            ),
-                                                                            (
-                                                                                "move_id.state",
-                                                                                "=",
-                                                                                "posted",
-                                                                            ),
-                                                                            # ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
-                                                                            (
-                                                                                "date",
-                                                                                "<=",
-                                                                                self.end_date,
-                                                                            ),
-                                                                            (
-                                                                                "balance",
-                                                                                "!=",
-                                                                                0,
-                                                                            ),
-                                                                            (
-                                                                                "company_id.id",
-                                                                                "=",
-                                                                                self.company_id.id,
-                                                                            ),
-                                                                            (
-                                                                                "partner_id",
-                                                                                "!=",
-                                                                                False,
-                                                                            ),
-                                                                        ]
-                                                                    )
+                                                                    lines = self.env['account.move.line'].search([
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.code', '=', x_NivelCuenta.code),
+                                                                        ('move_id.state', '=', 'posted'),
+                                                                        #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
+                                                                        ('date', '<=', self.end_date),
+                                                                        ('balance', '!=', 0),
+                                                                        ('company_id.id', '=', self.company_id.id),
+                                                                        ('partner_id', '!=', False)
+                                                                    ])
                                                                     # Diccionario para agrupar por activos
                                                                     grouped_assets = {}
 
                                                                     # Procesar cada línea y agrupar por `asset_ids`
                                                                     for line in lines:
-                                                                        if (
-                                                                            line.asset_ids
-                                                                        ):
-                                                                            for (
-                                                                                asset
-                                                                            ) in (
-                                                                                line.asset_ids
-                                                                            ):
-                                                                                asset_key = (
-                                                                                    asset.id
-                                                                                )
-                                                                                if (
-                                                                                    asset_key
-                                                                                    not in grouped_assets
-                                                                                ):
-                                                                                    grouped_assets[
-                                                                                        asset_key
-                                                                                    ] = 0
+                                                                        if line.asset_ids:
+                                                                            for asset in line.asset_ids:
+                                                                                asset_key = asset.id
+                                                                                if asset_key not in grouped_assets:
+                                                                                    grouped_assets[asset_key] = 0
                                                                                 # Sumar el balance
                                                                                 grouped_assets[
-                                                                                    asset_key
-                                                                                ] += (
-                                                                                    line.balance
-                                                                                )
+                                                                                    asset_key] += line.balance
                                                                         else:
                                                                             # Si `asset_ids` está vacío, agrupar en una clave genérica
-                                                                            generic_key = "no_asset"
-                                                                            if (
-                                                                                generic_key
-                                                                                not in grouped_assets
-                                                                            ):
-                                                                                grouped_assets[
-                                                                                    generic_key
-                                                                                ] = 0
-                                                                            grouped_assets[
-                                                                                generic_key
-                                                                            ] += (
-                                                                                line.balance
-                                                                            )
+                                                                            generic_key = 'no_asset'
+                                                                            if generic_key not in grouped_assets:
+                                                                                grouped_assets[generic_key] = 0
+                                                                            grouped_assets[generic_key] += line.balance
 
                                                                     # Crear las filas para `a_imprimir` con la agrupación por activos
-                                                                    for (
-                                                                        asset_id,
-                                                                        total_balance,
-                                                                    ) in (
-                                                                        grouped_assets.items()
-                                                                    ):
-                                                                        a_imprimir.append(
-                                                                            []
-                                                                        )
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelI.code_prefix_start
-                                                                        )  # Nivel I
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelII.code_prefix_start
-                                                                        )  # Nivel II
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelGrupoCuenta.code_prefix_start
-                                                                        )  # Grupo cuenta
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Código de cuenta
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            ""
-                                                                        )  # Espacio para cantidades
+                                                                    for asset_id, total_balance in grouped_assets.items():
+                                                                        a_imprimir.append([])
+                                                                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I
+                                                                        a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II
+                                                                        a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Grupo cuenta
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Código de cuenta
+                                                                        a_imprimir[x_altura].append('')  # Espacio para cantidades
 
-                                                                        if (
-                                                                            asset_id
-                                                                            == "no_asset"
-                                                                        ):
-                                                                            asset_name = "Sin Activo"
+                                                                        if asset_id == 'no_asset':
+                                                                            asset_name = 'Sin Activo'
                                                                         else:
-                                                                            asset_name = (
-                                                                                self.env[
-                                                                                    "account.asset"
-                                                                                ]
-                                                                                .browse(
-                                                                                    asset_id
-                                                                                )
-                                                                                .name
-                                                                                or ""
-                                                                            )
+                                                                            asset_name = self.env['account.asset'].browse(asset_id).name or ''
 
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            str(
-                                                                                asset_name
-                                                                            )
-                                                                        )  # Nombre del activo
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            abs(
-                                                                                total_balance
-                                                                            )
-                                                                        )  # Celda valor 1
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 2
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            0
-                                                                        )  # Celda valor 3
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            "nivel_d"
-                                                                        )  # Tipo de fila
-                                                                        a_imprimir[
-                                                                            x_altura
-                                                                        ].append(
-                                                                            x_NivelCuenta.code
-                                                                        )  # Cuenta desglosada
+                                                                        a_imprimir[x_altura].append(str(asset_name))  # Nombre del activo
+                                                                        a_imprimir[x_altura].append(abs(total_balance))  # Celda valor 1
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                        a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                        a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                        a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglosada
                                                                         x_altura += 1
-                                                                # else:
-                                                                #
+                                                                #else:
+                                                                    #
                                                                 a_imprimir.append([])
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelI.code_prefix_start
-                                                                )  # Nivel I   1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelII.code_prefix_start
-                                                                )  # Nivel II 101
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                                )  # Nivel grupo cuenta balance general
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelCuenta.code
-                                                                )  # Codigo Nivel
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Espacio para cantidades
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "Suma de "
-                                                                    + x_NivelCuenta.name
-                                                                )  # Nombre Nivel
+                                                                a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                a_imprimir[x_altura].append('Suma de ' + x_NivelCuenta.name)  # Nombre Nivel
                                                             # --------------------------------------------------Fin  24 Diciembre 2024 Alex ----------------------------------------------------------------
                                                             # DESDE AQUI ---------------------------------------------------------------------------
-                                                            if (
-                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                                == "10104"
-                                                            ):  # Para desglozar Cuentas por cobrar comerciales y no comerciales
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Celda valor 2
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    0
-                                                                )  # Celda valor 3
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "nivel_c"
-                                                                )  # Tipo de fila
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Cuenta desglozada
+                                                            if x_NivelGrupoCuenta.code_prefix_start == '10104':  # Para desglozar Cuentas por cobrar comerciales y no comerciales
+                                                                a_imprimir[x_altura].append(0)  # Celda valor 1
+                                                                a_imprimir[x_altura].append('')  # Celda valor 2
+                                                                a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                a_imprimir[x_altura].append('nivel_c')  # Tipo de fila
+                                                                a_imprimir[x_altura].append('')  # Cuenta desglozada
                                                                 x_altura += 1
                                                                 x_pre_desglozar = None
-                                                                x_pre_desglozar = self.env[
-                                                                    "account.move.line"
-                                                                ].search(
-                                                                    [
-                                                                        (
-                                                                            "account_id.group_id.id",
-                                                                            "in",
-                                                                            x_NivelGrupoCuenta.ids,
-                                                                        ),
-                                                                        (
-                                                                            "account_id.code",
-                                                                            "=",
-                                                                            x_NivelCuenta.code,
-                                                                        ),
-                                                                        (
-                                                                            "move_id.state",
-                                                                            "=",
-                                                                            "posted",
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            "<",
-                                                                            datetime.strptime(
-                                                                                str(
-                                                                                    self.end_date.year
-                                                                                )
-                                                                                + "-01-01",
-                                                                                "%Y-%m-%d",
-                                                                            ),
-                                                                        ),
-                                                                        (
-                                                                            "balance",
-                                                                            "!=",
-                                                                            0,
-                                                                        ),
-                                                                        (
-                                                                            "company_id.id",
-                                                                            "=",
-                                                                            self.company_id.id,
-                                                                        ),
-                                                                    ]
-                                                                )
+                                                                x_pre_desglozar = self.env['account.move.line'].search([
+                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.code', '=', x_NivelCuenta.code),
+                                                                    ('move_id.state', '=', 'posted'),
+                                                                    ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
+                                                                    ('balance', '!=', 0),
+                                                                    ('company_id.id', '=', self.company_id.id)])
 
-                                                                if (
-                                                                    round(
-                                                                        sum(
-                                                                            x_pre_desglozar.mapped(
-                                                                                "balance"
-                                                                            )
-                                                                        ),
-                                                                        2,
-                                                                    )
-                                                                    != 0
-                                                                ):
-                                                                    a_imprimir.append(
-                                                                        []
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelI.code_prefix_start
-                                                                    )  # Nivel I   1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelII.code_prefix_start
-                                                                    )  # Nivel II 101
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                                    )  # Nivel grupo cuenta balance general
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Código Nivel
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        ""
-                                                                    )  # Espacio para cantidades
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "Saldo Inicial"
-                                                                    )  # Nombre de la cuenta analítica
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        abs(
-                                                                            sum(
-                                                                                x_pre_desglozar.mapped(
-                                                                                    "balance"
-                                                                                )
-                                                                            )
-                                                                        )
-                                                                    )  # Celda valor 1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 3
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "nivel_d"
-                                                                    )  # Tipo de fila
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Cuenta desglozada
+                                                                if round(sum(x_pre_desglozar.mapped('balance')),2) != 0:
+                                                                    a_imprimir.append([])
+                                                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Código Nivel
+                                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                    a_imprimir[x_altura].append("Saldo Inicial")  # Nombre de la cuenta analítica
+                                                                    a_imprimir[x_altura].append(abs(sum(x_pre_desglozar.mapped('balance'))))  # Celda valor 1
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                    a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                     x_altura += 1
 
                                                                 x_desglozar = None
-                                                                x_desglozar = self.env[
-                                                                    "account.move.line"
-                                                                ].read_group(
-                                                                    [
-                                                                        (
-                                                                            "account_id.group_id.id",
-                                                                            "in",
-                                                                            x_NivelGrupoCuenta.ids,
-                                                                        ),
-                                                                        (
-                                                                            "account_id.code",
-                                                                            "=",
-                                                                            x_NivelCuenta.code,
-                                                                        ),
-                                                                        (
-                                                                            "move_id.state",
-                                                                            "=",
-                                                                            "posted",
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            ">=",
-                                                                            datetime.strptime(
-                                                                                str(
-                                                                                    self.end_date.year
-                                                                                )
-                                                                                + "-01-01",
-                                                                                "%Y-%m-%d",
-                                                                            ),
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            "<=",
-                                                                            self.end_date,
-                                                                        ),
-                                                                        (
-                                                                            "balance",
-                                                                            "!=",
-                                                                            0,
-                                                                        ),
-                                                                        (
-                                                                            "company_id.id",
-                                                                            "=",
-                                                                            self.company_id.id,
-                                                                        ),
-                                                                        # ('move_id.journal_id.name', '!=', 'Partida de Cierre'),
-                                                                        (
-                                                                            "product_id",
-                                                                            "!=",
-                                                                            False,
-                                                                        ),
-                                                                    ],
-                                                                    fields=[
-                                                                        "account_id.code",
-                                                                        "balance",
-                                                                        "product_id.name",
-                                                                        "quantity",
-                                                                    ],
-                                                                    groupby=[
-                                                                        "product_id",
-                                                                        "account_id",
-                                                                    ],
-                                                                    orderby="product_id",
-                                                                )
-                                                                if (
-                                                                    x_desglozar
-                                                                    and x_NivelCuenta.code
-                                                                    not in [
-                                                                        "1010407",
-                                                                        "1010410",
-                                                                    ]
-                                                                ):  # Si hay registros para desglozar
-                                                                    for (
-                                                                        x_desglozar_cxc
-                                                                    ) in (
-                                                                        x_desglozar
-                                                                    ):  # Recorremos los registros para desglozar
-                                                                        if (
-                                                                            x_desglozar_cxc[
-                                                                                "balance"
-                                                                            ]
-                                                                            != 0
-                                                                        ):
-                                                                            a_imprimir.append(
-                                                                                []
-                                                                            )
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelI.code_prefix_start
-                                                                            )  # Nivel I   1
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelII.code_prefix_start
-                                                                            )  # Nivel II 101
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelGrupoCuenta.code_prefix_start
-                                                                            )  # Nivel grupo cuenta balance general
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelCuenta.code
-                                                                            )  # Codigo Nivel
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_desglozar_cxc[
-                                                                                    "quantity"
-                                                                                ]
-                                                                            )  # Celda valor 1
-                                                                            product_id_tuple = x_desglozar_cxc.get(
-                                                                                "product_id"
-                                                                            )
-                                                                            product_name = (
-                                                                                product_id_tuple[
-                                                                                    1
-                                                                                ]
-                                                                                if product_id_tuple
-                                                                                else False
-                                                                            )
+                                                                x_desglozar = self.env['account.move.line'].read_group([
+                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.code', '=', x_NivelCuenta.code),
+                                                                    ('move_id.state', '=', 'posted'),
+                                                                    ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+                                                                    ('date', '<=', self.end_date),
+                                                                    ('balance', '!=', 0),
+                                                                    ('company_id.id', '=', self.company_id.id),
+                                                                    #('move_id.journal_id.name', '!=', 'Partida de Cierre'),
+                                                                    ('product_id', '!=', False)],
+                                                                    fields=['account_id.code', 'balance', 'product_id.name', 'quantity'],
+                                                                    groupby=['product_id', 'account_id'],
+                                                                    orderby='product_id')
+                                                                if x_desglozar and x_NivelCuenta.code not in ['1010407', '1010410']:  # Si hay registros para desglozar
+                                                                    for x_desglozar_cxc in x_desglozar:  # Recorremos los registros para desglozar
+                                                                        if x_desglozar_cxc['balance'] != 0:
+                                                                            a_imprimir.append([])
+                                                                            a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                            a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                            a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                            a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                            a_imprimir[x_altura].append(x_desglozar_cxc['quantity'])  # Celda valor 1
+                                                                            product_id_tuple = x_desglozar_cxc.get('product_id')
+                                                                            product_name = product_id_tuple[1] if product_id_tuple else False
                                                                             if product_name:
-                                                                                a_imprimir[
-                                                                                    x_altura
-                                                                                ].append(
-                                                                                    str(
-                                                                                        product_name
-                                                                                    )
-                                                                                )  # Nombre Nivel
+                                                                                a_imprimir[x_altura].append(str(product_name))  # Nombre Nivel
                                                                             else:
-                                                                                a_imprimir[
-                                                                                    x_altura
-                                                                                ].append(
-                                                                                    ""
-                                                                                )
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                abs(
-                                                                                    x_desglozar_cxc[
-                                                                                        "balance"
-                                                                                    ]
-                                                                                )
-                                                                            )  # Celda valor 1
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                0
-                                                                            )  # Celda valor 2
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                0
-                                                                            )  # Celda valor 3
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                "nivel_d"
-                                                                            )  # Tipo de fila
-                                                                            a_imprimir[
-                                                                                x_altura
-                                                                            ].append(
-                                                                                x_NivelCuenta.code
-                                                                            )  # Cuenta desglozada
-                                                                            x_altura += (
-                                                                                1
-                                                                            )
+                                                                                a_imprimir[x_altura].append('')
+                                                                            a_imprimir[x_altura].append(abs(x_desglozar_cxc['balance']))  # Celda valor 1
+                                                                            a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                            a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                            a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                            a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
+                                                                            x_altura += 1
                                                                 x_desglozar_ii = None
-                                                                x_desglozar_ii = self.env[
-                                                                    "account.move.line"
-                                                                ].search(
-                                                                    [
-                                                                        (
-                                                                            "account_id.group_id.id",
-                                                                            "in",
-                                                                            x_NivelGrupoCuenta.ids,
-                                                                        ),
-                                                                        (
-                                                                            "account_id.code",
-                                                                            "=",
-                                                                            x_NivelCuenta.code,
-                                                                        ),
-                                                                        (
-                                                                            "move_id.state",
-                                                                            "=",
-                                                                            "posted",
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            ">=",
-                                                                            datetime.strptime(
-                                                                                str(
-                                                                                    self.end_date.year
-                                                                                )
-                                                                                + "-01-01",
-                                                                                "%Y-%m-%d",
-                                                                            ),
-                                                                        ),
-                                                                        (
-                                                                            "date",
-                                                                            "<=",
-                                                                            self.end_date,
-                                                                        ),
-                                                                        (
-                                                                            "balance",
-                                                                            "!=",
-                                                                            0,
-                                                                        ),
-                                                                        (
-                                                                            "company_id.id",
-                                                                            "=",
-                                                                            self.company_id.id,
-                                                                        ),
-                                                                        # ('move_id.journal_id.name', '!=', 'Partida de Cierre'),
-                                                                        (
-                                                                            "product_id",
-                                                                            "=",
-                                                                            False,
-                                                                        ),
-                                                                    ]
-                                                                )
-                                                                # Alex 29 08 2024 Aca este desglose es porque no son productos sino movmientos contables por eso product es false
-                                                                if (
-                                                                    x_desglozar_ii
-                                                                    and x_NivelCuenta.code
-                                                                    not in [
-                                                                        "1010407",
-                                                                        "1010410",
-                                                                    ]
-                                                                ):  # Si hay registros para desglozar
-                                                                    a_imprimir.append(
-                                                                        []
-                                                                    )
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelI.code_prefix_start
-                                                                    )  # Nivel I   1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelII.code_prefix_start
-                                                                    )  # Nivel II 101
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                                    )  # Nivel grupo cuenta balance general
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Codigo Nivel
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        ""
-                                                                    )  # Espacio para cantidades
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "Desconocido"
-                                                                    )  # Referencia de movimiento
+                                                                x_desglozar_ii = self.env['account.move.line'].search(
+                                                                    [('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.code', '=', x_NivelCuenta.code),
+                                                                    ('move_id.state', '=', 'posted'),
+                                                                    ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
+                                                                    ('date', '<=', self.end_date),
+                                                                    ('balance', '!=', 0),
+                                                                    ('company_id.id', '=', self.company_id.id),
+                                                                    #('move_id.journal_id.name', '!=', 'Partida de Cierre'),
+                                                                    ('product_id', '=', False)])
+                                                                #Alex 29 08 2024 Aca este desglose es porque no son productos sino movmientos contables por eso product es false
+                                                                if x_desglozar_ii and x_NivelCuenta.code not in ['1010407', '1010410']:  # Si hay registros para desglozar
+                                                                    a_imprimir.append([])
+                                                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                    a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                    a_imprimir[x_altura].append('Desconocido')  # Referencia de movimiento
 
-                                                                    # a_imprimir[x_altura].append(x_desglozar_cxc_ii.partner_id.name if x_desglozar_cxc_ii.partner_id.name else x_desglozar_cxc_ii.name if x_desglozar_cxc_ii.name else x_desglozar_cxc_ii.move_id.name)  # Referencia de movimiento
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        abs(
-                                                                            sum(
-                                                                                x_desglozar_ii.mapped(
-                                                                                    "balance"
-                                                                                )
-                                                                            )
-                                                                        )
-                                                                    )  # Celda valor 1
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 2
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        0
-                                                                    )  # Celda valor 3
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        "nivel_d"
-                                                                    )  # Tipo de fila
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_NivelCuenta.code
-                                                                    )  # Cuenta desglozada
+                                                                    #a_imprimir[x_altura].append(x_desglozar_cxc_ii.partner_id.name if x_desglozar_cxc_ii.partner_id.name else x_desglozar_cxc_ii.name if x_desglozar_cxc_ii.name else x_desglozar_cxc_ii.move_id.name)  # Referencia de movimiento
+                                                                    a_imprimir[x_altura].append(abs(sum(x_desglozar_ii.mapped('balance'))))  # Celda valor 1
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(0)  # Celda valor 3
+                                                                    a_imprimir[x_altura].append('nivel_d')  # Tipo de fila
+                                                                    a_imprimir[x_altura].append(x_NivelCuenta.code)  # Cuenta desglozada
                                                                     x_altura += 1
 
                                                                 a_imprimir.append([])
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelI.code_prefix_start
-                                                                )  # Nivel I   1
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelII.code_prefix_start
-                                                                )  # Nivel II 101
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                                )  # Nivel grupo cuenta balance general
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_NivelCuenta.code
-                                                                )  # Codigo Nivel
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    ""
-                                                                )  # Espacio para cantidades
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    "Suma de "
-                                                                    + x_NivelCuenta.name
-                                                                )  # Nombre Nivel
+                                                                a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
+                                                                a_imprimir[x_altura].append(x_NivelII.code_prefix_start)  # Nivel II 101
+                                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                                a_imprimir[x_altura].append(x_NivelCuenta.code)  # Codigo Nivel
+                                                                a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                                a_imprimir[x_altura].append('Suma de '+x_NivelCuenta.name)  # Nombre Nivel
                                                                 # HASTa ACA ----------------------------------------------------------------------------
 
-                                                            a_imprimir[x_altura].append(
-                                                                0
-                                                            )  # Celda valor 1
-                                                            if (
-                                                                x_NivelI.code_prefix_start
-                                                                == "2"
-                                                                or x_NivelI.code_prefix_start
-                                                                == "3"
-                                                            ):
-                                                                if (
-                                                                    x_NivelCuenta.code
-                                                                    == "3010301"
-                                                                ):
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        (
-                                                                            x_control_c
-                                                                            * -1
-                                                                        )
-                                                                        + x_utilidad_ejercicio
-                                                                    )  # Celda valor 2
+                                                            a_imprimir[x_altura].append(0)  # Celda valor 1
+                                                            if x_NivelI.code_prefix_start == '2' or x_NivelI.code_prefix_start == '3':
+                                                                if x_NivelCuenta.code == '3010301':
+                                                                    a_imprimir[x_altura].append((x_control_c *-1) + x_utilidad_ejercicio) # Celda valor 2
                                                                 else:
-                                                                    a_imprimir[
-                                                                        x_altura
-                                                                    ].append(
-                                                                        x_control_c * -1
-                                                                    )  # Celda valor 2
+                                                                    a_imprimir[x_altura].append(x_control_c *-1) # Celda valor 2
                                                             else:
-                                                                a_imprimir[
-                                                                    x_altura
-                                                                ].append(
-                                                                    x_control_c
-                                                                )  # Celda valor 2
-                                                            a_imprimir[x_altura].append(
-                                                                0
-                                                            )  # Celda valor 3
-                                                            a_imprimir[x_altura].append(
-                                                                "nivel_c"
-                                                            )  # Tipo de fila
-                                                            a_imprimir[x_altura].append(
-                                                                ""
-                                                            )  # cuenta desglozada
+                                                                a_imprimir[x_altura].append(x_control_c) # Celda valor 2
+                                                            a_imprimir[x_altura].append(0) # Celda valor 3
+                                                            a_imprimir[x_altura].append('nivel_c')  # Tipo de fila
+                                                            a_imprimir[x_altura].append('')  # cuenta desglozada
                                                             x_altura += 1
                                                 # Pie de cuenta
                                                 a_imprimir.append([])
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelI.code_prefix_start
-                                                )  # Nivel I   1
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelII.code_prefix_start
-                                                )  # Nivel II 101
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelGrupoCuenta.code_prefix_start
-                                                )  # Nivel grupo cuenta balance general
-                                                a_imprimir[x_altura].append(
-                                                    ""
-                                                )  # Codigo Nivel
-                                                a_imprimir[x_altura].append(
-                                                    ""
-                                                )  # Espacio para cantidades
-                                                a_imprimir[x_altura].append(
-                                                    x_NivelGrupoCuenta.name
-                                                )  # Nombre Nivel
-                                                a_imprimir[x_altura].append(
-                                                    0
-                                                )  # Celda valor 1
-                                                if (
-                                                    x_NivelI.code_prefix_start == "2"
-                                                    or x_NivelI.code_prefix_start == "3"
-                                                ):
-                                                    if (
-                                                        x_NivelGrupoCuenta.code_prefix_start
-                                                        == "30103"
-                                                    ):
-                                                        a_imprimir[x_altura].append(
-                                                            (x_control_gc * -1)
-                                                            + x_utilidad_ejercicio
-                                                        )  # Celda valor 2
+                                                a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                                                a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.code_prefix_start)  # Nivel grupo cuenta balance general
+                                                a_imprimir[x_altura].append('')  # Codigo Nivel
+                                                a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                                a_imprimir[x_altura].append(x_NivelGrupoCuenta.name) # Nombre Nivel
+                                                a_imprimir[x_altura].append(0) # Celda valor 1
+                                                if x_NivelI.code_prefix_start == '2' or x_NivelI.code_prefix_start == '3':
+                                                    if x_NivelGrupoCuenta.code_prefix_start == '30103':
+                                                        a_imprimir[x_altura].append((x_control_gc *-1) + x_utilidad_ejercicio) # Celda valor 2
                                                     else:
-                                                        a_imprimir[x_altura].append(
-                                                            x_control_gc * -1
-                                                        )  # Celda valor 2
+                                                        a_imprimir[x_altura].append(x_control_gc*-1) # Celda valor 2
                                                 else:
-                                                    a_imprimir[x_altura].append(
-                                                        x_control_gc
-                                                    )  # Celda valor 2
-                                                a_imprimir[x_altura].append(
-                                                    0
-                                                )  # Celda valor 3
-                                                a_imprimir[x_altura].append(
-                                                    "foot_nivel_gc"
-                                                )  # Tipo de fila
-                                                a_imprimir[x_altura].append(
-                                                    ""
-                                                )  # cuenta desglozada
+                                                    a_imprimir[x_altura].append(x_control_gc) # Celda valor 2
+                                                a_imprimir[x_altura].append(0) # Celda valor 3
+                                                a_imprimir[x_altura].append('foot_nivel_gc')  # Tipo de fila
+                                                a_imprimir[x_altura].append('')  # cuenta desglozada
                                                 x_altura += 1
                                     a_imprimir.append([])
-                                    a_imprimir[x_altura].append(
-                                        x_NivelI.code_prefix_start
-                                    )  # Nivel I   1
-                                    a_imprimir[x_altura].append(
-                                        x_NivelII.code_prefix_start
-                                    )  # Nivel II 101
-                                    a_imprimir[x_altura].append(
-                                        ""
-                                    )  # Nivel grupo cuenta balance general
-                                    a_imprimir[x_altura].append("")  # Codigo Nivel
-                                    a_imprimir[x_altura].append(
-                                        ""
-                                    )  # Espacio para cantidades
-                                    a_imprimir[x_altura].append(
-                                        "   Suma " + x_NivelII.name
-                                    )  # Nombre Nivel
-                                    a_imprimir[x_altura].append(0)  # Celda valor 1
-                                    a_imprimir[x_altura].append(0)  # Celda valor 2
-                                    if (
-                                        x_NivelI.code_prefix_start == "2"
-                                        or x_NivelI.code_prefix_start == "3"
-                                    ):
-                                        if x_NivelII.code_prefix_start == "301":
-                                            a_imprimir[x_altura].append(
-                                                (x_control_ii * -1)
-                                                + x_utilidad_ejercicio
-                                            )  # Celda valor 3
+                                    a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                                    a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                                    a_imprimir[x_altura].append('')  # Nivel grupo cuenta balance general
+                                    a_imprimir[x_altura].append('')  # Codigo Nivel
+                                    a_imprimir[x_altura].append('')  # Espacio para cantidades
+                                    a_imprimir[x_altura].append('   Suma '+ x_NivelII.name) # Nombre Nivel
+                                    a_imprimir[x_altura].append(0) # Celda valor 1
+                                    a_imprimir[x_altura].append(0) # Celda valor 2
+                                    if x_NivelI.code_prefix_start == '2' or x_NivelI.code_prefix_start == '3':
+                                        if x_NivelII.code_prefix_start == '301':
+                                            a_imprimir[x_altura].append((x_control_ii *-1) + x_utilidad_ejercicio) # Celda valor 3
                                         else:
-                                            a_imprimir[x_altura].append(
-                                                x_control_ii * -1
-                                            )  # Celda valor 3
+                                            a_imprimir[x_altura].append(x_control_ii *-1) # Celda valor 3
                                     else:
-                                        a_imprimir[x_altura].append(
-                                            x_control_ii
-                                        )  # Celda valor 3
-                                    a_imprimir[x_altura].append(
-                                        "foot_nivel_ii"
-                                    )  # Tipo de fila
-                                    a_imprimir[x_altura].append("")  # cuenta desglozada
+                                        a_imprimir[x_altura].append(x_control_ii) # Celda valor 3
+                                    a_imprimir[x_altura].append('foot_nivel_ii')  # Tipo de fila
+                                    a_imprimir[x_altura].append('')  # cuenta desglozada
                                     x_altura += 1
                         a_imprimir.append([])
-                        a_imprimir[x_altura].append(
-                            x_NivelI.code_prefix_start
-                        )  # Nivel I   1
-                        a_imprimir[x_altura].append(
-                            x_NivelII.code_prefix_start
-                        )  # Nivel II 101
-                        a_imprimir[x_altura].append(
-                            ""
-                        )  # Nivel grupo cuenta balance general
-                        a_imprimir[x_altura].append("")  # Codigo Nivel
-                        a_imprimir[x_altura].append("")  # Espacio para cantidades
-                        a_imprimir[x_altura].append(
-                            "   SUMA TOTAL DEL " + x_NivelI.name
-                        )  # Nombre Nivel
-                        a_imprimir[x_altura].append(0)  # Celda valor 1
-                        a_imprimir[x_altura].append(0)  # Celda valor 2
-                        if (
-                            x_NivelI.code_prefix_start == "2"
-                            or x_NivelI.code_prefix_start == "3"
-                        ):
-                            if x_NivelI.code_prefix_start == "3":
-                                a_imprimir[x_altura].append(
-                                    (x_control_i * -1) + x_utilidad_ejercicio
-                                )  # Celda valor 3
+                        a_imprimir[x_altura].append(x_NivelI.code_prefix_start) # Nivel I   1
+                        a_imprimir[x_altura].append(x_NivelII.code_prefix_start) # Nivel II 101
+                        a_imprimir[x_altura].append('')  # Nivel grupo cuenta balance general
+                        a_imprimir[x_altura].append('') # Codigo Nivel
+                        a_imprimir[x_altura].append('')  # Espacio para cantidades
+                        a_imprimir[x_altura].append('   SUMA TOTAL DEL ' + x_NivelI.name) # Nombre Nivel
+                        a_imprimir[x_altura].append(0) # Celda valor 1
+                        a_imprimir[x_altura].append(0) # Celda valor 2
+                        if x_NivelI.code_prefix_start == '2' or x_NivelI.code_prefix_start == '3':
+                            if x_NivelI.code_prefix_start == '3':
+                                a_imprimir[x_altura].append((x_control_i *-1) + x_utilidad_ejercicio) # Celda valor 3
                             else:
-                                a_imprimir[x_altura].append(
-                                    x_control_i * -1
-                                )  # Celda valor 3
+                                a_imprimir[x_altura].append(x_control_i *-1) # Celda valor 3
                         else:
-                            a_imprimir[x_altura].append(x_control_i)  # Celda valor 3
-                        a_imprimir[x_altura].append("foot_nivel_i")  # Tipo de fila
-                        a_imprimir[x_altura].append("")  # cuenta desglozada
+                            a_imprimir[x_altura].append(x_control_i) # Celda valor 3
+                        a_imprimir[x_altura].append('foot_nivel_i')  # Tipo de fila
+                        a_imprimir[x_altura].append('')  # cuenta desglozada
                         x_altura += 1
             x_NiveliInicial += 1
 
         a_imprimir.append([])
-        a_imprimir[x_altura].append("")  # Nivel I   1
-        a_imprimir[x_altura].append("")  # Nivel II 101
-        a_imprimir[x_altura].append("")  # Nivel grupo cuenta balance general
-        a_imprimir[x_altura].append("")  # Codigo Nivel
-        a_imprimir[x_altura].append("")  # Espacio para cantidades
-        a_imprimir[x_altura].append(
-            "   SUMA TOTAL DEL PASIVO Y CAPITAL"
-        )  # Nombre Nivel
-        a_imprimir[x_altura].append(0)  # Celda valor 1
-        a_imprimir[x_altura].append(0)  # Celda valor 2
-        a_imprimir[x_altura].append(x_pasivo_capital)  # Celda valor 3
-        a_imprimir[x_altura].append("utilidad_ejercicio")  # Tipo de fila
-        a_imprimir[x_altura].append("")  # cuenta desglozada
+        a_imprimir[x_altura].append('') # Nivel I   1
+        a_imprimir[x_altura].append('') # Nivel II 101
+        a_imprimir[x_altura].append('')  # Nivel grupo cuenta balance general
+        a_imprimir[x_altura].append('') # Codigo Nivel
+        a_imprimir[x_altura].append('')  # Espacio para cantidades
+        a_imprimir[x_altura].append('   SUMA TOTAL DEL PASIVO Y CAPITAL') # Nombre Nivel
+        a_imprimir[x_altura].append(0) # Celda valor 1
+        a_imprimir[x_altura].append(0) # Celda valor 2
+        a_imprimir[x_altura].append(x_pasivo_capital) # Celda valor 3
+        a_imprimir[x_altura].append('utilidad_ejercicio')  # Tipo de fila
+        a_imprimir[x_altura].append('')  # cuenta desglozada
 
         if a_imprimir:
             x_recorre = 0
@@ -21769,618 +19737,314 @@ class wizard_libro_inventario(models.TransientModel):
                     # ---------------------------- Encabezado ----------------------------------------------------------
                     if x_row_page == 0:  # Nueva pagina
 
-                        worksheet.write(
-                            x_rows, 5, "Folio: " + str(self.folio + x_page), frmt_folio
-                        )
+                        worksheet.write(x_rows, 5, "Folio: " + str(self.folio + x_page), frmt_folio)
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows, 0, x_rows, 5, self.company_id.name, frmt_encabezado
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, self.company_id.name,
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            "NIT: " + self.company_id.partner_id.vat,
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "NIT: " + self.company_id.partner_id.vat,
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows, 0, x_rows, 5, "Libro de Inventario", frmt_encabezado
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "Libro de Inventario", frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            str(
-                                "Al "
-                                + str(self.end_date.day)
-                                + " de "
-                                + thMes
-                                + " de "
-                                + str(self.end_date.year)
-                            ),
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5,
+                                              str("Al " + str(self.end_date.day) + " de " + thMes + " de " + str(
+                                                  self.end_date.year)), frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            "(EXPRESADO EN QUETZALES)",
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "(EXPRESADO EN QUETZALES)",
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
                         # Aca es solo para cerrar el marco
-                        worksheet.write(x_rows, 0, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 1, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 2, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 3, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 4, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 5, "", frmt_borde_superior)
+                        worksheet.write(x_rows, 0, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 1, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 2, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 3, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 4, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 5, '', frmt_borde_superior)
                         x_rows += 1
                         x_row_page += 1
 
-                        if (
-                            a_imprimir[x_recorre][9] == "head_nivel_i"
-                            or a_imprimir[x_recorre][9] == "head_nivel_ii"
-                            or a_imprimir[x_recorre][9] == "head_nivel_gc"
-                        ):
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_c":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 4, a_imprimir[x_recorre][7], debe_haber
-                            )
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_d":
-                            if a_imprimir[x_recorre][4] == "":
-                                worksheet.write(x_rows, 0, "", debe_haber_vacio)
+                        if a_imprimir[x_recorre][9] == 'head_nivel_i' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_ii' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_c':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, a_imprimir[x_recorre][7], debe_haber)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_d':
+                            if a_imprimir[x_recorre][4] == '':
+                                worksheet.write(x_rows, 0, '', debe_haber_vacio)
                             else:
-                                worksheet.write(
-                                    x_rows,
-                                    0,
-                                    a_imprimir[x_recorre][4],
-                                    debe_haber_vacio,
-                                )
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(
-                                x_rows, 3, a_imprimir[x_recorre][6], debe_haber
-                            )
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_gc":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio_gc)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio_gc)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_ii":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_i":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i
-                            )
+                                worksheet.write(x_rows, 0, a_imprimir[x_recorre][4], debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, a_imprimir[x_recorre][6], debe_haber)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_ii':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_i':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i)
                         else:  # a_imprimir[x_recorre][2] == 'utilidad_ejercicio': # utilidad ejercicio
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, "", frmt_codigo_utilidad_ejercicio
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_utilidad_ejercicio,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_utilidad_ejercicio)
-                            worksheet.write(x_rows, 4, "", debe_utilidad_ejercicio)
-                            worksheet.write(
-                                x_rows,
-                                5,
-                                a_imprimir[x_recorre][8],
-                                haber_utilidad_ejercicio,
-                            )
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo_utilidad_ejercicio)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_utilidad_ejercicio)
+                            worksheet.write(x_rows, 3, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 4, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], haber_utilidad_ejercicio)
                         x_rows += 1
                         x_row_page += 1
 
                     # ---------------------------- Fin Encabezado ----------------------------------------------------------
-                    elif (
-                        x_row_page > 0 and x_row_page == x_max_rows - 1
-                    ):  # Estamos en la penultima linea
+                    elif x_row_page > 0 and x_row_page == x_max_rows - 1:  # Estamos en la penultima linea
                         x_row_page = 0
                         worksheet.merge_range(x_rows, 0, x_rows, 2, "VAN", frmt_van)
-                        worksheet.write(
-                            x_rows, 3, float(x_suma_nivel_d), debe_haber_van_vienen
-                        )
-                        worksheet.write(
-                            x_rows, 4, float(x_suma_nivel_c), debe_haber_van_vienen
-                        )
-                        worksheet.write(
-                            x_rows, 5, float(x_suma_nivel_gc), debe_haber_van_vienen
-                        )
+                        worksheet.write(x_rows, 3, float(x_suma_nivel_d), debe_haber_van_vienen)
+                        worksheet.write(x_rows, 4, float(x_suma_nivel_c), debe_haber_van_vienen)
+                        worksheet.write(x_rows, 5, float(x_suma_nivel_gc), debe_haber_van_vienen)
                         # Encabezado 1
                         x_rows += 1
-                        # x_row_page += 1
+                        #x_row_page += 1
                         x_page += 1
 
-                        worksheet.write(
-                            x_rows, 5, "Folio: " + str(self.folio + x_page), frmt_folio
-                        )
+                        worksheet.write(x_rows, 5, "Folio: " + str(self.folio + x_page), frmt_folio)
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows, 0, x_rows, 5, self.company_id.name, frmt_encabezado
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, self.company_id.name,
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            "NIT: " + self.company_id.partner_id.vat,
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "NIT: " + self.company_id.partner_id.vat,
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows, 0, x_rows, 5, "Libro de Inventario", frmt_encabezado
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "Libro de Inventario",
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            str(
-                                "Al "
-                                + str(self.end_date.day)
-                                + " de "
-                                + thMes
-                                + " de "
-                                + str(self.end_date.year)
-                            ),
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5,
+                                              str("Al " + str(self.end_date.day) + " de " + thMes + " de " + str(
+                                                  self.end_date.year)), frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.merge_range(
-                            x_rows,
-                            0,
-                            x_rows,
-                            5,
-                            "(EXPRESADO EN QUETZALES)",
-                            frmt_encabezado,
-                        )  # Encabezado
+                        worksheet.merge_range(x_rows, 0, x_rows, 5, "(EXPRESADO EN QUETZALES)",
+                                              frmt_encabezado)  # Encabezado
                         x_rows += 1
                         x_row_page += 1
 
-                        worksheet.write(x_rows, 0, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 1, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 2, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 3, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 4, "", frmt_borde_superior)
-                        worksheet.write(x_rows, 5, "", frmt_borde_superior)
+                        worksheet.write(x_rows, 0, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 1, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 2, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 3, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 4, '', frmt_borde_superior)
+                        worksheet.write(x_rows, 5, '', frmt_borde_superior)
                         x_rows += 1
                         x_row_page += 1
 
                         worksheet.merge_range(x_rows, 0, x_rows, 2, "VIENEN", frmt_van)
-                        worksheet.write(
-                            x_rows, 3, float(x_suma_nivel_d), debe_haber_van_vienen
-                        )
-                        worksheet.write(
-                            x_rows, 4, float(x_suma_nivel_c), debe_haber_van_vienen
-                        )
-                        worksheet.write(
-                            x_rows, 5, float(x_suma_nivel_gc), debe_haber_van_vienen
-                        )
+                        worksheet.write(x_rows, 3, float(x_suma_nivel_d), debe_haber_van_vienen)
+                        worksheet.write(x_rows, 4, float(x_suma_nivel_c), debe_haber_van_vienen)
+                        worksheet.write(x_rows, 5, float(x_suma_nivel_gc), debe_haber_van_vienen)
                         x_rows += 1
                         x_row_page += 1
 
-                        if (
-                            a_imprimir[x_recorre][9] == "head_nivel_i"
-                            or a_imprimir[x_recorre][9] == "head_nivel_ii"
-                            or a_imprimir[x_recorre][9] == "head_nivel_gc"
-                        ):
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_c":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 4, a_imprimir[x_recorre][7], debe_haber
-                            )
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_d":
-                            if a_imprimir[x_recorre][4] == "":
-                                worksheet.write(x_rows, 0, "", debe_haber_vacio)
+                        if a_imprimir[x_recorre][9] == 'head_nivel_i' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_ii' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_c':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, a_imprimir[x_recorre][7], debe_haber)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_d':
+                            if a_imprimir[x_recorre][4] == '':
+                                worksheet.write(x_rows, 0, '', debe_haber_vacio)
                             else:
-                                worksheet.write(
-                                    x_rows,
-                                    0,
-                                    a_imprimir[x_recorre][4],
-                                    debe_haber_vacio,
-                                )
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(
-                                x_rows, 3, a_imprimir[x_recorre][6], debe_haber
-                            )
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_gc":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio_gc)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio_gc)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_ii":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_i":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i
-                            )
+                                worksheet.write(x_rows, 0, a_imprimir[x_recorre][4], debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, a_imprimir[x_recorre][6], debe_haber)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_ii':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_i':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i)
                         else:  # a_imprimir[x_recorre][2] == 'utilidad_ejercicio': # utilidad ejercicio
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, "", frmt_codigo_utilidad_ejercicio
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_utilidad_ejercicio,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_utilidad_ejercicio)
-                            worksheet.write(x_rows, 4, "", debe_utilidad_ejercicio)
-                            worksheet.write(
-                                x_rows,
-                                5,
-                                a_imprimir[x_recorre][8],
-                                haber_utilidad_ejercicio,
-                            )
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo_utilidad_ejercicio)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_utilidad_ejercicio)
+                            worksheet.write(x_rows, 3, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 4, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], haber_utilidad_ejercicio)
                         x_rows += 1
                         x_row_page += 1
 
                     else:  # No estamos en la ultima linea, estamos en la misma cuenta
-                        if (
-                            a_imprimir[x_recorre][9] == "head_nivel_i"
-                            or a_imprimir[x_recorre][9] == "head_nivel_ii"
-                            or a_imprimir[x_recorre][9] == "head_nivel_gc"
-                        ):
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_c":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 4, a_imprimir[x_recorre][7], debe_haber
-                            )
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "nivel_d":
-                            if a_imprimir[x_recorre][4] == "":
-                                worksheet.write(x_rows, 0, "", debe_haber_vacio)
+                        if a_imprimir[x_recorre][9] == 'head_nivel_i' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_ii' \
+                                or a_imprimir[x_recorre][9] == 'head_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_c':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 4, a_imprimir[x_recorre][7], debe_haber)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'nivel_d':
+                            if a_imprimir[x_recorre][4] == '':
+                                worksheet.write(x_rows, 0, '', debe_haber_vacio)
                             else:
-                                worksheet.write(
-                                    x_rows,
-                                    0,
-                                    a_imprimir[x_recorre][4],
-                                    debe_haber_vacio,
-                                )
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta
-                            )
-                            worksheet.write(
-                                x_rows, 3, a_imprimir[x_recorre][6], debe_haber
-                            )
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 5, "", debe_haber_vacio)
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_gc":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_vacio_gc)
-                            worksheet.write(x_rows, 4, "", debe_haber_vacio_gc)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_ii":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(x_rows, 1, "", frmt_codigo)
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii
-                            )
-                        elif a_imprimir[x_recorre][9] == "foot_nivel_i":
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_cuenta_head_foot,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_haber_nivel_ii)
-                            worksheet.write(x_rows, 4, "", debe_haber_nivel_ii)
-                            worksheet.write(
-                                x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i
-                            )
+                                worksheet.write(x_rows, 0, a_imprimir[x_recorre][4], debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta)
+                            worksheet.write(x_rows, 3, a_imprimir[x_recorre][6], debe_haber)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 5, '', debe_haber_vacio)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_gc':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 4, '', debe_haber_vacio_gc)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][7], debe_haber_gc)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_ii':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_ii)
+                        elif a_imprimir[x_recorre][9] == 'foot_nivel_i':
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_cuenta_head_foot)
+                            worksheet.write(x_rows, 3, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 4, '', debe_haber_nivel_ii)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], debe_haber_nivel_i)
                         else:  # a_imprimir[x_recorre][2] == 'utilidad_ejercicio': # utilidad ejercicio
-                            worksheet.write(x_rows, 0, "", debe_haber_vacio)
-                            worksheet.write(
-                                x_rows, 1, "", frmt_codigo_utilidad_ejercicio
-                            )
-                            worksheet.write(
-                                x_rows,
-                                2,
-                                a_imprimir[x_recorre][5],
-                                frmt_utilidad_ejercicio,
-                            )
-                            worksheet.write(x_rows, 3, "", debe_utilidad_ejercicio)
-                            worksheet.write(x_rows, 4, "", debe_utilidad_ejercicio)
-                            worksheet.write(
-                                x_rows,
-                                5,
-                                a_imprimir[x_recorre][8],
-                                haber_utilidad_ejercicio,
-                            )
+                            worksheet.write(x_rows, 0, '', debe_haber_vacio)
+                            worksheet.write(x_rows, 1, '', frmt_codigo_utilidad_ejercicio)
+                            worksheet.write(x_rows, 2, a_imprimir[x_recorre][5], frmt_utilidad_ejercicio)
+                            worksheet.write(x_rows, 3, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 4, '', debe_utilidad_ejercicio)
+                            worksheet.write(x_rows, 5, a_imprimir[x_recorre][8], haber_utilidad_ejercicio)
                         x_rows += 1
                         x_row_page += 1
 
-                if (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3]
-                ) and (
-                    x_ctrl_nivel_d == a_imprimir[x_recorre][10]
-                    or a_imprimir[x_recorre][9] == "nivel_d"
-                    or a_imprimir[x_recorre][5] == "Saldo Inicial"
-                ):
-                    if a_imprimir[x_recorre][9] == "nivel_d":
+                if (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3]) and (x_ctrl_nivel_d  == a_imprimir[x_recorre][10] or a_imprimir[x_recorre][9] == 'nivel_d' or a_imprimir[x_recorre][5] == "Saldo Inicial"):
+                    if a_imprimir[x_recorre][9] == 'nivel_d':
                         x_suma_nivel_d += float(a_imprimir[x_recorre][6])
 
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3]
-                    and x_ctrl_nivel_d != a_imprimir[x_recorre][10]
-                    and a_imprimir[x_recorre][9] == "nivel_d"
-                ):
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3] and x_ctrl_nivel_d != a_imprimir[x_recorre][10] and a_imprimir[x_recorre][9] == 'nivel_d'):
                     x_suma_nivel_d = 0
 
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3]
-                    and (
-                        "" == a_imprimir[x_recorre][10]
-                        and a_imprimir[x_recorre][9] == "nivel_c"
-                    )
-                ):
-                    if a_imprimir[x_recorre][9] == "nivel_c":
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and x_ctrl_nivel_c == a_imprimir[x_recorre][3] and ('' == a_imprimir[x_recorre][10] and a_imprimir[x_recorre][9] == 'nivel_c')):
+                    if a_imprimir[x_recorre][9] == 'nivel_c':
                         x_suma_nivel_d = 0
-                        try:
-                            x_suma_nivel_c += float(a_imprimir[x_recorre][7] or 0)
-                        # la excpetion
-                        except Exception as e:
-                            raise UserError('error '+e)
+                        x_suma_nivel_c += float(a_imprimir[x_recorre][7] or 0)
 
-
-
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and x_ctrl_nivel_c != a_imprimir[x_recorre][3]
-                    and a_imprimir[x_recorre][3] != ""
-                    and a_imprimir[x_recorre][7] != ""
-                    and a_imprimir[x_recorre][9] == "nivel_c"
-                ):
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and x_ctrl_nivel_c != a_imprimir[x_recorre][3] and a_imprimir[x_recorre][3] != '' and a_imprimir[x_recorre][7] != '' and a_imprimir[x_recorre][9] == 'nivel_c'):
                     x_suma_nivel_d = 0
                     x_suma_nivel_c += float(a_imprimir[x_recorre][7])
 
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and x_ctrl_nivel_c != a_imprimir[x_recorre][3]
-                    and a_imprimir[x_recorre][3] != ""
-                    and a_imprimir[x_recorre][7] == ""
-                    and a_imprimir[x_recorre][9] == "nivel_c"
-                ):
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and x_ctrl_nivel_c != a_imprimir[x_recorre][3] and a_imprimir[x_recorre][3] != '' and a_imprimir[x_recorre][7] == '' and a_imprimir[x_recorre][9] == 'nivel_c'):
                     x_suma_nivel_d = 0
 
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
-                    and a_imprimir[x_recorre][9] == "foot_nivel_gc"
-                ):
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
+                    and a_imprimir[x_recorre][9] == 'foot_nivel_gc'):
                     x_suma_nivel_d = 0
                     x_suma_nivel_c = 0
                     x_suma_nivel_gc += float(a_imprimir[x_recorre][7])
 
-                elif a_imprimir[x_recorre][9] == "head_nivel_gc":
+                elif a_imprimir[x_recorre][9] == 'head_nivel_gc':
                     x_suma_nivel_d = 0
                     x_suma_nivel_c = 0
 
-                elif (
-                    x_ctrl_nivel_i == a_imprimir[x_recorre][0]
-                    and x_ctrl_nivel_ii == a_imprimir[x_recorre][1]
-                    and a_imprimir[x_recorre][9] == "foot_nivel_ii"
-                ):
+                elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and a_imprimir[x_recorre][9] == 'foot_nivel_ii'):
                     x_suma_nivel_d = 0
                     x_suma_nivel_c = 0
                     x_suma_nivel_gc = 0
 
-                elif a_imprimir[x_recorre][9] == "head_nivel_ii":
+                elif a_imprimir[x_recorre][9] == 'head_nivel_ii':
                     x_suma_nivel_d = 0
                     x_suma_nivel_c = 0
                     x_suma_nivel_gc = 0
@@ -22458,50 +20122,60 @@ class wizard_libro_inventario(models.TransientModel):
                 x_ctrl_nivel_d = a_imprimir[x_recorre][10]
                 x_recorre += 1
             certifica = str(self.certificacion)
-            text1 = (
-                "______________________"
-                "\n" + self.representante + "\nRepresentante Legal"
-            )
-            text2 = "______________________" "\n" + self.contador + "\nContador"
+            text1 = '______________________' \
+                    '\n' + self.representante + \
+                    '\nRepresentante Legal'
+            text2 = '______________________' \
+                    '\n' + self.contador + \
+                    '\nContador'
 
             options1 = {
-                "width": 205,
-                "height": 100,
-                "x_offset": 0,
-                "y_offset": 0,
-                "font": {
-                    "color": "black",
-                    "font": "Arial",
-                    "size": 10,
-                    "bold": True,
-                },
-                "align": {"vertical": "bottom", "horizontal": "center"},
+                'width': 205,
+                'height': 100,
+                'x_offset': 0,
+                'y_offset': 0,
+
+                'font': {'color': 'black',
+                         'font': 'Arial',
+                         'size': 10,
+                         'bold': True,
+                         },
+                'align': {'vertical': 'bottom',
+                          'horizontal': 'center'
+                          },
+
             }
             options2 = {
-                "width": 205,
-                "height": 100,
-                "x_offset": 0,
-                "y_offset": 0,
-                "font": {
-                    "color": "black",
-                    "font": "Arial",
-                    "size": 10,
-                    "bold": True,
-                },
-                "align": {"vertical": "bottom", "horizontal": "center"},
+                'width': 205,
+                'height': 100,
+                'x_offset': 0,
+                'y_offset': 0,
+
+                'font': {'color': 'black',
+                         'font': 'Arial',
+                         'size': 10,
+                         'bold': True,
+                         },
+                'align': {'vertical': 'bottom',
+                          'horizontal': 'center'
+                          },
+
             }
             cert_options = {
-                "width": 615,
-                "height": 100,
-                "x_offset": 0,
-                "y_offset": 0,
-                "font": {
-                    "color": "black",
-                    "font": "Arial",
-                    "size": 10,
-                    "bold": True,
-                },
-                "align": {"vertical": "top", "horizontal": "left"},
+                'width': 615,
+                'height': 100,
+                'x_offset': 0,
+                'y_offset': 0,
+
+                'font': {'color': 'black',
+                         'font': 'Arial',
+                         'size': 10,
+                         'bold': True,
+                         },
+                'align': {'vertical': 'top',
+                          'horizontal': 'left'
+                          },
+
             }
             cell = xl_rowcol_to_cell(x_rows + 2, 0)
             worksheet.insert_textbox(cell, certifica, cert_options)
@@ -22510,21 +20184,19 @@ class wizard_libro_inventario(models.TransientModel):
             cell = xl_rowcol_to_cell(x_rows + 7, 3)
             worksheet.insert_textbox(cell, text2, options2)
         workbook.close()
-        self.write(
-            {
-                "state": "get",
-                "data": base64.b64encode(open(xls_path, "rb").read()),
-                "name": xls_filename,
-            }
-        )
+        self.write({
+            'state': 'get',
+            'data': base64.b64encode(open(xls_path, 'rb').read()),
+            'name': xls_filename
+        })
         return {
-            "name": "Libro de Inventario",
-            "type": "ir.actions.act_window",
-            "res_model": self._name,
-            "view_mode": "form",
-            "view_type": "form",
-            "res_id": self.id,
-            "target": "new",
+            'name': 'Libro de Inventario',
+            'type': 'ir.actions.act_window',
+            'res_model': self._name,
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': self.id,
+            'target': 'new'
         }
 
 
