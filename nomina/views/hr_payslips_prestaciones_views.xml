@@ -5,7 +5,15 @@
             <field name="name">hr.payslip.prestaciones.tree</field>
             <field name="model">hr.payslip.prestaciones</field>
             <field name="arch" type="xml">
-                <list string="Prestaciones de Nómina" create="0" edit="1" sample="1" js_class="hrPayslipPrestacionesTreeView" >
+<!--                <list string="Prestaciones de Nómina" create="0" edit="1" sample="1" js_class="hrPayslipPrestacionesTreeView" >-->
+                <list string="Prestaciones de Nómina" create="0" edit="1">
+                    <header>
+                        <button name="open_prestaciones_wizard"
+                                string="Prestaciones a la Fecha"
+                                type="object"
+                                class="btn-primary"
+                                display="always"/>
+                    </header>
                     <field name="id_employee_id"/>
                     <field name="employee_id"/>
                     <field name="department_id"/>
