@@ -1,24 +1,18 @@
 from odoo import models, fields, api
 
-
 class HrPayslipPrestacionesWizard(models.TransientModel):
-    _name = "hr.payslip.prestaciones.wizard"
-    _description = "Prestaciones de Nómina Wizard"
+    _name = 'hr.payslip.prestaciones.wizard'
+    _description = 'Prestaciones de Nómina Wizard'
 
-    date_to = fields.Date(string="Fecha al", required=True)
-    company_id = fields.Many2one(
-        "res.company",
-        string="Compañía",
-        required=True,
-        default=lambda self: self.env.company,
-    )
+    date_to = fields.Date(string='Fecha al', required=True)
+    company_id = fields.Many2one('res.company', string='Compañía', required=True, default=lambda self: self.env.company)
 
     def open_prestaciones_at_date(self):
         self.ensure_one()
         date_to = self.date_to
 
         # Eliminar datos anteriores para no duplicar
-        self.env["hr.payslip.prestaciones"].search([]).unlink()
+        self.env['hr.payslip.prestaciones'].search([]).unlink()
 
         # Calcular prestaciones
         query = """
@@ -43,28 +37,26 @@ class HrPayslipPrestacionesWizard(models.TransientModel):
             order by emp."name";
         """
         self.env.cr.execute(query, (date_to, self.company_id.id))
-        # self.env.cr.execute(query, (date_to,))
+        #self.env.cr.execute(query, (date_to,))
         results = self.env.cr.dictfetchall()
 
-        prestaciones_obj = self.env["hr.payslip.prestaciones"]
+        prestaciones_obj = self.env['hr.payslip.prestaciones']
         for result in results:
-            prestaciones_obj.create(
-                {
-                    "employee_id": result["employee_id"],
-                    "codigo_colaborador": result["codigo_colaborador"],
-                    "empleado": result["empleado"],
-                    "bono14": result["bono14"],
-                    "aguinaldo": result["aguinaldo"],
-                    "vacaciones": result["vacaciones"],
-                    "indemnizacion": result["indemnizacion"],
-                    "date_to": str(date_to),
-                }
-            )
+            prestaciones_obj.create({
+                'employee_id': result['employee_id'],
+                'codigo_colaborador': result['codigo_colaborador'],
+                'empleado': result['empleado'],
+                'bono14': result['bono14'],
+                'aguinaldo': result['aguinaldo'],
+                'vacaciones': result['vacaciones'],
+                'indemnizacion': result['indemnizacion'],
+                'date_to': str(date_to),
+            })
 
         return {
-            "name": "Prestaciones de Nómina",
-            "type": "ir.actions.act_window",
-            "res_model": "hr.payslip.prestaciones",
-            "view_mode": "list",
-            "target": "current",
+            'name': 'Prestaciones de Nómina',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hr.payslip.prestaciones',
+            'view_mode': 'tree',
+            'target': 'current',
         }
