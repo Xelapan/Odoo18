@@ -90,28 +90,31 @@ class HrPayslip(models.Model):
             'debit': debit,
             'credit': credit,
             'analytic_distribution': (line.salary_rule_id.analytic_account_id and {line.salary_rule_id.analytic_account_id.id: 100}) or
-                                     (line.slip_id.contract_id.analytic_account_id.id and {line.slip_id.contract_id.analytic_account_id.id: 100})
+                                     (line.slip_id.contract_id.analytic_account_id.id and {line.slip_id.contract_id.analytic_account_id.id: 100}),
+            'tax_tag_ids': line.debit_tag_ids.ids if account_id == line.salary_rule_id.account_debit.id else line.credit_tag_ids.ids,
         }
 
-    # def _get_existing_lines(self, line_ids, line, account_id, debit, credit):
-    #     existing_lines = (
-    #         line_id for line_id in line_ids if
-    #         line_id['partner_id'] == line.employee_id.work_contact_id.id and
-    #         line_id['name'] == line.name
-    #         and line_id['account_id'] == account_id
-    #         and ((line_id['debit'] > 0 and credit <= 0) or (line_id['credit'] > 0 and debit <= 0))
-    #         and (
-    #                 (
-    #                     not line_id['analytic_distribution'] and
-    #                     not line.salary_rule_id.analytic_account_id.id and
-    #                     not line.slip_id.contract_id.analytic_account_id.id
-    #                 )
-    #                 or line_id['analytic_distribution'] and line.salary_rule_id.analytic_account_id.id in line_id['analytic_distribution']
-    #                 or line_id['analytic_distribution'] and line.slip_id.contract_id.analytic_account_id.id in line_id['analytic_distribution']
-    #
-    #             )
-    #     )
-    #     return next(existing_lines, False)
+    def _get_existing_lines(self, line_ids, line, account_id, debit, credit):
+        existing_lines = (
+            line_id for line_id in line_ids if
+            line_id['partner_id'] == line.employee_id.work_contact_id.id and
+            line_id['name'] == line.name
+            and line_id['account_id'] == account_id
+            and ((line_id['debit'] > 0 and credit <= 0) or (line_id['credit'] > 0 and debit <= 0))
+            and (
+                    (
+                        not line_id['analytic_distribution'] and
+                        not line.salary_rule_id.analytic_account_id.id and
+                        not line.slip_id.contract_id.analytic_account_id.id
+                    )
+                    or line_id['analytic_distribution'] and line.salary_rule_id.analytic_account_id.id in line_id['analytic_distribution']
+                    or line_id['analytic_distribution'] and line.slip_id.contract_id.analytic_account_id.id in line_id['analytic_distribution']
+
+                )
+            and self._check_debit_credit_tags(line_id, line, account_id)
+        )
+        return existing_lines
+        #return next(existing_lines, False)
     # #@api.multi
     # def set_to_paid(self):
     #     self.write({'state': 'paid'})
