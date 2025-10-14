@@ -18993,7 +18993,7 @@ class wizard_libro_inventario(models.TransientModel):
             #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) *- 1
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4').mapped('balance')) *- 1
             #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) *- 1
         x_balance_5 = 0
         x_balance_5 = sum(self.env['account.move.line'].search([
@@ -19002,7 +19002,7 @@ class wizard_libro_inventario(models.TransientModel):
             #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5').mapped('balance'))
             #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_6 = 0
         x_balance_6 = sum(self.env['account.move.line'].search([
@@ -19011,7 +19011,7 @@ class wizard_libro_inventario(models.TransientModel):
             #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6').mapped('balance'))
             #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_7 = 0
         x_balance_7 = sum(self.env['account.move.line'].search([
@@ -19020,7 +19020,7 @@ class wizard_libro_inventario(models.TransientModel):
             #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))*-1
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7').mapped('balance'))*-1
             #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
         x_balance_8 = 0
         x_balance_8 = sum(self.env['account.move.line'].search([
@@ -19029,7 +19029,7 @@ class wizard_libro_inventario(models.TransientModel):
             #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8').mapped('balance'))
             #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
 
         x_pasivo_capital = sum(self.env['account.move.line'].search([
@@ -19037,14 +19037,20 @@ class wizard_libro_inventario(models.TransientModel):
             ('move_id.state', '=', 'posted'),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) * -1
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '2').mapped('balance')) * -1
             # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
+        x_pasivo_capitalpre = self.env['account.move.line'].search([
+            ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '3'),
+            ('move_id.state', '=', 'posted'),
+            ('date', '<=', self.end_date),
+            ('balance', '!=', 0),
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '3').mapped('account_id.id')
         x_pasivo_capital += sum(self.env['account.move.line'].search([
             ('account_id.group_id.parent_id.parent_id.code_prefix_start', '=', '3'),
             ('move_id.state', '=', 'posted'),
             ('date', '<=', self.end_date),
             ('balance', '!=', 0),
-            ('company_id.id', '=', self.company_id.id)]).mapped('balance')) * -1
+            ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '3').mapped('balance')) * -1
             # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance')) * -1
 
         x_utilidad_ejercicio = (x_balance_4 - x_balance_5 - x_balance_6) + x_balance_7 - x_balance_8
@@ -19066,7 +19072,7 @@ class wizard_libro_inventario(models.TransientModel):
                         ('move_id.state', '=', 'posted'),
                         ('date', '<=', self.end_date),
                         ('balance', '!=', 0),
-                        ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+                        ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids).mapped('balance'))
                         #('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
 
                     if x_control_i != 0:
@@ -19095,7 +19101,7 @@ class wizard_libro_inventario(models.TransientModel):
                                     ('move_id.state', '=', 'posted'),
                                     ('date', '<=', self.end_date),
                                     ('balance', '!=', 0),
-                                    ('company_id.id', '=', self.company_id.id)]).mapped('balance'))
+                                    ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids).mapped('balance'))
                                     # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                                 if x_control_ii != 0:
                                     a_imprimir.append([])
@@ -19124,7 +19130,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                 ('move_id.state', '=', 'posted'),
                                                 ('date', '<=', self.end_date),
                                                 ('balance', '!=', 0),
-                                                ('company_id.id', '=', self.company_id.id)]).mapped('balance')),2)
+                                                ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids).mapped('balance')),2)
                                                 # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                                             contador = 0
                                             NivelCuenta2 = self.env['account.account'].search(
@@ -19232,7 +19238,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                         ('move_id.state', '=', 'posted'),
                                                                         ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
                                                                         ('balance', '!=', 0),
-                                                                        ('company_id.id', '=', self.company_id.id)])
+                                                                        ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
 
                                                                     x_desglozar = None
                                                                     x_desglozar = self.env['account.move.line'].read_group([
@@ -19246,7 +19252,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                             #('move_id.journal_id.name', '!=', 'Partida de Cierre'),
                                                                             ('partner_id', '!=', False)],
                                                                             fields=['account_id.code', 'balance', 'partner_id.name'],
-                                                                            groupby=['partner_id', 'account_id'])
+                                                                            groupby=['partner_id', 'account_id'])#.filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 #if x_pre_desglozar and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
                                                                 if x_pre_desglozar and round(sum(x_pre_desglozar.mapped('balance')),2)!=0: # Recorremos los registros para desglozar
                                                                     #if x_pre_desglozar_cxc['balance'] != 0:
@@ -19288,14 +19294,14 @@ class wizard_libro_inventario(models.TransientModel):
                                                                 if x_NivelCuenta.code in ['1010301', '2010102']:
                                                                     x_desglozar_ii = None
                                                                     x_desglozar_ii = self.env['account.move.line'].search([
-                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids),
                                                                         ('account_id.code', '=', x_NivelCuenta.code),
                                                                         ('move_id.state', '=', 'posted'),
                                                                         ('date', '<=', self.end_date),
                                                                         ('balance', '!=', 0),
                                                                         ('company_id.id', '=', self.company_id.id),
                                                                         # ('move_id.journal_id.name', '!=','Partida de Cierre'),
-                                                                        ('partner_id', '=', False)])
+                                                                        ('partner_id', '=', False)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 else:
                                                                     x_desglozar_ii = None
                                                                     x_desglozar_ii = self.env['account.move.line'].search([
@@ -19307,7 +19313,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                     ('balance', '!=', 0),
                                                                     ('company_id.id', '=', self.company_id.id),
                                                                     #('move_id.journal_id.name', '!=','Partida de Cierre'),
-                                                                    ('partner_id', '=', False)])
+                                                                    ('partner_id', '=', False)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 if x_desglozar_ii and x_NivelCuenta.code and x_NivelCuenta.code not in ['1010303', '2010303']: # Si hay registros para desglozar
 
                                                                     a_imprimir.append([])
@@ -19350,7 +19356,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                     ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
                                                                     ('balance', '!=', 0),
                                                                     ('company_id.id', '=', self.company_id.id),
-                                                                ])
+                                                                ]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 if round(sum(pre_lines.mapped('balance')),2)!=0:
                                                                     a_imprimir.append([])
                                                                     a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
@@ -19377,7 +19383,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                         ('balance', '!=', 0),
                                                                         ('company_id.id', '=', self.company_id.id),
                                                                         #('partner_id', '!=', False)
-                                                                    ])
+                                                                    ]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
 
                                                                     # Diccionario para agrupar por cuenta analítica
                                                                     grouped_analytics = {}
@@ -19432,7 +19438,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                         ('company_id.id', '=', self.company_id.id),
                                                                         ('name', '!=', False)],
                                                                         fields=['account_id.code', 'balance', 'name'],
-                                                                        groupby=['name', 'account_id'])
+                                                                        groupby=['name', 'account_id']).filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                                                     for x_desglozar_cxc in x_desglozar: # Recorremos los registros para desglozar
                                                                         a_imprimir.append([])
                                                                         a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
@@ -19460,7 +19466,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                         ('date', '<=', self.end_date),
                                                                         ('balance', '!=', 0),
                                                                         ('company_id.id', '=', self.company_id.id),
-                                                                        ('name', '=', False)])
+                                                                        ('name', '=', False)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                     if x_desglozar_ii and x_NivelCuenta.code :  # Si hay registros para desglozar
                                                                         a_imprimir.append([])
                                                                         a_imprimir[x_altura].append(x_NivelI.code_prefix_start)  # Nivel I   1
@@ -19479,7 +19485,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                 else:
                                                                     lines = None
                                                                     lines = self.env['account.move.line'].search([
-                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                        ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids),('account_id.group_id','!=',False),
                                                                         ('account_id.code', '=', x_NivelCuenta.code),
                                                                         ('move_id.state', '=', 'posted'),
                                                                         #('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
@@ -19487,7 +19493,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                         ('balance', '!=', 0),
                                                                         ('company_id.id', '=', self.company_id.id),
                                                                         ('partner_id', '!=', False)
-                                                                    ])
+                                                                    ]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                     # Diccionario para agrupar por activos
                                                                     grouped_assets = {}
 
@@ -19549,12 +19555,12 @@ class wizard_libro_inventario(models.TransientModel):
                                                                 x_altura += 1
                                                                 x_pre_desglozar = None
                                                                 x_pre_desglozar = self.env['account.move.line'].search([
-                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids),('account_id.group_id','!=',False),
                                                                     ('account_id.code', '=', x_NivelCuenta.code),
                                                                     ('move_id.state', '=', 'posted'),
                                                                     ('date', '<', datetime.strptime(str(self.end_date.year) + '-01-01',"%Y-%m-%d")),
                                                                     ('balance', '!=', 0),
-                                                                    ('company_id.id', '=', self.company_id.id)])
+                                                                    ('company_id.id', '=', self.company_id.id)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
 
                                                                 if round(sum(x_pre_desglozar.mapped('balance')),2) != 0:
                                                                     a_imprimir.append([])
@@ -19573,7 +19579,7 @@ class wizard_libro_inventario(models.TransientModel):
 
                                                                 x_desglozar = None
                                                                 x_desglozar = self.env['account.move.line'].read_group([
-                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    ('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids),('account_id.group_id','!=',False),
                                                                     ('account_id.code', '=', x_NivelCuenta.code),
                                                                     ('move_id.state', '=', 'posted'),
                                                                     ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
@@ -19584,7 +19590,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                     ('product_id', '!=', False)],
                                                                     fields=['account_id.code', 'balance', 'product_id.name', 'quantity'],
                                                                     groupby=['product_id', 'account_id'],
-                                                                    orderby='product_id')
+                                                                    orderby='product_id')#.filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 if x_desglozar and x_NivelCuenta.code not in ['1010407', '1010410']:  # Si hay registros para desglozar
                                                                     for x_desglozar_cxc in x_desglozar:  # Recorremos los registros para desglozar
                                                                         if x_desglozar_cxc['balance'] != 0:
@@ -19608,7 +19614,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                             x_altura += 1
                                                                 x_desglozar_ii = None
                                                                 x_desglozar_ii = self.env['account.move.line'].search(
-                                                                    [('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids), ('account_id.group_id','!=',False),
+                                                                    [('account_id.group_id.id', 'in', x_NivelGrupoCuenta.ids),('account_id.group_id','!=',False),
                                                                     ('account_id.code', '=', x_NivelCuenta.code),
                                                                     ('move_id.state', '=', 'posted'),
                                                                     ('date', '>=', datetime.strptime(str(self.end_date.year) + '-01-01', "%Y-%m-%d")),
@@ -19616,7 +19622,7 @@ class wizard_libro_inventario(models.TransientModel):
                                                                     ('balance', '!=', 0),
                                                                     ('company_id.id', '=', self.company_id.id),
                                                                     #('move_id.journal_id.name', '!=', 'Partida de Cierre'),
-                                                                    ('product_id', '=', False)])
+                                                                    ('product_id', '=', False)]).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                                 #Alex 29 08 2024 Aca este desglose es porque no son productos sino movmientos contables por eso product es false
                                                                 if x_desglozar_ii and x_NivelCuenta.code not in ['1010407', '1010410']:  # Si hay registros para desglozar
                                                                     a_imprimir.append([])
@@ -20018,7 +20024,7 @@ class wizard_libro_inventario(models.TransientModel):
                     and x_ctrl_nivel_c == a_imprimir[x_recorre][3] and ('' == a_imprimir[x_recorre][10] and a_imprimir[x_recorre][9] == 'nivel_c')):
                     if a_imprimir[x_recorre][9] == 'nivel_c':
                         x_suma_nivel_d = 0
-                        x_suma_nivel_c += float(a_imprimir[x_recorre][7] or 0)
+                        x_suma_nivel_c += float(a_imprimir[x_recorre][7])
 
                 elif (x_ctrl_nivel_i == a_imprimir[x_recorre][0] and x_ctrl_nivel_ii == a_imprimir[x_recorre][1] and x_ctrl_nivel_gc == a_imprimir[x_recorre][2]
                     and x_ctrl_nivel_c != a_imprimir[x_recorre][3] and a_imprimir[x_recorre][3] != '' and a_imprimir[x_recorre][7] != '' and a_imprimir[x_recorre][9] == 'nivel_c'):
