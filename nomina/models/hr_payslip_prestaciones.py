@@ -22,3 +22,15 @@ class HrPayslipPrestaciones(models.Model):
     vacaciones = fields.Float(string="VACACIONES", readonly=True)
     indemnizacion = fields.Float(string="INDEMNIZACIÓN", readonly=True)
     date_to = fields.Date(string="Fecha al", readonly=True)
+
+    def open_prestaciones_wizard(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Prestaciones a la Fecha",
+            "res_model": "hr.payslip.prestaciones.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_employee_ids": [(6, 0, self.ids)],
+            },
+        }
