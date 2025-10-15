@@ -13000,7 +13000,7 @@ class wizard_balance_general(models.TransientModel):
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                 .mapped("balance")
             )
             * -1
@@ -13028,7 +13028,7 @@ class wizard_balance_general(models.TransientModel):
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
             .mapped("balance")
         )
         # ('move_id.journal_id.name', '!=', 'Partida de Ciere')]).mapped('balance'))
@@ -13054,7 +13054,7 @@ class wizard_balance_general(models.TransientModel):
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
             .mapped("balance")
         )
         # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
@@ -13081,7 +13081,7 @@ class wizard_balance_general(models.TransientModel):
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7')
                 .mapped("balance")
             )
             * -1
@@ -13109,7 +13109,7 @@ class wizard_balance_general(models.TransientModel):
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8')
             .mapped("balance")
         )
         # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
@@ -13129,7 +13129,7 @@ class wizard_balance_general(models.TransientModel):
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '2')
                 .mapped("balance")
             )
             * -1
@@ -13150,7 +13150,7 @@ class wizard_balance_general(models.TransientModel):
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '3')
                 .mapped("balance")
             )
             * -1
@@ -13191,7 +13191,7 @@ class wizard_balance_general(models.TransientModel):
                             ("balance", "!=", 0),
                             ("company_id.id", "=", self.company_id.id),
                         ]
-                    )
+                    ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                     # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                     if sum(x_control_i.mapped("balance")) != 0 or len(x_control_i) > 0:
                         a_imprimir.append([])
@@ -13212,7 +13212,7 @@ class wizard_balance_general(models.TransientModel):
                         NivelII = self.env["account.group"].search(
                             [("parent_id.id", "in", x_NivelI.ids)],
                             order="code_prefix_start asc",
-                        )
+                        ).filtered(lambda a: a.parent_id.id in x_NivelI.ids)
                         if NivelII:
                             for x_NivelII in NivelII:
                                 x_control_ii = 0
@@ -13228,7 +13228,7 @@ class wizard_balance_general(models.TransientModel):
                                         ("balance", "!=", 0),
                                         ("company_id.id", "=", self.company_id.id),
                                     ]
-                                )
+                                ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                 # ('move_id.journal_id.name', '!=', 'Partida de Cierre')]).mapped('balance'))
                                 if (
                                     sum(x_control_ii.mapped("balance")) != 0
@@ -13257,7 +13257,7 @@ class wizard_balance_general(models.TransientModel):
                                     NivelGrupoCuenta = self.env["account.group"].search(
                                         [("parent_id.id", "in", x_NivelII.ids)],
                                         order="code_prefix_start asc",
-                                    )
+                                    ).filtered(lambda a: a.parent_id.id in x_NivelII.ids)
                                     if NivelGrupoCuenta:
                                         for x_NivelGrupoCuenta in NivelGrupoCuenta:
                                             x_control_gc = 0
@@ -13288,7 +13288,7 @@ class wizard_balance_general(models.TransientModel):
                                                                 self.company_id.id,
                                                             ),
                                                         ]
-                                                    )
+                                                    ).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                     .mapped("balance")
                                                 ),
                                                 2,
@@ -13306,7 +13306,7 @@ class wizard_balance_general(models.TransientModel):
                                                     )
                                                 ],
                                                 order="code asc",
-                                            )
+                                            ).filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                             contador = 0
                                             if NivelCuenta2:
                                                 x_control_c2 = 0.0
@@ -13396,7 +13396,7 @@ class wizard_balance_general(models.TransientModel):
                                                         )
                                                     ],
                                                     order="code asc",
-                                                )
+                                                ).filtered(lambda a: a.group_id.id in x_NivelII.ids)
                                                 if NivelCuenta:
                                                     for x_NivelCuenta in NivelCuenta:
                                                         x_control_c = round(
