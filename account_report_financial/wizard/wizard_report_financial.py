@@ -8871,7 +8871,7 @@ class wizard_estado_resultados(models.TransientModel):
         # Empieza detalle
         x_rows = 0  # Linea a imprimir
         x_page = 0  # Numero de pagina
-        x_max_rows = 47  # Maximo de lineas por pagina
+        x_max_rows = 46  # Maximo de lineas por pagina
         x_row_page = 0  # Linea actual vrs maximo de lineas
         x_ctrl_nivel_i = ""
         x_ctrl_nivel_ii = ""
@@ -8915,18 +8915,19 @@ class wizard_estado_resultados(models.TransientModel):
                         self.env["account.move.line"]
                         .search(
                             [
-                                (
-                                    "account_id.group_id.parent_id.parent_id.id",
-                                    "in",
-                                    x_NivelI.ids,
-                                ),
+
                                 ("move_id.state", "=", "posted"),
                                 ("date", ">=", self.start_date),
                                 ("date", "<=", self.end_date),
                                 ("balance", "!=", 0),
                                 ("company_id.id", "=", self.company_id.id),
+                                (
+                                    "account_id.group_id.parent_id.parent_id",
+                                    "in",
+                                    x_NivelI.ids,
+                                ),
                             ]
-                        )
+                        ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                         .mapped("balance")
                     )
                     if x_control != 0:
@@ -8945,9 +8946,9 @@ class wizard_estado_resultados(models.TransientModel):
                         x_altura += 1
                         # Buscamos el id de grupo del nivel ii que pertenezcan a nivel i
                         NivelII = self.env["account.group"].search(
-                            [("parent_id.id", "in", x_NivelI.ids)],
+                            [("parent_id", "in", x_NivelI.ids)],
                             order="code_prefix_start asc",
-                        )
+                        ).filtered(lambda a: a.parent_id.id in x_NivelI.ids)
 
                         if NivelII:
                             for x_NivelII in NivelII:
@@ -8956,18 +8957,19 @@ class wizard_estado_resultados(models.TransientModel):
                                     self.env["account.move.line"]
                                     .search(
                                         [
-                                            (
-                                                "account_id.group_id.parent_id.id",
-                                                "in",
-                                                x_NivelII.ids,
-                                            ),
+
                                             ("move_id.state", "=", "posted"),
                                             ("date", ">=", self.start_date),
                                             ("date", "<=", self.end_date),
                                             ("balance", "!=", 0),
                                             ("company_id.id", "=", self.company_id.id),
+                                            (
+                                                "account_id.group_id.parent_id",
+                                                "in",
+                                                x_NivelII.ids,
+                                            ),
                                         ]
-                                    )
+                                    ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                     .mapped("balance")
                                 )
                                 if x_control != 0 and x_NivelI.code_prefix_start != "5":
@@ -8989,11 +8991,7 @@ class wizard_estado_resultados(models.TransientModel):
                                             self.env["account.move.line"]
                                             .search(
                                                 [
-                                                    (
-                                                        "account_id.group_id.parent_id.id",
-                                                        "in",
-                                                        x_NivelII.ids,
-                                                    ),
+
                                                     ("move_id.state", "=", "posted"),
                                                     ("date", ">=", self.start_date),
                                                     ("date", "<=", self.end_date),
@@ -9003,8 +9001,13 @@ class wizard_estado_resultados(models.TransientModel):
                                                         "=",
                                                         self.company_id.id,
                                                     ),
+                                                    (
+                                                        "account_id.group_id.parent_id",
+                                                        "in",
+                                                        x_NivelII.ids,
+                                                    ),
                                                 ]
-                                            )
+                                            ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                             .mapped("balance")
                                         )
                                         if (
@@ -9023,20 +9026,16 @@ class wizard_estado_resultados(models.TransientModel):
                                         NivelGrupoCuenta = self.env[
                                             "account.group"
                                         ].search(
-                                            [("parent_id.id", "in", x_NivelII.ids)],
+                                            [("parent_id", "in", x_NivelII.ids)],
                                             order="code_prefix_start asc",
-                                        )
+                                        ).filtered(lambda a: a.parent_id.id in x_NivelII.ids)
                                         if NivelGrupoCuenta:
                                             for x_NivelGrupoCuenta in NivelGrupoCuenta:
                                                 x_balance = sum(
                                                     self.env["account.move.line"]
                                                     .search(
                                                         [
-                                                            (
-                                                                "account_id.group_id.id",
-                                                                "in",
-                                                                x_NivelGrupoCuenta.ids,
-                                                            ),
+
                                                             (
                                                                 "move_id.state",
                                                                 "=",
@@ -9058,8 +9057,13 @@ class wizard_estado_resultados(models.TransientModel):
                                                                 "=",
                                                                 self.company_id.id,
                                                             ),
+                                                            (
+                                                                "account_id.group_id",
+                                                                "in",
+                                                                x_NivelGrupoCuenta.ids,
+                                                            ),
                                                         ]
-                                                    )
+                                                    ).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                     .mapped("balance")
                                                 )
                                                 if x_NivelI.code_prefix_start == "4":
@@ -9088,12 +9092,12 @@ class wizard_estado_resultados(models.TransientModel):
                                                         ].search(
                                                             [
                                                                 (
-                                                                    "group_id.id",
+                                                                    "group_id",
                                                                     "in",
                                                                     x_NivelGrupoCuenta.ids,
                                                                 )
                                                             ]
-                                                        )
+                                                        ).filtered(lambda a: a.group_id.id in x_NivelGrupoCuenta.ids)
                                                         for bCuenta in ByCuentas:
                                                             NivelC = None
                                                             NivelC = self.env[
@@ -9227,11 +9231,7 @@ class wizard_estado_resultados(models.TransientModel):
                                             self.env["account.move.line"]
                                             .search(
                                                 [
-                                                    (
-                                                        "account_id.group_id.parent_id.id",
-                                                        "in",
-                                                        x_NivelII.ids,
-                                                    ),
+
                                                     ("move_id.state", "=", "posted"),
                                                     ("date", ">=", self.start_date),
                                                     ("date", "<=", self.end_date),
@@ -9241,8 +9241,13 @@ class wizard_estado_resultados(models.TransientModel):
                                                         "=",
                                                         self.company_id.id,
                                                     ),
+                                                    (
+                                                        "account_id.group_id.parent_id",
+                                                        "in",
+                                                        x_NivelII.ids,
+                                                    ),
                                                 ]
-                                            )
+                                            ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                             .mapped("balance")
                                         )
                                         if (
@@ -9269,18 +9274,19 @@ class wizard_estado_resultados(models.TransientModel):
                             self.env["account.move.line"]
                             .search(
                                 [
-                                    (
-                                        "account_id.group_id.parent_id.parent_id.id",
-                                        "in",
-                                        x_NivelI.ids,
-                                    ),
+
                                     ("move_id.state", "=", "posted"),
                                     ("date", ">=", self.start_date),
                                     ("date", "<=", self.end_date),
                                     ("balance", "!=", 0),
                                     ("company_id.id", "=", self.company_id.id),
+                                    (
+                                        "account_id.group_id.parent_id.parent_id",
+                                        "in",
+                                        x_NivelI.ids,
+                                    ),
                                 ]
-                            )
+                            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                             .mapped("balance")
                         )
                         if (
@@ -9301,18 +9307,19 @@ class wizard_estado_resultados(models.TransientModel):
                                     self.env["account.move.line"]
                                     .search(
                                         [
-                                            (
-                                                "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                                                "=",
-                                                "4",
-                                            ),
+
                                             ("move_id.state", "=", "posted"),
                                             ("date", ">=", self.start_date),
                                             ("date", "<=", self.end_date),
                                             ("balance", "!=", 0),
                                             ("company_id.id", "=", self.company_id.id),
+                                            (
+                                                "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                                                "=",
+                                                "4",
+                                            ),
                                         ]
-                                    )
+                                    ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                                     .mapped("balance")
                                 )
                                 * -1
@@ -9322,18 +9329,19 @@ class wizard_estado_resultados(models.TransientModel):
                                 self.env["account.move.line"]
                                 .search(
                                     [
-                                        (
-                                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                                            "=",
-                                            "5",
-                                        ),
+
                                         ("move_id.state", "=", "posted"),
                                         ("date", ">=", self.start_date),
                                         ("date", "<=", self.end_date),
                                         ("balance", "!=", 0),
                                         ("company_id.id", "=", self.company_id.id),
+                                        (
+                                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                                            "=",
+                                            "5",
+                                        ),
                                     ]
-                                )
+                                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
                                 .mapped("balance")
                             )
                             x_balance_6 = 0
@@ -9341,18 +9349,19 @@ class wizard_estado_resultados(models.TransientModel):
                                 self.env["account.move.line"]
                                 .search(
                                     [
-                                        (
-                                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                                            "=",
-                                            "6",
-                                        ),
+
                                         ("move_id.state", "=", "posted"),
                                         ("date", ">=", self.start_date),
                                         ("date", "<=", self.end_date),
                                         ("balance", "!=", 0),
                                         ("company_id.id", "=", self.company_id.id),
+                                        (
+                                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                                            "=",
+                                            "6",
+                                        ),
                                     ]
-                                )
+                                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
                                 .mapped("balance")
                             )
                             if x_NivelI.code_prefix_start == "5":
@@ -9389,18 +9398,19 @@ class wizard_estado_resultados(models.TransientModel):
                 self.env["account.move.line"]
                 .search(
                     [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "4",
-                        ),
+
                         ("move_id.state", "=", "posted"),
                         ("date", ">=", self.start_date),
                         ("date", "<=", self.end_date),
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
+                        (
+                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                            "=",
+                            "4",
+                        ),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                 .mapped("balance")
             )
             * -1
@@ -9410,18 +9420,19 @@ class wizard_estado_resultados(models.TransientModel):
             self.env["account.move.line"]
             .search(
                 [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "5",
-                    ),
+
                     ("move_id.state", "=", "posted"),
                     ("date", ">=", self.start_date),
                     ("date", "<=", self.end_date),
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
+                    (
+                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                        "=",
+                        "5",
+                    ),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
             .mapped("balance")
         )
         x_balance_6 = 0
@@ -9429,18 +9440,19 @@ class wizard_estado_resultados(models.TransientModel):
             self.env["account.move.line"]
             .search(
                 [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "6",
-                    ),
+
                     ("move_id.state", "=", "posted"),
                     ("date", ">=", self.start_date),
                     ("date", "<=", self.end_date),
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
+                    (
+                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                        "=",
+                        "6",
+                    ),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
             .mapped("balance")
         )
         x_balance_7 = 0
@@ -9449,18 +9461,19 @@ class wizard_estado_resultados(models.TransientModel):
                 self.env["account.move.line"]
                 .search(
                     [
-                        (
-                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                            "=",
-                            "7",
-                        ),
+
                         ("move_id.state", "=", "posted"),
                         ("date", ">=", self.start_date),
                         ("date", "<=", self.end_date),
                         ("balance", "!=", 0),
                         ("company_id.id", "=", self.company_id.id),
+                        (
+                            "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                            "=",
+                            "7",
+                        ),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7')
                 .mapped("balance")
             )
             * -1
@@ -9470,18 +9483,19 @@ class wizard_estado_resultados(models.TransientModel):
             self.env["account.move.line"]
             .search(
                 [
-                    (
-                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
-                        "=",
-                        "8",
-                    ),
+
                     ("move_id.state", "=", "posted"),
                     ("date", ">=", self.start_date),
                     ("date", "<=", self.end_date),
                     ("balance", "!=", 0),
                     ("company_id.id", "=", self.company_id.id),
+                    (
+                        "account_id.group_id.parent_id.parent_id.code_prefix_start",
+                        "=",
+                        "8",
+                    ),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8')
             .mapped("balance")
         )
         a_imprimir.append([])
