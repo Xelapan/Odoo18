@@ -12,7 +12,7 @@
                         <button name="cancelar" string="Cancelar" type="object" />
                     </header>
                     <sheet>
-                        <group>
+<!--                        <group>-->
                             <group>
                                 <field name="name" />
                                 <field name="no_liquidacion" />
@@ -23,7 +23,7 @@
                                 <field name="usuario_id" />
                                 <field name="company_id" />
                             </group>
-                        </group>
+<!--                        </group>-->
                         
                         <div class="oe_title">
                             <h2>Facturas</h2>
