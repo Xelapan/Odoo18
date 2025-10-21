@@ -13,10 +13,11 @@
                     <xpath expr="//button[@name='button_draft']" position="after">
                         <button name="button_cancel" id="button_cancel_anula" string="Anular FEL" class="btn-primary" type="object" modifiers="{}" />
                     </xpath>
-                    <xpath expr="//field[@name='partner_id']" position="after">
-                        <field name="firma_fel" />
-                        <field name="serie_fel" />
-                        <field name="numero_fel" />
+                    <xpath expr="//group[@id='header_left_group']" position="inside">
+<!--                    <xpath expr="//field[@name='partner_id']" position="after">-->
+                        <field name="firma_fel" string="Firma FEL"/>
+                        <field name="serie_fel" string="Serie FEL"/>
+                        <field name="numero_fel" string="Numero FEL"/>
                         <field name="pdf_fel" widget="url" readonly="1" />
                         <field name="factura_original_id" readonly="1" />
                     </xpath>

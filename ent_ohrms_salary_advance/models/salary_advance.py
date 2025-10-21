@@ -250,18 +250,3 @@ class SalaryAdvancePayment(models.Model):
         else:
             raise UserError('No se puede cobrar el descuento, debe estar aprobado')
 
-class HrTipoAnticipo(models.Model):
-    _name = 'hr.tipo.anticipo'
-    _description = 'Tipo de anticipo'
-
-    name = fields.Char(string='Nombre', required=True)
-    mostrar = fields.Boolean(string='Mostrar en nómina', default=True)
-    active = fields.Boolean(string='Activo', default=True)
-
-class HrConceptoAnticipo(models.Model):
-    _name = 'hr.concepto.anticipo'
-    _description = 'Concepto de anticipo'
-
-    name = fields.Char(string='Nombre', required=True)
-    mostrar = fields.Boolean(string='Mostrar en nómina', default=True)
-    active = fields.Boolean(string='Activo', default=True)

@@ -242,4 +242,20 @@ class HrEmployee(models.Model):
         self.loan_count = self.env['hr.loan'].search_count(
             [('employee_id', '=', self.id)])
 
+class HrTipoAnticipo(models.Model):
+    _name = 'hr.tipo.anticipo'
+    _description = 'Tipo de anticipo'
+
+    name = fields.Char(string='Nombre', required=True)
+    mostrar = fields.Boolean(string='Mostrar en nómina', default=True)
+    active = fields.Boolean(string='Activo', default=True)
+
+class HrConceptoAnticipo(models.Model):
+    _name = 'hr.concepto.anticipo'
+    _description = 'Concepto de anticipo'
+
+    name = fields.Char(string='Nombre', required=True)
+    mostrar = fields.Boolean(string='Mostrar en nómina', default=True)
+    active = fields.Boolean(string='Activo', default=True)
+
 

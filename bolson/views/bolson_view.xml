@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <record id="view_bolson_bolson_form" model="ir.ui.view">
+        <record id="view_bolson_bolson_form2" model="ir.ui.view">
             <field name="name">bolson.bolson.form</field>
             <field name="model">bolson.bolson</field>
             <field name="arch" type="xml">
@@ -12,7 +12,7 @@
                         <button name="cancelar" string="Cancelar" type="object" />
                     </header>
                     <sheet>
-<!--                        <group>-->
+                        <group>
                             <group>
                                 <field name="name" />
                                 <field name="no_liquidacion" />
@@ -23,8 +23,7 @@
                                 <field name="usuario_id" />
                                 <field name="company_id" />
                             </group>
-<!--                        </group>-->
-                        
+                        </group>
                         <div class="oe_title">
                             <h2>Facturas</h2>
                         </div>
