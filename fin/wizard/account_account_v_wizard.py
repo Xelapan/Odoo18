@@ -390,7 +390,7 @@ class HrPayslipPrestacionesWizard(models.TransientModel):
             ("date", "<=", date_to),
             ("company_id", "=", self.company_id.id),
             ("move_id.state", "=", "posted"),
-            ("move_id.payment_id", "=", False),
+            ("move_id.matched_payment_ids", "=", False),
             ("move_id.amount_total", "!=", 0),
         ]
         if self.date_from:

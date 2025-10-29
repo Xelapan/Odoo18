@@ -7,7 +7,7 @@
     "description": """ Integración con factura electrónica de Infile """,
     "author": "Alex Martínez",
     "website": "https://www.linkedin.com/in/baterodedios",
-    "depends": ["l10n_gt_extra"],
+    "depends": ["l10n_gt_extra","fel_gt"],
     "data": [
         "views/account_view.xml",
         "views/partner_view.xml",
