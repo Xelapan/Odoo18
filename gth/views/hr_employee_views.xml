@@ -95,8 +95,9 @@
                 <xpath expr="//group/group[@name='application_group']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-                <xpath expr="//page[@name='hr_settings']/group/group[@name='active_group']" position="replace">
-                  <group string="Estado">
+<!--                <xpath expr="//page[@name='hr_settings']/group/group[@name='active_group']" position="replace">-->
+                <xpath expr="//page[@name='hr_settings']" position="inside">
+                <group string="Estado">
                     <field name="employee_type" />
                     <field name="user_id" string="Usuario Relacionado" domain="[('share', '=', False)]" context="{'allow_create_employee': False, 'default_create_employee': False}" />
                   </group>
