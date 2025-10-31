@@ -89,9 +89,9 @@
                         </group>
                     </group>
                 </xpath>
-                <xpath expr="//group/group[@name='identification_group']" position="attributes">
-                    <attribute name="invisible">1</attribute>
-                </xpath>
+<!--                <xpath expr="//group/group[@name='identification_group']" position="attributes">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
                 <xpath expr="//group/group[@name='application_group']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
