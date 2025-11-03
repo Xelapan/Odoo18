@@ -10478,7 +10478,7 @@ class wizard_costo_ventas(models.TransientModel):
                                 ("balance", "!=", 0),
                                 ("company_id.id", "=", self.company_id.id),
                             ]
-                        )
+                        ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                         .mapped("balance")
                     )
                     if x_control != 0:
@@ -10515,7 +10515,7 @@ class wizard_costo_ventas(models.TransientModel):
                                             ("balance", "!=", 0),
                                             ("company_id.id", "=", self.company_id.id),
                                         ]
-                                    )
+                                    ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                     .mapped("balance")
                                 )
                                 if x_control != 0:
@@ -10591,7 +10591,7 @@ class wizard_costo_ventas(models.TransientModel):
                                                                 self.company_id.id,
                                                             ),
                                                         ]
-                                                    )
+                                                    ).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                     .mapped("balance")
                                                 )
                                                 if x_balance != 0:
@@ -10657,7 +10657,7 @@ class wizard_costo_ventas(models.TransientModel):
                                                         self.company_id.id,
                                                     ),
                                                 ]
-                                            )
+                                            ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                             .mapped("balance")
                                         )
                                         if (
@@ -10689,7 +10689,7 @@ class wizard_costo_ventas(models.TransientModel):
                                     ("balance", "!=", 0),
                                     ("company_id.id", "=", self.company_id.id),
                                 ]
-                            )
+                            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                             .mapped("balance")
                         )
                         if x_NivelI.code_prefix_start == "4":  # 4 Ingresos
@@ -11774,7 +11774,7 @@ class wizard_costo_produccion(models.TransientModel):
                                 ("balance", "!=", 0),
                                 ("company_id.id", "=", self.company_id.id),
                             ]
-                        )
+                        ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.id in x_NivelI.ids)
                         .mapped("balance")
                     )
                     if x_control != 0:
@@ -11814,7 +11814,7 @@ class wizard_costo_produccion(models.TransientModel):
                                             ("balance", "!=", 0),
                                             ("company_id.id", "=", self.company_id.id),
                                         ]
-                                    )
+                                    ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                     .mapped("balance")
                                 )
                                 if x_control != 0:
@@ -11863,7 +11863,7 @@ class wizard_costo_produccion(models.TransientModel):
                                                             self.company_id.id,
                                                         ),
                                                     ]
-                                                )
+                                                ).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
                                                 .mapped("balance")
                                             )
                                             if x_balance != 0:
@@ -11915,7 +11915,7 @@ class wizard_costo_produccion(models.TransientModel):
                                                         ),
                                                     ],
                                                     order="account_id asc",
-                                                )
+                                                ).filtered(lambda a: a.account_id.group_id.id in x_NivelGrupoCuenta.ids)
 
                                                 # Agrupar por cuenta y acumular balance
                                                 cuentas_agrupadas = defaultdict(
@@ -12035,7 +12035,7 @@ class wizard_costo_produccion(models.TransientModel):
                                                     self.company_id.id,
                                                 ),
                                             ]
-                                        )
+                                        ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                                         .mapped("balance")
                                     )
                                     if x_NivelI.code_prefix_start == "4":  # 4 Ingresos
@@ -12066,7 +12066,7 @@ class wizard_costo_produccion(models.TransientModel):
                                     ("balance", "!=", 0),
                                     ("company_id.id", "=", self.company_id.id),
                                 ]
-                            )
+                            ).filtered(lambda a: a.account_id.group_id.parent_id.id in x_NivelII.ids)
                             .mapped("balance")
                         )
                         if x_NivelI.code_prefix_start == "4":  # 4 Ingresos
