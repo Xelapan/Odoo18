@@ -25,10 +25,10 @@
             </field>
         </record>
 
-        <record id="l10n_gt_view_account_payment_form" model="ir.ui.view">
+        <record id="l10n_gt_view_account_payment_form2" model="ir.ui.view">
             <field name="name">l10n_gt_extra.account.payment.form</field>
             <field name="model">account.payment</field>
-            <field name="inherit_id" ref="account.view_account_payment_form" />
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
             <field name="arch" type="xml">
                 <data>
                     <button name="action_post" position="after">
