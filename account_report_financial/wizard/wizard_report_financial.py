@@ -17960,7 +17960,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     # ('journal_id.name', '!=', 'Partida de Apertura'),
                     ("journal_id.name", "!=", "Traslado de Utilidad"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['30101'])
             .mapped("balance")
         )
 
@@ -17987,7 +17987,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         # ('journal_id.name', '!=', 'Partida de Apertura'),
                         ("journal_id.name", "!=", "Traslado de Utilidad"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['30102'])
                 .mapped("balance")
             )
             * -1
@@ -18015,7 +18015,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     # ('journal_id.name', '!=', 'Partida de Apertura'),
                     # ('journal_id.name', '!=', 'Traslado de Utilidad')
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['30106'])
             .mapped("balance")
         )
 
@@ -18106,7 +18106,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                 .mapped("balance")
             )
             * -1
@@ -18130,7 +18130,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
             .mapped("balance")
         )
         x_balance_6_p = 0
@@ -18152,7 +18152,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
             .mapped("balance")
         )
         x_balance_7_p = 0
@@ -18175,7 +18175,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7')
                 .mapped("balance")
             )
             * -1
@@ -18198,7 +18198,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8')
             .mapped("balance")
         )
 
@@ -18288,7 +18288,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "=", "Ajustes al Resultado"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['30104'])
                 .mapped("balance")
             )
             * -1
@@ -18346,7 +18346,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                 .mapped("balance")
             )
             * -1
@@ -18368,7 +18368,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
             .mapped("balance")
         )
         x_balance_6 = 0
@@ -18388,7 +18388,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
             .mapped("balance")
         )
         x_balance_7 = 0
@@ -18409,7 +18409,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7')
                 .mapped("balance")
             )
             * -1
@@ -18431,7 +18431,7 @@ class wizard_cambio_patrimonio(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8')
             .mapped("balance")
         )
 
