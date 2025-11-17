@@ -5,7 +5,7 @@ Copyright (C) 2015 DevIntelle Consulting Service Pvt.Ltd (<http://www.devintelle
 For Module Support : devintelle@gmail.com  or Skype : devintelle 
  -->
 <odoo>
-    <record id="account_paumnet_add_method_of_payment" model="ir.ui.view">
+    <record id="account_paumnet_add_method_of_payment2" model="ir.ui.view">
         <field name="name">account.paumnet.add.method.of.paynet</field>
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>

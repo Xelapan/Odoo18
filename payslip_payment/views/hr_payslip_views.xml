@@ -1,18 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-
-
-
-
-
-
-
-
-
-
-
-
         <record id="view_hr_payslip_form_inherit_uaes_payroll" model="ir.ui.view">
             <field name="name">hr.payslip.form.inherit</field>
             <field name="model">hr.payslip</field>
