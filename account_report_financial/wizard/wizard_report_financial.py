@@ -16698,7 +16698,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '4')
                 .mapped("balance")
             )
             * -1
@@ -16720,7 +16720,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '5')
             .mapped("balance")
         )
         x_balance_6 = 0
@@ -16740,7 +16740,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '6')
             .mapped("balance")
         )
         x_balance_7 = 0
@@ -16761,7 +16761,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                         ("company_id.id", "=", self.company_id.id),
                         ("journal_id.name", "!=", "Partida de Cierre"),
                     ]
-                )
+                ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '7')
                 .mapped("balance")
             )
             * -1
@@ -16783,7 +16783,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.parent_id.parent_id.code_prefix_start == '8')
             .mapped("balance")
         )
 
@@ -17119,7 +17119,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['10101','10102'])
             .mapped("balance")
         )
 
@@ -17148,7 +17148,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                     ("company_id.id", "=", self.company_id.id),
                     ("journal_id.name", "!=", "Partida de Cierre"),
                 ]
-            )
+            ).filtered(lambda a: a.account_id.group_id.code_prefix_start in ['10101','10102'])
             .mapped("balance")
         )
 
