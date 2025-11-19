@@ -2,6 +2,7 @@ from datetime import timedelta
 import logging
 from odoo import models, fields, api
 from odoo.exceptions import UserError
+import math
 
 
 class HrWorkEntry(models.Model):
@@ -86,8 +87,8 @@ class HrWorkEntry(models.Model):
         if self.date_start and aux_date_stop and not self.duration:
             #self.duration en horas
             secondss = (aux_date_stop - self.date_start).total_seconds()
-            self.duration = (secondss / 3600)+24
-            self.dias = (self.duration / 24)
+            self.duration = math.ceil((secondss / 3600)+24)
+            self.dias = math.ceil((self.duration / 24))
 
     @api.model
     def create(self, vals_list):
@@ -96,8 +97,8 @@ class HrWorkEntry(models.Model):
             if 'date_start' in vals_list:
                 #convertir vals_list['date_start'] a datetime
                 secondss = (aux_date_stop - fields.Datetime.from_string(vals_list['date_start'])).total_seconds()
-                vals_list['duration'] = (secondss / 3600)+24
-                vals_list['dias'] = (vals_list['duration'] / 24)
+                vals_list['duration'] = math.ceil((secondss / 3600)+24)
+                vals_list['dias'] = math.ceil((vals_list['duration'] / 24))
 
         vals_list['state'] = 'validated'
         res = super(HrWorkEntry, self).create(vals_list)
@@ -109,8 +110,8 @@ class HrWorkEntry(models.Model):
             aux_date_stop = vals_list['date_stop']
             if 'date_start' in vals_list:
                 secondss = (aux_date_stop - fields.Datetime.from_string(vals_list['date_start'])).total_seconds()
-                vals_list['duration'] = (secondss / 3600)+24
-                vals_list['dias'] = (vals_list['duration'] / 24)
+                vals_list['duration'] = math.ceil((secondss / 3600)+24)
+                vals_list['dias'] = math.ceil((vals_list['duration'] / 24))
         vals_list['state'] = 'validated'
         res = super(HrWorkEntry, self).write(vals_list)
         return res
