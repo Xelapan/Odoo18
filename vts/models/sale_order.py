@@ -26,7 +26,8 @@ class SaleOrder(models.Model):
                 '"url": "' + str(urlimagen) + '"}'
             )
             data = json.loads(json_str)
-            wsdl = "http://mix.xelapan.com:55/Alertas.asmx?WSDL"
+            #wsdl = "http://mix.xelapan.com:55/Alertas.asmx?WSDL"
+            wsdl = "http://ws.xelapan.net/Alertas.asmx?WSDL"
             client = Client(wsdl=wsdl)
             client.service.EnviarMsj(str(data))
 

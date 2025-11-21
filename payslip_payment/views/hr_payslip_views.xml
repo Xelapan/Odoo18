@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
     <data>
-        <record id="view_hr_payslip_form_inherit_uaes_payroll" model="ir.ui.view">
+        <record id="view_hr_payslip_form_inherit_uaes_payroll2" model="ir.ui.view">
             <field name="name">hr.payslip.form.inherit</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
@@ -35,12 +35,6 @@
                                 </field>
                     </page>
                 </xpath>
-
-
-
-
-
-
             </field>
         </record>
 
@@ -51,9 +45,9 @@
             <field name="arch" type="xml">
 
                 <xpath expr="/form/header/button[@name='action_paid']" position="after">
-<!--                        <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': active_id}" groups="account.group_account_manager" modifiers="{}" />-->
-                        <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': id}" groups="account.group_account_manager" modifiers="{}" />
-                        <button name="batch_wise_payslip_confirm" type="object" string="Confirmar Nóminas" class="oe_highlight o_expense_sheet_pay" groups="account.group_account_manager" modifiers="{}" />
+<!--                    <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': active_id}" groups="account.group_account_manager" modifiers="{}" />-->
+                        <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" states="verify,close" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': id}" groups="account.group_account_manager" modifiers="{}" />
+                        <button name="batch_wise_payslip_confirm" states="draft, verify" type="object" string="Confirmar Nóminas" class="oe_highlight o_expense_sheet_pay" groups="account.group_account_manager" modifiers="{}" />
                 </xpath>
                 <xpath expr="/form/header/button[@name='action_paid']" position="replace">
                   <button name="action_paid" type="object" string="Cerrar" class="oe_highlight" modifiers="{}" />
