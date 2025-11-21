@@ -46,11 +46,11 @@
 
                 <xpath expr="/form/header/button[@name='action_paid']" position="after">
 <!--                    <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': active_id}" groups="account.group_account_manager" modifiers="{}" />-->
-                        <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" states="verify,close" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': id}" groups="account.group_account_manager" modifiers="{}" />
-                        <button name="batch_wise_payslip_confirm" states="draft, verify" type="object" string="Confirmar Nóminas" class="oe_highlight o_expense_sheet_pay" groups="account.group_account_manager" modifiers="{}" />
+                        <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': id}" groups="account.group_account_manager" modifiers="{'invisible': [['state', 'not in', ['verify','close']]]}" />
+                        <button name="batch_wise_payslip_confirm" type="object" string="Confirmar Nóminas" class="oe_highlight o_expense_sheet_pay" groups="account.group_account_manager" modifiers="{'invisible': [['state', 'not in', ['draft','verify']]]}" />
                 </xpath>
                 <xpath expr="/form/header/button[@name='action_paid']" position="replace">
-                  <button name="action_paid" type="object" string="Cerrar" class="oe_highlight" modifiers="{}" />
+                  <button name="action_paid" type="object" string="Cerrar" class="oe_highlight" modifiers="{'invisible': [['state', 'in', ['paid']]]}" />
                 </xpath>
             </field>
         </record>
