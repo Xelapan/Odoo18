@@ -108,7 +108,7 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
                                 "currency_id": record.currency_id.id,
                                 "date": record.payment_date,
                                 "ref": record.communication,
-                                "narration": "Nomina de empleado "
+                                "memo": "Nomina de empleado "
                                 + payslip.employee_id.name
                                 + " con un monto de "
                                 + str(record.amount)
