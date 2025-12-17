@@ -5,7 +5,11 @@
             <field name="name">account.inventory.v.tree</field>
             <field name="model">account.inventory.v</field>
             <field name="arch" type="xml">
-                <list string="Visor Inventario Contable" create="0" edit="1" js_class="AccountInventoryVTreeView">
+<!--                <list string="Visor Inventario Contable" create="0" edit="1" js_class="AccountInventoryVTreeView">-->
+                <list string="Visor Inventario Contable" create="0" edit="1">
+                    <header>
+                        <button name="open_wizard" type="object" string="Actualizar Datos" class="btn-primary" display="always"/>
+                    </header>
                     <field name="product_id" widget="many2one"/>
                     <field name="account_id"/>
                     <field name="default_code"/>

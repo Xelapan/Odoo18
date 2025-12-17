@@ -88,3 +88,19 @@ class AccountInventoryV(models.Model):
         old_records = self.search([("create_date", "<", time_threshold)])
         if old_records:
             old_records.unlink()
+
+    def open_wizard(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Consultar Inventario Contable',
+            'res_model': 'account.inventory.v.wizard',
+            'view_mode': 'form',
+            'view_id': self.env.ref('fin.view_account_inventory_v_wizard_form').id,
+            'target': 'new',
+            'context': {
+                'default_account_ids': [(6, 0, self.ids)],
+                # 'default_company_id': (
+                #     self.company_id.id if self.company_id else self.env.company.id
+                # )
+            }
+        }
