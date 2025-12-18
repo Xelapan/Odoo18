@@ -70,7 +70,7 @@ class StockKardexReportWiz(models.TransientModel):
                     sml.product_uom_id,
                     sml.owner_id, 
                     sml.package_id,
-                    sml.qty_done, 
+                    sml.quantity, 
                     sml.move_id, 
                     sml.location_id,
                     sml.location_dest_id, 
@@ -92,7 +92,7 @@ class StockKardexReportWiz(models.TransientModel):
                 FROM one
                 WHERE location_id = %s OR location_dest_id = %s
             )
-            SELECT two.*, svl.unit_cost, svl.value AS total_cost -- (two.qty_done * svl.unit_cost) AS total_cost
+            SELECT two.*, svl.unit_cost, svl.value AS total_cost -- (two.quantity * svl.unit_cost) AS total_cost
             FROM two
             LEFT JOIN stock_valuation_layer svl ON svl.stock_move_id = two.move_id and svl.unit_cost != 0 and svl.quantity != 0
             WHERE two.product_id = %s AND two.state = 'done'
@@ -110,7 +110,7 @@ class StockKardexReportWiz(models.TransientModel):
                     sml.product_uom_id,
                     sml.owner_id, 
                     sml.package_id,
-                    sml.qty_done, 
+                    sml.quantity, 
                     sml.move_id, 
                     sml.location_id,
                     sml.location_dest_id, 
@@ -129,7 +129,7 @@ class StockKardexReportWiz(models.TransientModel):
                 SELECT *
                 FROM one
             )
-            SELECT two.*, svl.unit_cost, svl.value AS total_cost -- (two.qty_done * svl.unit_cost) AS total_cost
+            SELECT two.*, svl.unit_cost, svl.value AS total_cost -- (two.quantity * svl.unit_cost) AS total_cost
             FROM two
             LEFT JOIN stock_valuation_layer svl ON svl.stock_move_id = two.move_id and svl.unit_cost != 0 and svl.quantity != 0
             WHERE two.product_id = %s AND two.state = 'done'
@@ -154,7 +154,7 @@ class StockKardexReportWiz(models.TransientModel):
                     thdone_qty = 0
                     if location_id.id:
                         if rec["location_id"] == location_id.id:
-                            thdone_qty = -rec["qty_done"]
+                            thdone_qty = -rec["quantity"]
                     else:
                         if self.env["stock.location"].browse(
                             rec["location_id"]
@@ -166,7 +166,7 @@ class StockKardexReportWiz(models.TransientModel):
                             "internal",
                             "transit",
                         ]:
-                            thdone_qty = -rec["qty_done"]
+                            thdone_qty = -rec["quantity"]
                         if (
                             self.env["stock.picking.type"]
                             .browse(rec["picking_type_id"])
@@ -182,10 +182,10 @@ class StockKardexReportWiz(models.TransientModel):
             #    continue
             # seen_moves.add(move_id)
 
-            done_qty = rec["qty_done"]
+            done_qty = rec["quantity"]
             if location_id.id:
                 if rec["location_id"] == location_id.id:
-                    done_qty = -rec["qty_done"]
+                    done_qty = -rec["quantity"]
                 total += done_qty
             else:
                 if self.env["stock.location"].browse(rec["location_id"]).usage in [
@@ -197,7 +197,7 @@ class StockKardexReportWiz(models.TransientModel):
                     "internal",
                     "transit",
                 ]:
-                    done_qty = -rec["qty_done"]
+                    done_qty = -rec["quantity"]
                 if (
                     self.env["stock.picking.type"].browse(rec["picking_type_id"]).code
                     == "internal"
@@ -233,7 +233,7 @@ class StockKardexReportWiz(models.TransientModel):
                 "product_uom_id": rec["product_uom_id"],
                 "owner_id": rec["owner_id"],
                 "package_id": rec["package_id"],
-                "qty_done": done_qty,
+                "quantity": done_qty,
                 "location_id": rec["location_id"],
                 "location_dest_id": rec["location_dest_id"],
                 "tipo_mov": thTipoMov,

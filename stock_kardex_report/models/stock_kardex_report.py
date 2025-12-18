@@ -29,7 +29,7 @@ class StockKardexReport(models.Model):
     location_dest_id = fields.Many2one(
         "stock.location", readonly=True, string="Destino"
     )
-    qty_done = fields.Float("Cantidad", readonly=True)
+    quantity = fields.Float("Cantidad", readonly=True)
     date = fields.Datetime(readonly=True, string="Fecha")
     origin = fields.Char(readonly=True, string="Movimiento", related="move_id.origin")
     reference = fields.Char(readonly=True, string="Referencia")

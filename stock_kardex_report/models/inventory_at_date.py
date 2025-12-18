@@ -100,10 +100,10 @@ class StockInventoryAtDate(models.TransientModel):
             if location_id:
                 if move.location_dest_id.id == location_id.id:
                     # Si la ubicación de destino es la seleccionada, es una entrada
-                    product_data[product_id]["total_quantity"] += move.qty_done
+                    product_data[product_id]["total_quantity"] += move.quantity
                     product_data[product_id][
                         "total_cost"
-                    ] += value  # move.qty_done * cost
+                    ] += value  # move.quantity * cost
                     if (
                         (move.picking_type_id.code != "internal")
                         or (
@@ -112,17 +112,17 @@ class StockInventoryAtDate(models.TransientModel):
                         )
                         or not move.picking_type_id
                     ):
-                        product_data[product_id]["calc_total_quantity"] += move.qty_done
+                        product_data[product_id]["calc_total_quantity"] += move.quantity
                         product_data[product_id][
                             "calc_total_cost"
-                        ] += value  # move.qty_done * cost
+                        ] += value  # move.quantity * cost
                         product_data[product_id]["unit_cost"] = cost
                 elif move.location_id.id == location_id.id:
                     # Si la ubicación de origen es la seleccionada, es una salida
-                    product_data[product_id]["total_quantity"] -= move.qty_done
+                    product_data[product_id]["total_quantity"] -= move.quantity
                     product_data[product_id][
                         "total_cost"
-                    ] -= value  # move.qty_done * cost
+                    ] -= value  # move.quantity * cost
                     if (
                         (move.picking_type_id.code != "internal")
                         or (
@@ -131,10 +131,10 @@ class StockInventoryAtDate(models.TransientModel):
                         )
                         or not move.picking_type_id
                     ):
-                        product_data[product_id]["calc_total_quantity"] -= move.qty_done
+                        product_data[product_id]["calc_total_quantity"] -= move.quantity
                         product_data[product_id][
                             "calc_total_cost"
-                        ] -= value  # move.qty_done * cost
+                        ] -= value  # move.quantity * cost
                         product_data[product_id]["unit_cost"] = cost
             else:
                 # Si no se especifica una ubicación, se hace el cálculo general
@@ -148,27 +148,27 @@ class StockInventoryAtDate(models.TransientModel):
                     "transit",
                 ]:
                     # Movimiento interno o en tránsito a externo
-                    product_data[product_id]["total_quantity"] -= move.qty_done
+                    product_data[product_id]["total_quantity"] -= move.quantity
                     product_data[product_id][
                         "total_cost"
-                    ] -= value  # move.qty_done * cost
+                    ] -= value  # move.quantity * cost
                     if move.picking_type_id.code != "internal":
-                        product_data[product_id]["calc_total_quantity"] -= move.qty_done
+                        product_data[product_id]["calc_total_quantity"] -= move.quantity
                         product_data[product_id][
                             "calc_total_cost"
-                        ] -= value  # move.qty_done * cost
+                        ] -= value  # move.quantity * cost
                         product_data[product_id]["unit_cost"] = cost
                 else:
                     # Movimiento general
-                    product_data[product_id]["total_quantity"] += move.qty_done
+                    product_data[product_id]["total_quantity"] += move.quantity
                     product_data[product_id][
                         "total_cost"
-                    ] += value  # move.qty_done * cost
+                    ] += value  # move.quantity * cost
                     if move.picking_type_id.code != "internal":
-                        product_data[product_id]["calc_total_quantity"] += move.qty_done
+                        product_data[product_id]["calc_total_quantity"] += move.quantity
                         product_data[product_id][
                             "calc_total_cost"
-                        ] += value  # move.qty_done * cost
+                        ] += value  # move.quantity * cost
                         product_data[product_id]["unit_cost"] = cost
 
         # Crear los registros consolidados en stock.inventory.at.date

@@ -33,7 +33,7 @@ class InventoryAtDateWizard(models.TransientModel):
         return {
             "type": "ir.actions.act_window",
             "name": "Reporte de Inventario a la Fecha",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "stock.inventory.at.date",
             "domain": [],
             "context": {"search_default_group_by_product": 1},

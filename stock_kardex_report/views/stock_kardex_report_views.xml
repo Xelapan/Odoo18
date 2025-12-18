@@ -18,7 +18,7 @@
 <!--                <field name="lot_id"/>-->
                 <field name="owner_id" optional="hide"/>
                 <field name="package_id" optional="hide"/>
-                <field name="qty_done"/>
+                <field name="quantity"/>
                 <field name="cost"/>
                 <field name="balance"/>
                 <field name="total_cost"/>
