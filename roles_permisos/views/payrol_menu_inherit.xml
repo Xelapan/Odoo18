@@ -3,7 +3,7 @@
     <data>
 
          <!-- Nomina   -->
-        <record id="hr_payroll.menu_hr_payroll_root" model="ir.ui.menu">
+        <record id="hr_work_entry_contract_enterprise.menu_hr_payroll_root" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
                                                     ref('roles_permisos.group_alto_finanzas'),
                                                     ref('roles_permisos.group_basico_nominas'),
