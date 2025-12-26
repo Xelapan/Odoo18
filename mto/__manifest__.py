@@ -7,7 +7,7 @@
     """,
     "author": "Alex Martínez",
     "website": "https://odoocorporativo.xelapan.com",
-    "version": "17.1",
+    "version": "18.1",
     "category": "Services/Helpdesk",
     "sequence": 110,
     "depends": ["helpdesk", "mrp", "sale", "stock", "mto"],
