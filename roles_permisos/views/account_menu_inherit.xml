@@ -751,15 +751,15 @@
 <!--                                                    ref('roles_permisos.group_alto_nominas')-->
 <!--                                                    ])]"/>-->
 <!--        </record>-->
-        
+
 
          <!--CContabilidad/Configuración/Administración/Modelos de gastos diferidos-->
-        <record id="account_asset.menu_action_account_expense_model_recognition" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_alto_nominas')
-                                                    ])]"/>
-        </record>
+<!--        <record id="account_asset.menu_action_account_expense_model_recognition" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas')-->
+<!--                                                    ])]"/>-->
+<!--        </record>-->
 
         <!--Contabilidad/Configuración/Administración/Categorías de productos-->
         <record id="account.menu_product_product_categories" model="ir.ui.menu">
