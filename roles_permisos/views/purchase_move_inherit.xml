@@ -61,15 +61,15 @@
 
 
             <!-- Botón crear factura -->
-            <xpath expr="//button[@name='action_create_invoice']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_medio_finanzas,
-                    roles_permisos.group_alto_prov,
-                    roles_permisos.group_gerencia_prov
-                </attribute>
-            </xpath>
+<!--            <xpath expr="//button[@name='action_create_invoice']" position="attributes">-->
+<!--                <attribute name="groups">-->
+<!--                    roles_permisos.group_alto_finanzas,-->
+<!--                    roles_permisos.group_gerencia_finanzas,-->
+<!--                    roles_permisos.group_medio_finanzas,-->
+<!--                    roles_permisos.group_alto_prov,-->
+<!--                    roles_permisos.group_gerencia_prov-->
+<!--                </attribute>-->
+<!--            </xpath>-->
 
 <!--            &lt;!&ndash; Botón generar impuesto &ndash;&gt;-->
 <!--            <xpath expr="//button[@name='impuesto_global']" position="attributes">-->
