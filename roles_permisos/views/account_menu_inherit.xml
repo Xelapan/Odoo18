@@ -537,8 +537,32 @@
 <!--                                                    ])]"/>-->
 <!--        </record>-->
 
-        <!--Contabilidad/Contabilidad/Acciones -->
-        <record id="account.menu_finance_entries_actions" model="ir.ui.menu">
+        <!--Contabilidad/Contabilidad/Prestamos antes era acciones-->
+        <record id="account_loans.menu_action_loans" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+        <record id="account_accountant.menu_account_reconcile" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+        <record id="account_accountant.menu_action_change_lock_date" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
+                                                    ref('roles_permisos.group_medio_finanzas'),
+                                                    ref('roles_permisos.group_gerencia_finanzas'),
+                                                    ref('roles_permisos.group_alto_nominas'),
+                                                    ref('roles_permisos.group_medio_nominas')
+                                                    ])]"/>
+        </record>
+        <record id="account.menu_action_secure_entries" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
                                                     ref('roles_permisos.group_medio_finanzas'),
                                                     ref('roles_permisos.group_gerencia_finanzas'),
