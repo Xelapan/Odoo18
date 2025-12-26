@@ -30,7 +30,8 @@ class MaterialPurchaseRequisition(models.Model):
         on_delete="restrict",
     )
     x_no_ticket = fields.Integer(
-        string="Ticket", store=True, compute="_compute_ticket", readonly=True
+        string="Ticket", #store=True,
+        compute="_compute_ticket", readonly=True
     )
     # transaccion_proceso = fields.Boolean(string="Transaccion en Proceso", store=True, default=False)
     # exportado_13 = fields.Datetime(string="ExpoOdoo 13", store=True)

@@ -60,7 +60,7 @@ class MaterialPurchaseRequisitionLine(models.Model):
     x_monto = fields.Float(
         string="Monto",
         readonly=True,
-        store=True,
+        #store=True,
         compute="_compute_monto",
     )
 
