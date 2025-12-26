@@ -751,6 +751,7 @@
 <!--                                                    ref('roles_permisos.group_alto_nominas')-->
 <!--                                                    ])]"/>-->
 <!--        </record>-->
+        
 
          <!--CContabilidad/Configuración/Administración/Modelos de gastos diferidos-->
         <record id="account_asset.menu_action_account_expense_model_recognition" model="ir.ui.menu">
