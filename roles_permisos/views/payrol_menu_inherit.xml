@@ -158,15 +158,15 @@
         </record>
 
           <!--Nómina/Informes/Reporte de archivo adjunto de salario  -->
-        <record id="hr_payroll.menu_hr_payroll_attachment_salary_report" model="ir.ui.menu">
-             <field name="groups_id" eval="[(6, 0, [
-                                                    ref('roles_permisos.group_medio_nominas'),
-                                                    ref('roles_permisos.group_alto_nominas'),
-                                                    ref('roles_permisos.group_alto_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_gth')
-                                                    ])]"/>
-        </record>
+<!--        <record id="hr_payroll.menu_hr_payroll_attachment_salary_report" model="ir.ui.menu">-->
+<!--             <field name="groups_id" eval="[(6, 0, [-->
+<!--                                                    ref('roles_permisos.group_medio_nominas'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                    ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_gth')-->
+<!--                                                    ])]"/>-->
+<!--        </record>-->
 
            <!--Nómina/Configuración/Entradas de trabajo/Tipo de entradas de trabajo  -->
         <record id="hr_work_entry_contract_enterprise.menu_hr_work_entry_type_view" model="ir.ui.menu">
