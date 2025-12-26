@@ -201,15 +201,15 @@
         </record>
 
         <!--Empleados/Configuración/Planificación de Actividades -->
-        <record id="hr.menu_config_plan" model="ir.ui.menu">
-             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_gth'),
-                                                    ref('roles_permisos.group_gerencia_gth'),
-                                                    ref('roles_permisos.group_alto_nominas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_alto_finanzas')
+<!--        <record id="hr.menu_config_plan" model="ir.ui.menu">-->
+<!--             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_gth'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_gth'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_finanzas')-->
 
-            ])]"/>
-        </record>
+<!--            ])]"/>-->
+<!--        </record>-->
 
 
          <!--Proceso de selección/Configuración/Actividades/Tipos de actividad -->
