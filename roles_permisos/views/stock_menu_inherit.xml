@@ -68,17 +68,17 @@
         </record>
 
         <!--Inventario/Operaciones/Transferencias -->
-        <record id="stock.all_picking" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_prov'),
-                                                    ref('roles_permisos.group_alto_prov'),
-                                                    ref('roles_permisos.group_gerencia_mto'),
-                                                    ref('roles_permisos.group_alto_mto'),
-                                                    ref('roles_permisos.group_medio_finanzas'),
-                                                    ref('roles_permisos.group_alto_gth')
-                                                  ])]"/>
-        </record>
+<!--        <record id="stock.all_picking" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_prov'),-->
+<!--                                                    ref('roles_permisos.group_alto_prov'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_mto'),-->
+<!--                                                    ref('roles_permisos.group_alto_mto'),-->
+<!--                                                    ref('roles_permisos.group_medio_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_gth')-->
+<!--                                                  ])]"/>-->
+<!--        </record>-->
 
          <!--Inventario/Operaciones/Desechar -->
         <record id="stock.menu_stock_scrap" model="ir.ui.menu">
