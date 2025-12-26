@@ -901,8 +901,8 @@
                                                     ])]"/>
         </record>
 
-         <!--Contabilidad/Clientes/Informes de seguimiento-->
-        <record id="account_followup.customer_statements_menu" model="ir.ui.menu">
+         <!--Contabilidad/Clientes/Niveles de seguimiento  antes era Informes de seguimiento-->
+        <record id="account_followup.account_followup_menu" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
                                                     ref('roles_permisos.group_gerencia_finanzas'),
                                                     ref('roles_permisos.group_alto_nominas')
