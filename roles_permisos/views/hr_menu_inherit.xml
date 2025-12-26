@@ -315,19 +315,19 @@
         </record>
 
          <!-- Empleados/Empleados/Contratos   -->
-        <record id="hr_contract.hr_menu_contract_history" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_gth'),
-                                                    ref('roles_permisos.group_alto_nominas'),
-                                                    ref('roles_permisos.group_medio_nominas'),
-                                                    ref('roles_permisos.group_gerencia_gth'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_alto_finanzas')
+<!--        <record id="hr_contract.hr_menu_contract_history" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_gth'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                    ref('roles_permisos.group_medio_nominas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_gth'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_finanzas')-->
 
-            ])]"/>
-        </record>
+<!--            ])]"/>-->
+<!--        </record>-->
 
          <!-- Empleados/Empleados/Todos los contratos   -->
-        <record id="hr_work_entry_contract_enterprise.hr_menu_contract" model="ir.ui.menu">
+        <record id="hr_contract.hr_menu_contract" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_nominas'),
                                                     ref('roles_permisos.group_medio_nominas'),
                                                     ref('roles_permisos.group_gerencia_gth'),
