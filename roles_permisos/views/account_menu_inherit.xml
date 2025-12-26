@@ -858,7 +858,7 @@
         </record>
 
          <!--Contabilidad/Configuración/Contabilidad/Ejercicio fiscal-->
-        <record id="accountant.menu_account_fiscal_year" model="ir.ui.menu">
+        <record id="account_accountant.menu_account_fiscal_year" model="ir.ui.menu">
             <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
                                                     ref('roles_permisos.group_gerencia_finanzas'),
                                                     ref('roles_permisos.group_alto_nominas')
