@@ -196,13 +196,13 @@
         </record>
 
          <!-- Nómina/Entradas de trabajo/Conflictos -->
-        <record id="hr_work_entry_contract_enterprise.menu_work_entry_conflicts" model="ir.ui.menu">
-             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),
-                                                        ref('roles_permisos.group_gerencia_finanzas'),
-                                                        ref('roles_permisos.group_medio_nominas'),
-                                                        ref('roles_permisos.group_gerencia_gth')
-                                                    ])]"/>
-        </record>
+<!--        <record id="hr_work_entry_contract_enterprise.menu_work_entry_conflicts" model="ir.ui.menu">-->
+<!--             <field name="groups_id" eval="[(6, 0, [   ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                        ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                        ref('roles_permisos.group_medio_nominas'),-->
+<!--                                                        ref('roles_permisos.group_gerencia_gth')-->
+<!--                                                    ])]"/>-->
+<!--        </record>-->
 
         <!-- Nómina/Entradas de trabajo/Ausencia para informar -->
         <record id="hr_payroll_holidays.menu_work_entry_leave_to_approve" model="ir.ui.menu">
