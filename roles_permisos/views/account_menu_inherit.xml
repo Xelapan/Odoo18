@@ -518,14 +518,14 @@
         </record>
 
         <!--Contabilidad/Contabilidad/Generar asientos -->
-        <record id="account.menu_finance_entries_generate_entries" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
-                                                     ref('roles_permisos.group_medio_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_alto_nominas'),
-                                                    ref('roles_permisos.group_medio_nominas')
-                                                    ])]"/>
-        </record>
+<!--        <record id="account.menu_finance_entries_generate_entries" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                     ref('roles_permisos.group_medio_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                    ref('roles_permisos.group_medio_nominas')-->
+<!--                                                    ])]"/>-->
+<!--        </record>-->
 
         <!--Contabilidad/Contabilidad/Administración -->
         <record id="account.menu_finance_entries_management" model="ir.ui.menu">
