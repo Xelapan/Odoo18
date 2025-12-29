@@ -10,7 +10,7 @@
     "version": "18.1",
     "category": "Services/Helpdesk",
     "sequence": 110,
-    "depends": ["helpdesk", "mrp", "sale", "stock", "mto"],
+    "depends": ["helpdesk", "mrp", "sale", "stock"],
     "data": [
         "security/security.xml",
         "views/helpdesk_ticket_views.xml",
