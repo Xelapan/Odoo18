@@ -370,14 +370,14 @@
           </record>
 
         <!--Inventario/Configuración/Productos/Reglas de abastecimiento -->
-        <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_prov'),
-                                                    ref('roles_permisos.group_alto_finanzas'),
-                                                    ref('roles_permisos.group_alto_mto'),
-                                                    ref('roles_permisos.group_alto_gth')
-                                                  ])]"/>
-          </record>
+<!--        <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_prov'),-->
+<!--                                                    ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_mto'),-->
+<!--                                                    ref('roles_permisos.group_alto_gth')-->
+<!--                                                  ])]"/>-->
+<!--          </record>-->
 
         <!--Inventario/Configuración/Productos/Unidades de medida -->
         <record id="stock.menu_stock_unit_measure_stock" model="ir.ui.menu">
