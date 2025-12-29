@@ -99,8 +99,7 @@ Email notifications to Department Manager, Requisition Manager for approval.
         "hr",
         "purchase",
         "sale",
-        "mrp",
-        "mto"
+        "mrp"
     ],
     "data": [
         "security/security.xml",
