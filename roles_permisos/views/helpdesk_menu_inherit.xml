@@ -132,13 +132,13 @@
         </record>
 
     <!--Servicio de asistencia/Configuración/Tipos-->
-         <record id="helpdesk.helpdesk_ticket_type_menu" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [
-                ref('roles_permisos.group_gerencia_mto'),
-                ref('roles_permisos.group_alto_mto'),
-                ref('roles_permisos.group_gerencia_finanzas')
-            ])]"/>
-         </record>
+<!--         <record id="helpdesk.helpdesk_ticket_type_menu" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [-->
+<!--                ref('roles_permisos.group_gerencia_mto'),-->
+<!--                ref('roles_permisos.group_alto_mto'),-->
+<!--                ref('roles_permisos.group_gerencia_finanzas')-->
+<!--            ])]"/>-->
+<!--         </record>-->
 
     <!-- Servicio de asistencia/Configuración/Etiquetas-->
         <record id="helpdesk.helpdesk_tag_menu" model="ir.ui.menu">
