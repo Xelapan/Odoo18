@@ -50,7 +50,7 @@
                 </xpath>
                 <xpath expr="/form/header/button[@name='action_paid']" position="after">
 <!--                    <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" type="action" string="Generar Pagos" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': active_id}" groups="account.group_account_manager" modifiers="{}" />-->
-                         <button name="818"
+                         <button name="payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action"
                                 type="action"
                                 string="Generar Pagos"
                                 class="oe_highlight o_expense_sheet_pay"
