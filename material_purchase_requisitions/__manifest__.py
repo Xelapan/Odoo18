@@ -100,7 +100,8 @@ Email notifications to Department Manager, Requisition Manager for approval.
         "purchase",
         "sale",
         "mrp",
-        "mto"
+        "mto",
+        "helpdesk"
     ],
     "data": [
         "security/security.xml",
