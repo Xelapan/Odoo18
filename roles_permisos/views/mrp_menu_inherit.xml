@@ -102,17 +102,17 @@
         </record>
 
     <!--Fabricación/Informes/Órdenes de producción-->
-        <record id="mrp.menu_mrp_production_report" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [
-                ref('roles_permisos.group_basico_mto'),
-                ref('roles_permisos.group_medio_mto'),
-                ref('roles_permisos.group_alto_mto'),
-                ref('roles_permisos.group_gerencia_mto'),
-                ref('roles_permisos.group_gerencia_finanzas'),
-                ref('roles_permisos.group_alto_finanzas'),
-                ref('roles_permisos.group_medio_finanzas')
-            ])]"/>
-        </record>
+<!--        <record id="mrp.menu_mrp_production_report" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [-->
+<!--                ref('roles_permisos.group_basico_mto'),-->
+<!--                ref('roles_permisos.group_medio_mto'),-->
+<!--                ref('roles_permisos.group_alto_mto'),-->
+<!--                ref('roles_permisos.group_gerencia_mto'),-->
+<!--                ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                ref('roles_permisos.group_alto_finanzas'),-->
+<!--                ref('roles_permisos.group_medio_finanzas')-->
+<!--            ])]"/>-->
+<!--        </record>-->
 
     <!-- Fabricación/Informes/Eficacia general del equipo-->
         <record id="mrp.menu_mrp_workcenter_productivity_report" model="ir.ui.menu">
