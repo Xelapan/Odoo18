@@ -4,7 +4,7 @@ from . import purchase_requisition
 from . import purchase_requisition_line
 from . import stock_picking
 from . import purchase_order
-
+from . import helpdesk
 
 # from . import hr_employee
 # from . import hr_department
