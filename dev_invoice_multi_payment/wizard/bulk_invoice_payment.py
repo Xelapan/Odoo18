@@ -66,10 +66,10 @@ class bulk_inv_payment(models.TransientModel):
     
     
     name = fields.Char('Name',default='hello')
-    payment_type = fields.Selection([('outbound','Send Money'),('inbound','Receive Money'),('transfer','Transfer')],string="Payment Type", required="1")
+    payment_type = fields.Selection([('outbound','Enviar'),('inbound','Recibir'),('transfer','Transferencia')],string="Payment Type", required="1")
     payment_date = fields.Date('Payment Date', required="1")
     communication = fields.Char('Memo')
-    partner_type = fields.Selection([('customer','Customer'),('supplier','Supplier')],string='Partner Type')
+    partner_type = fields.Selection([('customer','Cliente'),('supplier','Proveedor')],string='Partner Type')
     journal_id = fields.Many2one('account.journal', string='Payment Method', required=True, domain=[('type', 'in', ('bank', 'cash'))])
     invoice_ids = fields.One2many('bulk.invoice','bulk_invoice_id',string='Invoice')
 
