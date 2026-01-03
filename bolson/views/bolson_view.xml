@@ -2,7 +2,7 @@
 <openerp>
     <data>
 
-        <record id="view_bolson_bolson_form2" model="ir.ui.view">
+        <record id="view_bolson_bolson_form" model="ir.ui.view">
             <field name="name">bolson.bolson.form</field>
             <field name="model">bolson.bolson</field>
             <field name="arch" type="xml">
@@ -47,7 +47,7 @@
                             <h2>Cheques</h2>
                         </div>
 
-                        <field name="cheques" widget="one2many" nolabel="1">
+                        <field name="cheques" widget="many2many" nolabel="1">
                             <list>
                                 <field name="no_liquidacion" />
                                 <field name="date" />
