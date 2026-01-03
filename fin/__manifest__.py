@@ -37,7 +37,7 @@
     "data": [
         #'wizard/wizard_mes_bloqueado_view.xml',
         "views/account_move_views.xml",
-        #'views/account_payment_views.xml',
+        'views/account_payment_views.xml',
         "security/ir.model.access.csv",
         #'data/account_mes_bloqueado_sequence.xml',
         "wizard/account_account_v_wizard.xml",

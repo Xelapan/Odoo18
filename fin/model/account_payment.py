@@ -19,6 +19,8 @@ class AccountPayment(models.Model):
         compute="_onchange_reconciled_statement_line_ids",
     )
 
+    cuenta_destino_id = fields.Many2one('account.account', string='Cuenta Contable', store=True)
+
     @api.depends("reconciled_statement_line_ids")
     def _onchange_reconciled_statement_line_ids(self):
         for record in self:
@@ -39,3 +41,8 @@ class AccountPayment(models.Model):
             if record.state == "posted" and record.move_id and record.ref:
                 record.move_id.write({"ref": record.ref})
         return res
+
+    @api.onchange('cuenta_destino_id')
+    def _onchange_cuenta_destino_id(self):
+        if self.cuenta_destino_id:
+            self.destination_account_id = self.cuenta_destino_id
