@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from Demos.win32cred_demo import domain
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
@@ -35,6 +36,7 @@ class BolsonBolson(models.Model):
         #    ("reconciled_invoice_ids", "=", False),
         #    ("reconciled_bill_ids", "=", False),
         #],
+        domain=[("reconciled_bills_count", "=", 0), ("reconciled_invoices_count", "=", 0)],
     )
     company_id = fields.Many2one(
         "res.company",
