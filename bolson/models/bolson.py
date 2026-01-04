@@ -33,7 +33,7 @@ class BolsonBolson(models.Model):
         store=True,
         domain=[
             ("reconciled_invoice_ids", "=", False),
-            ("reconciled_bill_ids", "=", False),
+            #("reconciled_bill_ids", "=", False),
         ],
     )
     company_id = fields.Many2one(
