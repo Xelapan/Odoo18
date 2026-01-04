@@ -47,8 +47,8 @@
                             <h2>Cheques</h2>
                         </div>
 
-                        <field name="cheques" nolabel="1">
-                            <list editable="bottom">
+                        <field name="cheques" widget="many2many" nolabel="1">
+                            <list>
                                 <field name="no_liquidacion" />
                                 <field name="date" />
                                 <field name="name" />
