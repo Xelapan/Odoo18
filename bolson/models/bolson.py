@@ -1,5 +1,4 @@
 # -*- encoding: utf-8 -*-
-from Demos.win32cred_demo import domain
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError, ValidationError
