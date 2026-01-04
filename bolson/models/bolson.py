@@ -31,10 +31,10 @@ class BolsonBolson(models.Model):
         "bolson_id",
         string="Cheques",
         store=True,
-        domain=[
-            ("reconciled_invoice_ids", "=", False),
-            #("reconciled_bill_ids", "=", False),
-        ],
+        #domain=[
+        #    ("reconciled_invoice_ids", "=", False),
+        #    ("reconciled_bill_ids", "=", False),
+        #],
     )
     company_id = fields.Many2one(
         "res.company",
