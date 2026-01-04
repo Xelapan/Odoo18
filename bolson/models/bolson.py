@@ -35,7 +35,7 @@ class BolsonBolson(models.Model):
         #    ("reconciled_invoice_ids", "=", False),
         #    ("reconciled_bill_ids", "=", False),
         #],
-        domain=[("reconciled_bills_count", "=", 0), ("reconciled_invoices_count", "=", 0),("bolson_id", "=", False)],
+        #domain=[("reconciled_bills_count", "=", 0), ("reconciled_invoices_count", "=", 0),("bolson_id", "=", False)],
     )
     company_id = fields.Many2one(
         "res.company",
