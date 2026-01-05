@@ -1328,13 +1328,19 @@ class AccountPayment(models.Model):
 
     def anular(self):
         for rec in self:
-            for move in rec.move_line_ids.mapped("move_id"):
+            # for move in rec.move_line_ids.mapped("move_id"):
+            #     move.button_cancel()
+            for move in rec.move_id:
                 move.button_cancel()
 
-            rec.move_line_ids.remove_move_reconcile()
-            rec.move_line_ids.write({"debit": 0, "credit": 0, "amount_currency": 0})
+            # rec.move_line_ids.remove_move_reconcile()
+            # rec.move_line_ids.write({"debit": 0, "credit": 0, "amount_currency": 0})
+            rec.move_id.line_ids.remove_move_reconcile()
+            rec.move_id.line_ids.write({"debit": 0, "credit": 0, "amount_currency": 0})
 
-            for move in rec.move_line_ids.mapped("move_id"):
+            # for move in rec.move_line_ids.mapped("move_id"):
+            #     move.post()
+            for move in rec.move_id:
                 move.post()
             rec.anulado = True
             rec.fecha_anulacion = datetime.datetime.strftime(
