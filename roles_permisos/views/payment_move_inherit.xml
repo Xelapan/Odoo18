@@ -18,13 +18,7 @@
 
             <!-- Botón establecer a borrador -->
             <xpath expr="//button[@name='action_draft']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_alto_nominas,
-                    roles_permisos.group_medio_nominas,
-                    roles_permisos.group_medio_finanzas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_alto_nominas,roles_permisos.group_medio_nominas,roles_permisos.group_medio_finanzas</attribute>
             </xpath>
              <!-- Botón  marcar como enviado -->
             <xpath expr="//button[@name='mark_as_sent']" position="attributes">
