@@ -1,5 +1,3 @@
-from Demos.win32cred_demo import domain
-
 from odoo import models, fields, api
 
 
