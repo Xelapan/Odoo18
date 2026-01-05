@@ -1,3 +1,5 @@
+from Demos.win32cred_demo import domain
+
 from odoo import models, fields, api
 
 
@@ -21,7 +23,7 @@ class AccountPayment(models.Model):
 
     cuenta_destino_id = fields.Many2one('account.account', string='Cuenta Contable', store=True)
 
-    destination_account_id = fields.Many2one('account.account', string='Cuenta Destino', store=True)
+    destination_account_id = fields.Many2one('account.account', string='Cuenta Destino', store=True, domain="[]")
 
     @api.depends("reconciled_statement_line_ids")
     def _onchange_reconciled_statement_line_ids(self):
