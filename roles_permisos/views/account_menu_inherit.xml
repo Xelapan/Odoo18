@@ -439,14 +439,14 @@
 <!--        </record>-->
 
         <!--Contabilidad/Informes/Libro diario  -->
-        <record id="l10n_gt_extra.menu_asistente_reporte_diario" model="ir.ui.menu">
-            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),
-                                                    ref('roles_permisos.group_medio_finanzas'),
-                                                    ref('roles_permisos.group_gerencia_finanzas'),
-                                                    ref('roles_permisos.group_alto_nominas'),
-                                                    ref('roles_permisos.group_medio_nominas')
-                                                    ])]"/>
-        </record>
+<!--        <record id="l10n_gt_extra.menu_asistente_reporte_diario" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(6, 0, [ ref('roles_permisos.group_alto_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_medio_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_gerencia_finanzas'),-->
+<!--                                                    ref('roles_permisos.group_alto_nominas'),-->
+<!--                                                    ref('roles_permisos.group_medio_nominas')-->
+<!--                                                    ])]"/>-->
+<!--        </record>-->
 
         <!--Contabilidad/Informes/Libro mayor -->
         <record id="l10n_gt_extra.menu_asistente_reporte_mayor" model="ir.ui.menu">
