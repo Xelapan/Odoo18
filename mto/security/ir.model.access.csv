@@ -1,4 +1,3 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_employee_ticket,acc_employee_ticket,model_hr_employee_ticket,roles_permisos.group_medio_mto,1,1,1,1
 access_helpdesk_ticket_type_user,helpdesk.ticket.type.user,model_helpdesk_ticket_type,helpdesk.group_helpdesk_user,1,0,0,0
 access_helpdesk_ticket_type_manager,helpdesk.ticket.type.manager,model_helpdesk_ticket_type,helpdesk.group_helpdesk_manager,1,1,1,1
