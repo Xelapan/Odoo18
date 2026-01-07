@@ -15,7 +15,7 @@
         "security/security.xml",
         "views/helpdesk_ticket_views.xml",
         "views/project_views.xml",
-        #"security/ir.model.access.csv",
+        "security/ir.model.access.csv",
         #'views/mrp_production_views.xml',
         #'views/project_views.xml',
         "views/sale_order_views.xml",
