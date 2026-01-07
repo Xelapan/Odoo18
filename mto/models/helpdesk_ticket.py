@@ -158,3 +158,15 @@ class UoM(models.Model):
             # Generar una advertencia con el query resultante en el mensaje
             # warning_msg = "No se encontró ningún registro. Query: %s" % query_result.decode('utf-8')
             # raise Warning(warning_msg)
+
+class HelpdeskTicketType(models.Model):
+    _name = 'helpdesk.ticket.type'
+    _description = 'Helpdesk Ticket Type'
+    _order = 'sequence, name'
+
+    name = fields.Char(required=True, translate=True)
+    sequence = fields.Integer(default=10)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "A type with the same name already exists."),
+    ]
