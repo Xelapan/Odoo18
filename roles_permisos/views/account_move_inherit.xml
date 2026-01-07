@@ -7,24 +7,11 @@
         <field name="arch" type="xml">
             <!-- Botón "Posted" accesible para todos los grupos -->
             <xpath expr="//button[@name='action_post']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_basico_finanzas,
-                    roles_permisos.group_medio_finanzas,
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_alto_nominas
-
-                </attribute>
+                <attribute name="groups">roles_permisos.group_basico_finanzas,roles_permisos.group_medio_finanzas,roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
             <!-- Botón "Restablecer a Borrador" accesible solo para Alto Finanzas y Gerencia Finanzas -->
             <xpath expr="//button[@name='button_draft']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_basico_finanzas,
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_medio_finanzas,
-                    roles_permisos.group_alto_nominas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_basico_finanzas,roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_medio_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
              <!-- Botón "añadir factura rectificativa" accesible solo para Alto Finanzas y Gerencia Finanzas -->
             <xpath expr="//button[@name='action_reverse']" position="attributes">
@@ -38,22 +25,12 @@
 
              <!-- Botón "añadir factura rectificativa" accesible solo para Alto Finanzas y Gerencia Finanzas -->
             <xpath expr="//button[@name='action_register_payment']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_medio_finanzas,
-                    roles_permisos.group_alto_nominas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_medio_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
 
      <!-- Botón "añadir factura rectificativa" accesible solo para Alto Finanzas y Gerencia Finanzas -->
             <xpath expr="//button[@name='preview_invoice']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_medio_finanzas,
-                    roles_permisos.group_alto_nominas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_medio_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
         </field>
     </record>

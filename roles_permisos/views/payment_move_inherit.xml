@@ -56,21 +56,13 @@
 
              <!-- Botón  asiento contable -->
             <xpath expr="//button[@name='button_open_journal_entry']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_alto_nominas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
 
 
              <!-- Botón  conciliacion -->
             <xpath expr="//button[@name='action_open_manual_reconciliation_widget']" position="attributes">
-                <attribute name="groups">
-                    roles_permisos.group_alto_finanzas,
-                    roles_permisos.group_gerencia_finanzas,
-                    roles_permisos.group_alto_nominas
-                </attribute>
+                <attribute name="groups">roles_permisos.group_alto_finanzas,roles_permisos.group_gerencia_finanzas,roles_permisos.group_alto_nominas</attribute>
             </xpath>
 
               <!-- Botón  desmarcar como enviado -->
