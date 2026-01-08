@@ -901,7 +901,7 @@ class MaterialPurchaseRequisition(models.Model):
             for line in rec.requisition_line_ids:
                 if (
                     line.requisition_type == "internal"
-                    and line.product_id.detailed_type != "service"
+                    and line.product_id.type != "service"
                 ):
                     pick_vals = rec._prepare_pick_vals(line, stock_id)
                     move_id = move_obj.sudo().create(pick_vals)
@@ -1217,13 +1217,13 @@ class MaterialPurchaseRequisition(models.Model):
                 thMateriales = sum(
                     line.x_monto
                     for line in rec.requisition_line_ids
-                    if line.product_id.detailed_type != "service"
+                    if line.product_id.type != "service"
                 )
                 thServicios = (
                     sum(
                         line.x_monto
                         for line in rec.requisition_line_ids
-                        if line.product_id.detailed_type == "service"
+                        if line.product_id.type == "service"
                     )
                 ) * 1.12
                 thManoObra = self.env["ir.config_parameter"].search(

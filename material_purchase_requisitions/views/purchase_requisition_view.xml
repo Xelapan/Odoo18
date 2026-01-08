@@ -121,6 +121,8 @@
             <field name="arch" type="xml">
                 <search string="Purchase Requistion search">
                     <field name="x_no_ticket" />
+                    <field name="reason"/>
+                    <field name="name"/>
                     <field name="employee_id" />
                     <field name="request_date" />
                     <field name="company_id" groups="base.group_multi_company" />

@@ -877,7 +877,7 @@ class MrpProduction(models.Model):
                     raise UserError(
                         "La bodega de origen no esta bien configurada en el tipo de operacion de fabricacion en Odoo 13"
                     )
-                if record.product_id.detailed_type == "service":
+                if record.product_id.type == "service":
                     mensaje = (
                         "Error - Ticket "
                         + str(record.ticket)
