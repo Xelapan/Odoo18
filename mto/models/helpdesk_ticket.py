@@ -54,6 +54,12 @@ class HelpdeskTicket(models.Model):
         store=True,
         copy=True,
     )
+    ticket_type_id = fields.Many2one(
+        "helpdesk.ticket.type",
+        string="Tipo de Ticket",
+        related='x_mesa_servicio.x_tipo_solicitud_id',
+        store=True
+    )
     # @api.onchange('team_id')
     # def _onchange_team_id(self):
     #     if self.team_id:
