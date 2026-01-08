@@ -17524,7 +17524,7 @@ class wizard_flujo_efectivo(models.TransientModel):
                                 x_rows, 1, a_imprimir[x_recorre][3], frmt_codigo
                             )
                             worksheet.write(
-                                x_rows, 2, a_imprimir[x_recorre][4], frmt_cuenta
+                                x_rows, 2, a_imprimir[x_recorre][4].get('en_US', ''), frmt_cuenta
                             )
                             worksheet.write(
                                 x_rows, 3, a_imprimir[x_recorre][5], debe_haber
