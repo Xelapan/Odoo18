@@ -50,7 +50,7 @@ class HelpdeskTeam(models.Model):
         employees = (
             self.env["hr.employee"]
             .sudo()
-            .search([("write_date", ">=", fields.Datetime.now() - timedelta(days=15))])
+            .search([("write_date", ">=", fields.Datetime.now() - timedelta(days=800))])
         )
 
         # Para cada empleado, buscar si existe un ticket asociado
@@ -72,7 +72,7 @@ class HelpdeskTeam(models.Model):
                         "job_title": employee.job_id.name,
                         "job_id": employee.job_id.id,
                         "active": employee.active,
-                        "address_home_id": employee.work_contact_id.id,
+                        "work_contact_id": employee.work_contact_id.id,
                         "phone": employee.phone,
                         "mobile_phone": employee.mobile_phone,
                         "registration_number": employee.registration_number,
@@ -95,7 +95,7 @@ class HelpdeskTeam(models.Model):
                         "job_title": employee.job_id.name,
                         "job_id": employee.job_id.id,
                         "active": employee.active,
-                        "address_home_id": employee.work_contact_id,
+                        "work_contact_id": employee.work_contact_id,
                         "phone": employee.phone,
                         "mobile_phone": employee.mobile_phone,
                         "registration_number": employee.registration_number,
