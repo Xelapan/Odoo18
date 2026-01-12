@@ -16,7 +16,11 @@ class SaleOrder(models.Model):
         string="Fecha Concluido", store=True, readonly=True, compute="_compute_ticket"
     )
     # url_venta_13 = fields.Char(string="Venta Odoo 13", store=True)
-
+    analytic_account_id = fields.Many2one(
+        "account.analytic.account",
+        string="Cuenta Analítica",
+        store=True
+    )
     @api.depends("x_ticket")
     def _compute_ticket(self):
         for record in self:
