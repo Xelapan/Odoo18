@@ -7,15 +7,15 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button name="requisition_confirm" type="object" string="Confirmar" class="btn-primary" groups="base.group_user" modifiers="{}" />
-                        <button name="manager_approve" type="object" string="Aprobación MTO" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_department" modifiers="{}" />
-                        <button name="user_approve" type="object" string="Aprobación Cliente" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}" />
-                        <button name="request_stock" type="object" string="Crear Transferencias" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}" />
-                        <button name="action_received" type="object" string="Received" class="btn-primary" modifiers="{}" />
-                        <button name="requisition_reject" type="object" string="Rechazar" groups="material_purchase_requisitions.group_purchase_requisition_department,material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}" />
-                        <button name="action_cancel" type="object" string="Cancelar" groups="base.group_user" modifiers="{}" />
-                        <button name="reset_draft" type="object" string="Reiniciar a Borrador" class="btn-primary" modifiers="{}" />
-                        <field name="state" widget="statusbar" string="Confirmar" statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive" />
+                        <button name="requisition_confirm" invisible="state != 'draft' or not name" type="object" string="Confirmar" class="btn-primary" groups="base.group_user" modifiers="{}"/>
+                        <button name="manager_approve" invisible="state not in ['dept_confirm','cancel']" type="object" string="Aprobación MTO" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_department" modifiers="{}"/>
+                        <button name="user_approve" invisible="state not in ['ir_approve']" type="object" string="Aprobación Cliente" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}"/>
+                        <button name="request_stock" invisible="state not in ['approve']" type="object" string="Crear Transferencias" class="btn-primary" groups="material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}"/>
+                        <button name="action_received" invisible="state not in ['stock']" type="object" string="Received" class="btn-primary" modifiers="{}"/>
+                        <button name="requisition_reject" invisible="state in ['draft']" type="object" string="Rechazar" groups="material_purchase_requisitions.group_purchase_requisition_department,material_purchase_requisitions.group_purchase_requisition_user" modifiers="{}"/>
+                        <button name="action_cancel" invisible="state not in ['draft']" type="object" string="Cancelar" groups="base.group_user" modifiers="{}"/>
+                        <button name="reset_draft" invisible="state not in ['cancel','reject']" type="object" string="Reiniciar a Borrador" class="btn-primary" modifiers="{}"/>
+                        <field name="state" widget="statusbar" string="Confirmar" statusbar_visible="draft,dept_confirm,ir_approve,approve,stock,receive"/>
                     </header>
                     <sheet>
                     <div class="oe_button_box" name="button_box">
