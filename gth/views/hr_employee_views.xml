@@ -29,7 +29,7 @@
                         <field name="work_email" widget="email" string="Correo Personal (Voucher)" />
                         <field name="company_id" groups="base.group_multi_company" />
                         <field name="company_country_code" invisible="1" />
-                        <field name="department_id" required="1" />
+                        <field name="department_id" required="1" options="{'no_create': True}"//>
                         <field name="job_id" />
                         <field name="parent_id" invisible="1" />
                         <field name="coach_id" invisible="1" />
