@@ -85,10 +85,10 @@ class account_report_financial(models.AbstractModel):
 				                        cc."name" Empresa,
 				                        rp.vat Nit
 			                        from account_move_line aml
-			                        inner join account_move am on am.id = aml.move_id and am.id not in ("""
-            + ",".join(map(str, NoIncluirAsientos.ids))
-            + """)
-			                        inner join account_account aa on aa.id = aml.account_id		
+			                        inner join account_move am on am.id = aml.move_id"""
+            + (f" and am.id not in ({','.join(map(str, NoIncluirAsientos.ids))})" if NoIncluirAsientos.ids else "")
+            + """
+			                        inner join account_account aa on aa.id = aml.account_id
 			                        left join res_company cc on aml.company_id = cc.id
 			                        inner join res_partner rp on rp.id = cc.partner_id
 			                        inner join account_journal aj on aj.id = am.journal_id
@@ -270,10 +270,10 @@ class account_report_financial(models.AbstractModel):
 				cc."name" Empresa,
 				rp.vat Nit
 			from account_move_line aml
-			inner join account_move am on am.id = aml.move_id and am.id not in ("""
-            + ",".join(map(str, NoIncluirAsientos.ids))
-            + """)
-			inner join account_account aa on aa.id = aml.account_id		
+			inner join account_move am on am.id = aml.move_id"""
+            + (f" and am.id not in ({','.join(map(str, NoIncluirAsientos.ids))})" if NoIncluirAsientos.ids else "")
+            + """
+			inner join account_account aa on aa.id = aml.account_id
 			left join res_company cc on aml.company_id = cc.id
 			inner join res_partner rp on rp.id = cc.partner_id
 			inner join account_journal aj on aj.id = am.journal_id

@@ -119,6 +119,12 @@ class wizard_inventory_valuation(models.TransientModel):
             raise ValidationError(_("End Date should be greater than Start Date."))
 
     def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
         if int(self.mes_de) > int(self.mes_a):
             raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
@@ -8620,6 +8626,12 @@ class wizard_estado_resultados(models.TransientModel):
             raise ValidationError(_("Fecha fin ser posterior a fecha inicio."))
 
     def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
         if int(self.mes_de) > int(self.mes_a):
             raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
@@ -10178,6 +10190,12 @@ class wizard_costo_ventas(models.TransientModel):
             raise ValidationError(_("Fecha fin ser posterior a fecha inicio."))
 
     def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
         if int(self.mes_de) > int(self.mes_a):
             raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
@@ -11471,6 +11489,12 @@ class wizard_costo_produccion(models.TransientModel):
             raise ValidationError(_("Fecha fin ser posterior a fecha inicio."))
 
     def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
         if int(self.mes_de) > int(self.mes_a):
             raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
@@ -16416,6 +16440,12 @@ class wizard_flujo_efectivo(models.TransientModel):
             raise ValidationError(_("Fecha fin ser posterior a fecha inicio."))
 
     def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
         if int(self.mes_de) > int(self.mes_a):
             raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
