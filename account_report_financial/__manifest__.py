@@ -14,7 +14,7 @@
         Reportes Financieros Xelapan XLSX.
     """,
     "summary": """Libro Diario, Mayor, Balance General, Estado de Resultados, Estado de Cambios en el Patrimonio Neto, Estado de Flujo de Efectivo, Estado de Flujo de Efectivo""",
-    "depends": ["base", "stock_account"],
+    "depends": ["base", "stock_account", "account_reports"],
     "price": 500,
     "currency": "EUR",
     "license": "OPL-1",
