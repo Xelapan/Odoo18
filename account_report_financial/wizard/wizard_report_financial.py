@@ -6099,9 +6099,15 @@ class wizard_report_balance_saldo(models.TransientModel):
     name = fields.Char(string="File Name", readonly=True)
     data = fields.Binary(string="File", readonly=True)
 
-    # def check_mes(self):
-    #   if int(self.mes_de) > int(self.mes_a):
-    #      raise ValidationError(_('-Mes De- debe ser anterior a -Mes A-.'))
+    def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes inicial."))
+        if not self.mes_a:
+            raise ValidationError(_("Debe seleccionar el mes final."))
+        if int(self.mes_de) > int(self.mes_a):
+            raise ValidationError(_("Mes De debe ser anterior a mes A."))
 
     def go_back_balance_saldo(self):
         self.state = "choose"
@@ -6116,7 +6122,7 @@ class wizard_report_balance_saldo(models.TransientModel):
         }
 
     def print_xls_report_balance_saldo(self):
-        # self.check_mes()
+        self.check_mes()
         # company_id = self.env['res.company'].browse(self._context.get('allowed_company_ids'))
         xls_filename = "Balance de Saldos.xlsx"
         temp_dir = tempfile.gettempdir()
@@ -20784,6 +20790,12 @@ class wizard_conciliacion_bancaria2(models.TransientModel):
     sortedpay = None
     account_payment = []
 
+    def check_mes(self):
+        if not self.anio or self.anio <= 0:
+            raise ValidationError(_("Debe ingresar un año válido."))
+        if not self.mes_de:
+            raise ValidationError(_("Debe seleccionar el mes."))
+
     @api.onchange("company_id")
     def onchange_company_id(self):
         domain = [("id", "in", self.env.user.company_ids.ids)]
@@ -21067,7 +21079,7 @@ class wizard_conciliacion_bancaria2(models.TransientModel):
             return payments
 
     def print_xls_conciliacion_bancaria2(self):
-
+        self.check_mes()
         fecha_strt = (
             str(self.anio) + "-" + str(self.mes_de) + "-01"
         )  # Cadena de texto que representa la fecha inicio
